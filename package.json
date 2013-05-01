@@ -4,7 +4,8 @@
   "description": "Example express application",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node src/server.js",
+    "test": "grunt travis --verbose"
   },
   "author": {
     "name": "Michael Lex",
