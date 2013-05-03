@@ -5,6 +5,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: '<json:package.json>',
         meta: {
+
         },
         simplemocha: {
             options: {
@@ -16,11 +17,17 @@ module.exports = function (grunt) {
             all: { src: ['test/**/*.js'] }
         },
         jshint: {
-            all: [
-                'Gruntfile.js',
-                'src/**/*.js',
-                'test/**/*.js'
-            ],
+            src: 'src/**/*.js',
+            test: {
+                files: 'test/**/*.js',
+                options: {
+                    globals: {
+                        describe: false,
+                        it: false
+                    }
+                }
+            },
+            gruntfile: 'Gruntfile.js',
             options: {
                 bitwise: true,
                 boss: true,
@@ -56,5 +63,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
+    grunt.registerTask('default', ['jshint', 'simplemocha']);
     grunt.registerTask('travis', ['jshint', 'simplemocha']);
 };
