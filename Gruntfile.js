@@ -1,17 +1,10 @@
-/*global module:false,require:false*/
-module.exports = function (grunt) {
-    "use strict";
+'use strict';
 
+module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
-        pkg: "<json:package.json>",
+        pkg: '<json:package.json>',
         meta: {
-            banner: "/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - " +
-                "<%= grunt.template.today('yyyy-mm-dd') %>\n" +
-                "<%= pkg.homepage ? '* ' + pkg.homepage + '\n' : '' %>" +
-                "* Copyright (c) <%= grunt.template.today('yyyy') %> " +
-                " <%= pkg.author.name %>;" +
-                " Licensed <%= _.pluck(pkg.licenses, 'type').join('') %> */"
         },
         simplemocha: {
             options: {
@@ -22,18 +15,12 @@ module.exports = function (grunt) {
             },
             all: { src: ['test/**/*.js'] }
         },
-        jslint: {
-            files: [
-                //'Gruntfile.js', 
+        jshint: {
+            all: [
+                'Gruntfile.js',
                 'src/**/*.js',
                 'test/**/*.js'
             ],
-        },
-        jshint: {
-            all: [
-                //'Gruntfile.js', 
-                'src/**/*.js', 
-                'test/**/*.js'],
             options: {
                 bitwise: true,
                 boss: true,
@@ -44,7 +31,7 @@ module.exports = function (grunt) {
                 eqnull: true,
                 forin: true,
                 immed: true,
-                indent: 2,
+                indent: 4,
                 latedef: true,
                 maxcomplexity: 4,
                 maxdepth: 3,
@@ -55,24 +42,19 @@ module.exports = function (grunt) {
                 noarg: true,
                 noempty: true,
                 nonew: true,
-                quotmark: "double",
+                quotmark: 'single',
                 sub: true,
                 strict: true,
                 trailing: true,
                 undef: true,
-                unused: true
-            },
-            globals: {
-                require: false,
-                define: false
+                unused: true,
+                node: true
             }
-        },
+        }
     });
 
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-jslint');
 
-    grunt.registerTask('travis', ["jslint", "simplemocha"]);
-
+    grunt.registerTask('travis', ['jshint', 'simplemocha']);
 };

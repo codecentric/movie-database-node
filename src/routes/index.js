@@ -1,6 +1,5 @@
-/*jslint node:true*/
+'use strict';
 
 exports.index = function (req, res) {
-    'use strict';
     res.send('Hello World - now automatically deployed!');
 };
