@@ -13,7 +13,8 @@
     "url": "http://www.codecentric.de"
   },
   "dependencies": {
-    "express": "~3.2.1"
+    "express": "~3.2.1",
+    "neo4j": "~0.2.20"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
