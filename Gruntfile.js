@@ -9,6 +9,9 @@ module.exports = function (grunt) {
             server: {
                 src: 'src/**/*.js',
                 test: 'test/**/*.js'
+            },
+            client: {
+                js: ['public/js/**/*.js', '!public/js/lib/**/*']
             }
         },
         simplemocha: {
@@ -23,17 +26,37 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            src: '<%= meta.server.src %>',
-            test: {
-                files: '<%= meta.server.test %>',
+            src: {
+                files: { src: '<%= meta.server.src %>' },
                 options: {
+                    node: true,
+                    globalstrict: true
+                }
+            },
+            test: {
+                files: { src: '<%= meta.server.test %>' },
+                options: {
+                    node: true,
+                    globalstrict: true,
                     globals: {
                         describe: false,
                         it: false
                     }
                 }
             },
-            gruntfile: '<%= meta.gruntfile %>',
+            gruntfile: {
+                files: { src: '<%= meta.gruntfile %>' },
+                options: {
+                    node: true,
+                    globalstrict: true
+                }
+            },
+            client: {
+                files: { src: '<%= meta.client.js %>' },
+                options: {
+                    browser: true
+                }
+            },
             options: {
                 bitwise: true,
                 boss: true,
@@ -60,8 +83,7 @@ module.exports = function (grunt) {
                 strict: true,
                 trailing: true,
                 undef: true,
-                unused: true,
-                node: true
+                unused: true
             }
         }
     });
