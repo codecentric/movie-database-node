@@ -3,11 +3,10 @@ var request = require('supertest');
 
 describe('Index', function () {
     'use strict';
-    it('should return hello world', function (done) {
+    it('should some page', function (done) {
         request(app)
             .get('/')
             .expect('Content-Type', /html/)
-            .expect(200)
-            .expect('Hello World - now automatically deployed!', done);
+            .expect(200, done);
     });
 });
