@@ -11,6 +11,6 @@ describe("Index", function () {
             .get("/")
             .expect("Content-Type", /html/)
             .expect(200)
-            .expect("Hello World", done);
+            .expect("Hello World - now automatically deployed!", done);
     });
 });
