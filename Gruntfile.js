@@ -5,7 +5,11 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: '<json:package.json>',
         meta: {
-
+            gruntfile: 'Gruntfile.js',
+            server: {
+                src: 'src/**/*.js',
+                test: 'test/**/*.js'
+            }
         },
         simplemocha: {
             options: {
@@ -14,12 +18,14 @@ module.exports = function (grunt) {
                 ui: 'bdd',
                 reporter: 'dot'
             },
-            all: { src: ['test/**/*.js'] }
+            all: {
+                src: '<%= meta.server.test %>'
+            }
         },
         jshint: {
-            src: 'src/**/*.js',
+            src: '<%= meta.server.src %>',
             test: {
-                files: 'test/**/*.js',
+                files: '<%= meta.server.test %>',
                 options: {
                     globals: {
                         describe: false,
@@ -27,7 +33,7 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            gruntfile: 'Gruntfile.js',
+            gruntfile: '<%= meta.gruntfile %>',
             options: {
                 bitwise: true,
                 boss: true,
