@@ -1,5 +1,5 @@
-var app = require('../src/app.js'),
-    request = require('supertest');
+var app = require('../src/app.js');
+var request = require('supertest');
 
 describe('Index', function () {
     'use strict';
