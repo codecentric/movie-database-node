@@ -1,4 +1,5 @@
 function AppCtrl ($scope) {
+    'use strict';
     $scope.title = 'The Movie Database';
 }
 

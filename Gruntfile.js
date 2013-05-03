@@ -54,7 +54,10 @@ module.exports = function (grunt) {
             client: {
                 files: { src: '<%= meta.client.js %>' },
                 options: {
-                    browser: true
+                    browser: true,
+                    globals: {
+                        angular: false
+                    }
                 }
             },
             options: {
@@ -82,8 +85,7 @@ module.exports = function (grunt) {
                 sub: true,
                 strict: true,
                 trailing: true,
-                undef: true,
-                unused: true
+                undef: true
             }
         }
     });

@@ -1,3 +1,5 @@
+/*global WelcomeCtrl:false, NotFoundCtrl:false */
+
 angular.module('MovieDatabase', []).config(function ($routeProvider) {
     'use strict';
 
