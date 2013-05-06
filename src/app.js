@@ -36,3 +36,4 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/hello', routes.hello);
+app.get('/movies', routes.movies);
