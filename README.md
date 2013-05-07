@@ -8,6 +8,20 @@ is being deployed to Heroku after every push. Feel free to check it out:
 
 ## System requirements
 
+### Neo4j
+
+Make sure to define the following properties in your `neo4j.properties`:
+
+```
+# Enable auto-indexing for nodes, default is false
+node_auto_indexing=true
+
+# The node property keys to be auto-indexed, if enabled
+node_keys_indexable=type,title,name
+```
+
+### Node.js
+
 *Make sure that you have [node.js with NPM](http://nodejs.org/) installed on
 your machine. You also need a Neo4j instance listening
 on* `http://127.0.0.1:7474`.
