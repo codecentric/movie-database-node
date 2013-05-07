@@ -69,6 +69,38 @@ added to the database (which then automatically creates the index) or after
 you have created it manually. Trying to query the index without fulfilling at
 least one of the previously mentioned conditions will result in an error.*
 
+## Technologies
+
+### Server
+The code for the server is in the `src`-folder.
+
+#### Express.js
+* Web: http://expressjs.com/
+* Source: https://github.com/visionmedia/express
+* Documentation: http://expressjs.com/api.html
+
+#### node-neo4j
+* Source: https://github.com/thingdom/node-neo4j
+* Documentation: http://coffeedoc.info/github/thingdom/node-neo4j/master/
+
+### Client
+The client-side code is in the `public`-folder. It is served via the express-server as static.
+
+#### AngularJS
+* Web: http://angularjs.org/
+* Source: https://github.com/angular/angular.js
+* Tutorial: http://docs.angularjs.org/tutorial/index
+* API-Documentation: http://docs.angularjs.org/api
+
+### Testing
+
+#### Mocha
+* Web & Documentation: http://visionmedia.github.io/mocha/
+* Source: https://github.com/visionmedia/mocha
+
+#### Supertest
+* Source: https://github.com/visionmedia/supertest
+
 ## Emptying the Neo4j database and starting over
 
 To clear the database, you only need to delete the directory `data/graph.db`.
