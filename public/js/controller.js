@@ -36,8 +36,8 @@ function MovieDetailCtrl ($scope, $http, $location, moviesResponse) {
     'use strict';
     $scope.movie = moviesResponse.data;
 
-    $scope.delete = function () {
-        $http.delete('/movies/' + $scope.movie.id).success(function (res) {
+    $scope['delete'] = function () {
+        $http['delete']('/movies/' + $scope.movie.id).success(function (res) {
             $location.path('/movies');
         });
     };
