@@ -25,10 +25,8 @@ function MoviesAddCtrl ($scope, $http, $location) {
     'use strict';
     $scope.movie = {};
     $scope.save = function (movie) {
+	// We should do something if this fails. But what?
         $http.post('/movies', movie)
-            .error(function () {
-                alert('error adding movie');
-            })
             .success(function(res) {
                 $location.path('/movies/' + res.id);
             });
