@@ -57,8 +57,9 @@ exports.deleteMovie = function (req, res) {
     console.log('Deleting movie ' + id);
 
     // TODO delete relationship once actors / votes have been added
-    var cypher = 'START node = node:node_auto_index(id={id}) ' +
-        'DELETE node';
+    var cypher = 'START node=node:node_auto_index(id={id}) ' +
+        'MATCH node-[relationship?]-() ' +
+        'DELETE node, relationship';
     db.query(cypher, { id: id }, function (err) {
         if (err) {
             console.error(err);
