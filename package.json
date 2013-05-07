@@ -15,7 +15,8 @@
   "dependencies": {
     "express": "~3.2.1",
     "neo4j": "~0.2.20",
-    "node-uuid": "~1.4.0"
+    "node-uuid": "~1.4.0",
+    "superagent": "~0.14.2"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
