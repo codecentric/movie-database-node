@@ -48,7 +48,7 @@ looks like this.
 node_auto_indexing=true
 
 # The node property keys to be auto-indexed, if enabled
-node_keys_indexable=type,title,name
+node_keys_indexable=id,type,title,name
 ```
 
 You will need to restart Neo4j after changing the configuration file.

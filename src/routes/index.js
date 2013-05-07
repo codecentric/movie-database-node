@@ -1,9 +1,13 @@
 'use strict';
+var uuid = require('node-uuid');
 var neo4j = require('neo4j');
 var db = new neo4j.GraphDatabase(
     process.env.NEO4J_URL || 'http://localhost:7474');
 
-var defaultSuccessObject = { ok: true };
+function getAbsoluteUriBase (req) {
+    // we use req.get('host') as this also gives us the port
+    return req.protocol + '://' + req.get('host');
+}
 
 exports.hello = function (req, res) {
     res.send('Hello World - now automatically deployed!');
@@ -37,10 +41,18 @@ exports.deleteMovie = function (req, res) {
 };
 
 exports.addMovie = function (req, res) {
-    console.log(req.body);
     var node = db.createNode(req.body);
     node.data.type = 'movie';
+    node.data.id = uuid.v4();
     node.save(function (error, savedNode) {
-        res.send(savedNode.data);
+        if (error) {
+            res.status(500).send();
+            console.error(error);
+        }
+
+        res.status(201)
+            .header('Location', getAbsoluteUriBase(req) +
+                '/movies/' + node.data.id)
+            .send(savedNode.data);
     });
 };
