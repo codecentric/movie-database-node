@@ -39,6 +39,7 @@ exports.deleteMovie = function (req, res) {
 exports.addMovie = function (req, res) {
     console.log(req.body);
     var node = db.createNode(req.body);
+    node.data.type = 'movie';
     node.save(function (error, savedNode) {
         res.send(savedNode.data);
     });
