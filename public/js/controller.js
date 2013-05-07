@@ -1,6 +1,13 @@
-function AppCtrl ($scope) {
+function AppCtrl ($scope, $rootScope, $location) {
     'use strict';
     $scope.title = 'The Movie Database';
+
+    $rootScope.$on('$routeChangeError',
+            function (event, current, previous, rejection) {
+        if (rejection.status === 404) {
+            $location.path('/404');
+        }
+    });
 }
 
 function WelcomeCtrl () {
@@ -32,6 +39,19 @@ function MoviesAddCtrl ($scope, $http, $location) {
             });
     };
 }
+
+function MovieDetailCtrl ($scope, moviesResponse) {
+    'use strict';
+    $scope.movie = moviesResponse.data;
+}
+
+MovieDetailCtrl.resolve = {
+    moviesResponse: function ($http, $route) {
+        'use strict';
+        var id = $route.current.params.id;
+        return $http.get('/movies/' + id);
+    }
+};
 
 function NotFoundCtrl () {
 }

@@ -38,7 +38,6 @@ exports.movies = function (req, res) {
 
 exports.getMovie = function (req, res) {
     var id = req.params.id;
-    // TODO how to retrieve movie => UUID?
 
     db.getIndexedNode('node_auto_index', 'id', id, function (err, node) {
         if (err) {

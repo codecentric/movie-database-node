@@ -74,7 +74,7 @@ module.exports = function (grunt) {
                 latedef: true,
                 maxcomplexity: 4,
                 maxdepth: 3,
-                maxparams: 3,
+                maxparams: 4,
                 maxstatements: 10,
                 maxlen: 80,
                 newcap: true,

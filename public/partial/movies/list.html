@@ -1,20 +1,22 @@
 <h1>Movie List</h1>
 
 <p>
-  <a class="btn btn-primary" ng-click="add()">Add Movie</a>
+    <a class="btn btn-primary" ng-click="add()">Add Movie</a>
 </p>
 
 <table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="movie in movies">
-      <td>
-	{{movie.title}}
-      </td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="movie in movies">
+            <td>
+                <a href="#" ng-href="#/movies/{{movie.id}}">
+                    {{movie.title}}
+                </a>
+            </td>
+        </tr>
+    </tbody>
 </table>
