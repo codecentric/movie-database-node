@@ -1,0 +1,30 @@
+<form class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputTitle">Title</label>
+    <div class="controls">
+      <input type="text"
+             id="inputTitle"
+             class="input-block-level"
+             autofocus
+             ng-model="movie.title">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDescription">Description</label>
+    <div class="controls">
+      <textarea rows="5"
+                id="inputDescription"
+                class="input-block-level"
+                ng-model="movie.description">
+      </textarea>
+    </div>
+  </div>
+  <div class="form-actions">
+    <button type="submit"
+            class="btn btn-primary"
+            ng-click="save(movie)">
+      Save
+    </button>
+    <a href="/movies/{{movie.id}}" class="btn">Cancel</a>
+  </div>
+</form>

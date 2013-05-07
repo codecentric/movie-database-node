@@ -1,4 +1,8 @@
-/*global WelcomeCtrl:false, NotFoundCtrl:false, MoviesCtrl:false */
+/*global
+  WelcomeCtrl:false, 
+  NotFoundCtrl:false, 
+  MoviesListCtrl:false, 
+  MoviesAddCtrl:false */
 
 angular.module('MovieDatabase', []).config(function ($routeProvider) {
     'use strict';
@@ -9,9 +13,16 @@ angular.module('MovieDatabase', []).config(function ($routeProvider) {
         templateUrl: 'partial/index.html'
     })
     .when('/movies', {
-        controller: MoviesCtrl,
-        resolve: MoviesCtrl.resolve,
-        templateUrl: 'partial/movies.html'
+        controller: MoviesListCtrl,
+        resolve: MoviesListCtrl.resolve,
+        templateUrl: 'partial/movies/list.html'
+    })
+    .when('/movies/new', {
+        controller: MoviesAddCtrl,
+        templateUrl: 'partial/movies/add.html'
+    })
+    .when('/movies/:id', {
+        redirectTo: '/movies'
     })
     .when('/404', {
         controller: NotFoundCtrl,
