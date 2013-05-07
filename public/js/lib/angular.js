@@ -6078,12 +6078,12 @@ function $LogProvider(){
    * @returns {*} current value if used as getter or itself (chaining) if used as setter
    */
   this.debugEnabled = function(flag) {
-	  if (isDefined(flag)) {
-		  debug = flag;
-		  return this;
-	  } else {
-		  return debug;
-	  }
+      if (isDefined(flag)) {
+          debug = flag;
+          return this;
+      } else {
+          return debug;
+      }
   };
   
   this.$get = ['$window', function($window){
@@ -6137,13 +6137,13 @@ function $LogProvider(){
        * Write a debug message
        */
       debug: (function () {
-    	var fn = consoleLog('debug');
-    	
-    	return function() {
-    		if (debug) {
-    			fn.apply(self, arguments);
-    		}
-    	}
+        var fn = consoleLog('debug');
+        
+        return function() {
+            if (debug) {
+                fn.apply(self, arguments);
+            }
+        }
       }())
     };
 

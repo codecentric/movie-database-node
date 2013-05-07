@@ -36,3 +36,10 @@ exports.deleteMovie = function (req, res) {
     res.status(204).send();
 };
 
+exports.addMovie = function (req, res) {
+    console.log(req.body);
+    var node = db.createNode(req.body);
+    node.save(function (error, savedNode) {
+        res.send(savedNode.data);
+    });
+};
