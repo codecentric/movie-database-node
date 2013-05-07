@@ -99,11 +99,18 @@ The client-side code is in the `public`-folder. It is served via the express-ser
 
 ### Testing
 
+#### Karma
+Test runner
+* Web: http://karma-runner.github.io/
+* Source: https://github.com/karma-runner/karma
+
 #### Mocha
+Test Framework
 * Web & Documentation: http://visionmedia.github.io/mocha/
 * Source: https://github.com/visionmedia/mocha
 
 #### Supertest
+Library for testing http servers 
 * Source: https://github.com/visionmedia/supertest
 
 ## Emptying the Neo4j database and starting over
