@@ -32,7 +32,7 @@ exports.getMovie = function (req, res) {
 exports.deleteMovie = function (req, res) {
     var id = req.params.id;
     // TODO actually delete movie from database
-    console.log("Deleting movie " + id);
+    console.log('Deleting movie ' + id);
     res.status(204).send();
 };
 

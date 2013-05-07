@@ -38,4 +38,4 @@ if ('development' === app.get('env')) {
 app.get('/hello', routes.hello);
 app.get('/movies', routes.movies);
 app.get('/movies/:id', routes.getMovie);
-app.delete('/movies/:id', routes.deleteMovie);
+app['delete']('/movies/:id', routes.deleteMovie);

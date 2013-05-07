@@ -1,4 +1,4 @@
-var app = require('../src/app.js');
+var app = require('../../src/app.js');
 var request = require('supertest');
 
 describe('Index', function () {
