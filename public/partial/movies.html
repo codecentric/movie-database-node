@@ -1,0 +1,16 @@
+<h1>Movie List</h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="movie in movies">
+      <td>
+	{{movie.title}}
+      </td>
+    </tr>
+  </tbody>
+</table>
