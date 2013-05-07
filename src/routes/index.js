@@ -54,9 +54,19 @@ exports.getMovie = function (req, res) {
 
 exports.deleteMovie = function (req, res) {
     var id = req.params.id;
-    // TODO actually delete movie from database
     console.log('Deleting movie ' + id);
-    res.status(204).send();
+
+    // TODO delete relationship once actors / votes have been added
+    var cypher = 'START node = node:node_auto_index(id={id}) ' +
+        'DELETE node';
+    db.query(cypher, { id: id }, function (err) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send();
+        }
+
+        res.status(204).send();
+    });
 };
 
 

@@ -32,9 +32,15 @@ function MoviesAddCtrl ($scope, $http, $location) {
     };
 }
 
-function MovieDetailCtrl ($scope, moviesResponse) {
+function MovieDetailCtrl ($scope, $http, $location, moviesResponse) {
     'use strict';
     $scope.movie = moviesResponse.data;
+
+    $scope.delete = function () {
+        $http.delete('/movies/' + $scope.movie.id).success(function (res) {
+            $location.path('/movies');
+        });
+    };
 }
 
 MovieDetailCtrl.resolve = {
