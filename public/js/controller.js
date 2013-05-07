@@ -1,13 +1,6 @@
-function AppCtrl ($scope, $rootScope, $location) {
+function AppCtrl ($scope) {
     'use strict';
     $scope.title = 'The Movie Database';
-
-    $rootScope.$on('$routeChangeError',
-            function (event, current, previous, rejection) {
-        if (rejection.status === 404) {
-            $location.path('/404');
-        }
-    });
 }
 
 function WelcomeCtrl () {
@@ -32,7 +25,6 @@ function MoviesAddCtrl ($scope, $http, $location) {
     'use strict';
     $scope.movie = {};
     $scope.save = function (movie) {
-	// We should do something if this fails. But what?
         $http.post('/movies', movie)
             .success(function(res) {
                 $location.path('/movies/' + res.id);
@@ -54,4 +46,7 @@ MovieDetailCtrl.resolve = {
 };
 
 function NotFoundCtrl () {
+}
+
+function ErrorCtrl() {
 }

@@ -3,9 +3,11 @@
   NotFoundCtrl:false,
   MoviesListCtrl:false,
   MoviesAddCtrl:false,
-  MovieDetailCtrl:false */
+  MovieDetailCtrl:false,
+  ErrorCtrl:false */
 
-angular.module('MovieDatabase', []).config(function ($routeProvider) {
+angular.module('MovieDatabase', []).config(
+        function ($routeProvider, $httpProvider) {
     'use strict';
 
     $routeProvider
@@ -31,5 +33,28 @@ angular.module('MovieDatabase', []).config(function ($routeProvider) {
         controller: NotFoundCtrl,
         templateUrl: 'partial/notFound.html'
     })
+    .when('/error', {
+        controller: ErrorCtrl,
+        templateUrl: 'partial/error.html'
+    })
     .otherwise({ redirectTo: '/404' });
+
+
+    $httpProvider.responseInterceptors.push(function ($q, $location) {
+        return function (promise) {
+            return promise.then(function () {
+                // no success handler
+                return promise;
+            }, function (response) {
+                var status = response.status;
+                if (status === 404) {
+                    $location.path('/404');
+                } else if (status >= 500) {
+                    $location.path('/error');
+                }
+
+                return $q.reject(response);
+            });
+        };
+    });
 });
