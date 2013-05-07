@@ -27,7 +27,7 @@ The most useful Grunt tasks currently are `simplemocha` for test execution and
 Grunt:
 
 ```
-grunt nodeunit
+grunt simplemocha
 ```
 
 ## Automatically restarting the express server on file changes
