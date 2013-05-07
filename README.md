@@ -92,6 +92,11 @@ The client-side code is in the `public`-folder. It is served via the express-ser
 * Tutorial: http://docs.angularjs.org/tutorial/index
 * API-Documentation: http://docs.angularjs.org/api
 
+#### Bootstrap
+* Web: http://twitter.github.io
+* Source: https://github.com/twitter/bootstrap
+* Documentation: http://twitter.github.io/bootstrap/components.html
+
 ### Testing
 
 #### Mocha
