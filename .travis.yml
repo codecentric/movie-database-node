@@ -2,6 +2,8 @@
 language: node_js
 node_js:
   - '0.10'
+services:
+  - neo4j
 before_script:
   - npm install -g grunt-cli
   - export DISPLAY=:99.0
