@@ -4,6 +4,8 @@ node_js:
   - '0.10'
 before_script:
   - npm install -g grunt-cli
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 after_script:
   - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   - git remote add heroku git@heroku.com:movie-database-node.git

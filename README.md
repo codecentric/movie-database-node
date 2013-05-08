@@ -104,14 +104,27 @@ Test runner
 * Web: http://karma-runner.github.io/
 * Source: https://github.com/karma-runner/karma
 
+
+#### Angular Scenario
+Used to test the front-end
+* Documentation: http://docs.angularjs.org/guide/dev_guide.e2e-testing
+* Source: https://github.com/angular/angular.js/tree/master/src/ngScenario
+* Matchers: https://github.com/angular/angular.js/blob/master/src/ngScenario/matchers.js
+
+
 #### Mocha
 Test Framework
 * Web & Documentation: http://visionmedia.github.io/mocha/
 * Source: https://github.com/visionmedia/mocha
 
 #### Supertest
-Library for testing http servers 
+Library for testing http servers
 * Source: https://github.com/visionmedia/supertest
+
+#### Chai
+Library for for BDD and TDD style assertions
+* Web & Documentation: http://chaijs.com/
+* Source: https://github.com/chaijs/chai
 
 ## Emptying the Neo4j database and starting over
 

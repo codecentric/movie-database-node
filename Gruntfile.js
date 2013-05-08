@@ -11,7 +11,17 @@ module.exports = function (grunt) {
                 test: 'test/server/**/*.js'
             },
             client: {
-                js: ['public/js/**/*.js', '!public/js/lib/**/*']
+                js: ['public/js/**/*.js', '!public/js/lib/**/*'],
+                tests: {
+                    integration: {
+                        config: 'test/karma/integration.conf.js',
+                        src: 'test/karma/integration/**/*.js'
+                    },
+                    unit: {
+                        config: 'test/karma/unit.conf.js',
+                        src: 'test/karma/unit/**/*.js'
+                    }
+                }
             }
         },
         simplemocha: {
@@ -60,6 +70,31 @@ module.exports = function (grunt) {
                     }
                 }
             },
+            karmaIntegration: {
+                files: { src: '<%= meta.client.tests.integration.src %>' },
+                options: {
+                    globals: {
+                        browser: false,
+                        expect: false,
+                        element: false,
+                        describe: false,
+                        it: false,
+                        beforeEach: false,
+                        input: false,
+                        repeater: false
+                    }
+                }
+            },
+            karmaUnit: {
+                files: { src: '<%= meta.client.tests.unit.src %>' },
+                options: {
+                    globals: {
+                        describe: false,
+                        it: false,
+                        chai: false
+                    }
+                }
+            },
             options: {
                 bitwise: true,
                 boss: true,
@@ -87,12 +122,25 @@ module.exports = function (grunt) {
                 trailing: true,
                 undef: true
             }
+        },
+        karma: {
+            unit: {
+                configFile: '<%= meta.client.tests.unit.config %>',
+                browsers: ['PhantomJS'],
+                singleRun: true
+            },
+            integration: {
+                configFile: '<%= meta.client.tests.integration.config %>',
+                browsers: ['PhantomJS'],
+                singleRun: true
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['jshint', 'simplemocha']);
-    grunt.registerTask('travis', ['jshint', 'simplemocha']);
+    grunt.registerTask('travis', ['jshint', 'simplemocha', 'karma:unit']);
 };
