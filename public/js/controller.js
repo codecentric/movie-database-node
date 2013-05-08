@@ -26,9 +26,9 @@ function MoviesAddCtrl ($scope, $http, $location) {
     $scope.movie = {};
     $scope.save = function (movie) {
         $http.post('/movies', movie)
-            .success(function(res) {
-                $location.path('/movies/' + res.id);
-            });
+        .success(function(res) {
+            $location.path('/movies/' + res.id);
+        });
     };
 }
 
@@ -43,12 +43,30 @@ function MovieDetailCtrl ($scope, $http, $location, moviesResponse) {
     };
 }
 
+function movieDetailResolver ($http, $route) {
+    'use strict';
+    var id = $route.current.params.id;
+    return $http.get('/movies/' + id);
+}
+
 MovieDetailCtrl.resolve = {
-    moviesResponse: function ($http, $route) {
-        'use strict';
-        var id = $route.current.params.id;
-        return $http.get('/movies/' + id);
-    }
+    moviesResponse: movieDetailResolver
+};
+
+function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
+    'use strict';
+    $scope.movie = moviesResponse.data;
+
+    $scope.save = function () {
+        $http.put('/movies/' + $scope.movie.id, $scope.movie)
+        .success(function (res) {
+            $location.path('/movies/' + $scope.movie.id);
+        });
+    };
+}
+
+MovieEditCtrl.resolve = {
+    moviesResponse: movieDetailResolver
 };
 
 function NotFoundCtrl () {

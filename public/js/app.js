@@ -4,6 +4,7 @@
   MoviesListCtrl:false,
   MoviesAddCtrl:false,
   MovieDetailCtrl:false,
+  MovieEditCtrl:false,
   ErrorCtrl:false */
 
 angular.module('MovieDatabase', []).config(
@@ -28,6 +29,11 @@ angular.module('MovieDatabase', []).config(
         controller: MovieDetailCtrl,
         resolve: MovieDetailCtrl.resolve,
         templateUrl: 'partial/movies/detail.html'
+    })
+    .when('/movies/:id/edit', {
+        controller: MovieEditCtrl,
+        resolve: MovieEditCtrl.resolve,
+        templateUrl: 'partial/movies/edit.html'
     })
     .when('/404', {
         controller: NotFoundCtrl,

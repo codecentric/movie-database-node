@@ -39,5 +39,6 @@ app.get('/hello', routes.hello);
 app.get('/movies', routes.movies);
 app.post('/movies', routes.addMovie);
 app.get('/movies/:id', routes.getMovie);
+app.put('/movies/:id', routes.updateMovie);
 // delete is a reserved word
 app['delete']('/movies/:id', routes.deleteMovie);

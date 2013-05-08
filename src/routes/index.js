@@ -56,7 +56,6 @@ exports.deleteMovie = function (req, res) {
     var id = req.params.id;
     console.log('Deleting movie ' + id);
 
-    // TODO delete relationship once actors / votes have been added
     var cypher = 'START node=node:node_auto_index(id={id}) ' +
         'MATCH node-[relationship?]-() ' +
         'DELETE node, relationship';
@@ -85,5 +84,28 @@ exports.addMovie = function (req, res) {
             .header('Location', getAbsoluteUriBase(req) +
                 '/movies/' + node.data.id)
             .send(savedNode.data);
+    });
+};
+
+
+exports.updateMovie = function (req, res) {
+    var id = req.params.id;
+    db.getIndexedNode('node_auto_index', 'id', id, function (err, node) {
+        if (err) {
+            console.error(err);
+            return res.status(500).send();
+        } else if (!node) {
+            return res.status(404).send();
+        }
+        node.data.title = req.body.title;
+        node.data.description = req.body.description;
+        node.save(function (err, savedNode) {
+            if (err) {
+                console.error(err);
+                return res.status(500).send();
+            }
+
+            res.send(savedNode.data);
+        });
     });
 };
