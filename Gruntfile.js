@@ -141,6 +141,15 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
 
+    grunt.registerTask('server',
+            'Start the server for testing purposes',
+            function () {
+        require('./src/server');
+    });
+
     grunt.registerTask('default', ['jshint', 'simplemocha']);
-    grunt.registerTask('travis', ['jshint', 'simplemocha', 'karma:unit']);
+    grunt.registerTask('travis', ['jshint',
+        'server',
+        'simplemocha',
+        'karma']);
 };
