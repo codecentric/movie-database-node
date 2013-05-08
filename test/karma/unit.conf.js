@@ -8,6 +8,8 @@ files = [
     MOCHA,
     MOCHA_ADAPTER,
     'node_modules/chai/chai.js',
+    'public/js/lib/angular.js',
+    'public/js/**/*.js',
     'test/karma/unit/**/*.spec.js'
 ];
 
@@ -17,7 +19,7 @@ exclude = [];
 // use dolts reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit', 'teamcity'
 // CLI --reporters progress
-reporters = ['progress', 'junit'];
+reporters = ['progress', 'junit', 'coverage'];
 
 junitReporter = {
     // will be resolved to basePath (in the same way as files/exclude patterns)
@@ -67,6 +69,10 @@ singleRun = true;
 // report which specs are slower than 500ms
 // CLI --report-slower-than 500
 reportSlowerThan = 500;
+
+preprocessors = {
+    '**/public/js/*.js': 'coverage'
+};
 
 plugins = [
     'karma-mocha',
