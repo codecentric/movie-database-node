@@ -1,10 +1,13 @@
 'use strict';
 
+var supersivor = require('supervisor');
+
 module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: '<json:package.json>',
         meta: {
+            all: ['public/**/*', 'src/**/*', 'test/**/*'],
             gruntfile: 'Gruntfile.js',
             server: {
                 src: 'src/**/*.js',
@@ -134,17 +137,34 @@ module.exports = function (grunt) {
                 browsers: ['PhantomJS'],
                 singleRun: true
             }
+        },
+        watch: {
+            files: '<%= meta.all %>',
+            tasks: ['jshint', 'simplemocha', 'karma']
         }
     });
 
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('server',
             'Start the server for testing purposes',
             function () {
-        require('./src/server');
+        supersivor.run(['--ignore',
+                'coverage/,test-results.xml',
+                'src/server.js']);
+
+        process.on('exit', function() {
+            var child = supersivor.child;
+            if (child) {
+                ['SIGTERM', 'SIGINT', 'SIGHUP', 'SIGQUIT'].forEach(
+                        function(signal) {
+                    child.kill(signal);
+                });
+            }
+        });
     });
 
     grunt.registerTask('default', ['jshint', 'simplemocha']);
@@ -152,4 +172,5 @@ module.exports = function (grunt) {
         'server',
         'simplemocha',
         'karma']);
+    grunt.registerTask('dev', ['server', 'watch']);
 };
