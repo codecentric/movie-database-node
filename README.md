@@ -125,6 +125,12 @@ Test Framework
 Library for testing http servers
 * Source: https://github.com/visionmedia/supertest
 
+#### Sinon.JS
+Spys, Stubs, Mocks for (node)js tests
+* Web: http://sinonjs.org
+* Documentation: http://sinonjs.org/docs/
+* Source: https://github.com/cjohansen/Sinon.JS
+
 #### Chai
 Library for for BDD and TDD style assertions
 * Web & Documentation: http://chaijs.com/
