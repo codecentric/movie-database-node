@@ -2,11 +2,12 @@
 
 var express = require('express');
 var routes = require('./routes')();
+var config = require('./config');
 
 var app = module.exports = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', config.application.port);
 
 // shortcut for favicon requests. Favicon requests do not need to go through
 // the whole middleware (static middleware is the last in the chain).

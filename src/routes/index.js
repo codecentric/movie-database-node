@@ -9,7 +9,7 @@ exports = module.exports = function (db) {
         // Default database provider: Neo4j
         var neo4j = require('neo4j');
         var config = require('../config');
-        db = new neo4j.GraphDatabase(config.neo4jUrl);
+        db = new neo4j.GraphDatabase(config.neo4j.url);
     }
 
     var exports = {};
