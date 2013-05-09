@@ -92,6 +92,13 @@ module.exports = function (grunt) {
             karmaUnit: {
                 files: { src: '<%= meta.client.tests.unit.src %>' },
                 options: {
+                    newcap: false,
+                    undef: false,
+                    immed: false,
+                    unused: false,
+                    sub: false,
+                    noempty: false,
+                    expr: true,
                     globals: {
                         describe: false,
                         it: false,

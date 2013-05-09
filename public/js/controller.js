@@ -6,7 +6,7 @@ function AppCtrl ($scope) {
 function WelcomeCtrl () {
 }
 
-function MoviesListCtrl ($scope, $location,moviesResponse) {
+function MoviesListCtrl ($scope, $location, moviesResponse) {
     'use strict';
     $scope.movies = moviesResponse.data;
     $scope.add = function () {
