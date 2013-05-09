@@ -1,3 +1,5 @@
+'use strict';
+
 var request = require('superagent');
 var config = require('./config');
 
@@ -23,7 +25,7 @@ exports.initAutoIndex = function() {
             }
         });
 
-     request.put(config.neo4jUrl + '/db/data/index/auto/node/status')
+    request.put(config.neo4jUrl + '/db/data/index/auto/node/status')
         .type('application/json')
         .send(true)
         .end(function (err, res) {
