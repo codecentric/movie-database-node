@@ -1,11 +1,7 @@
 'use strict';
 
 var express = require('express');
-
-var neo4j = require('neo4j');
-var db = new neo4j.GraphDatabase(
-    process.env.NEO4J_URL || 'http://localhost:7474');
-var routes = require('./routes')(db);
+var routes = require('./routes')();
 
 var app = module.exports = express();
 

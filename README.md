@@ -69,6 +69,10 @@ added to the database (which then automatically creates the index) or after
 you have created it manually. Trying to query the index without fulfilling at
 least one of the previously mentioned conditions will result in an error.*
 
+As much as possible, the application tries to configure automatic indexing at
+application start through
+[Neo4j's web service](http://docs.neo4j.org/chunked/milestone/rest-api-configurable-auto-indexes.html).
+
 ## Technologies
 
 ### Server

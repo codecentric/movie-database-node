@@ -68,6 +68,7 @@ module.exports = function (grunt) {
                 files: { src: '<%= meta.client.js %>' },
                 options: {
                     browser: true,
+                    unused: false,
                     globals: {
                         angular: false
                     }
@@ -101,7 +102,6 @@ module.exports = function (grunt) {
             options: {
                 bitwise: true,
                 boss: true,
-                browser: true,
                 curly: true,
                 camelcase: true,
                 eqeqeq: true,
@@ -114,7 +114,7 @@ module.exports = function (grunt) {
                 maxdepth: 3,
                 maxparams: 4,
                 maxstatements: 10,
-                maxlen: 120,
+                maxlen: 80,
                 newcap: true,
                 noarg: true,
                 noempty: true,
@@ -123,7 +123,8 @@ module.exports = function (grunt) {
                 sub: true,
                 strict: true,
                 trailing: true,
-                undef: true
+                undef: true,
+                unused: true
             }
         },
         karma: {

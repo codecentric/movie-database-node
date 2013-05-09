@@ -1,14 +1,15 @@
 'use strict';
 
-var app = require('./app'),
-    http = require('http'),
-    request = require('superagent');
+var http = require('http');
+var request = require('superagent');
+
+var app = require('./app');
+var config = require('./config');
 
 // Enable auto-indexing, primarily needed for heroku,
 // where we dont have access to neo4j.properties.
-// See http://docs.neo4j.org/chunked/milestone/rest-api-configurable-auto-indexes.html
-var neo4jBaseUrl = process.env.NEO4J_URL || 'http://localhost:7474';
-request.post(neo4jBaseUrl + '/db/data/index/node')
+// See http://bit.ly/12fL6Gy
+request.post(config.neo4jUrl + '/db/data/index/node')
     .type('application/json')
     .send({
         'name' : 'node_auto_index',
@@ -26,7 +27,7 @@ request.post(neo4jBaseUrl + '/db/data/index/node')
         }
     });
 
-request.put(neo4jBaseUrl + '/db/data/index/auto/node/status')
+request.put(config.neo4jUrl + '/db/data/index/auto/node/status')
     .type('application/json')
     .send(true)
     .end(function (err, res) {
@@ -40,7 +41,7 @@ request.put(neo4jBaseUrl + '/db/data/index/auto/node/status')
     });
 
 ['id','type','title'].forEach(function (property) {
-    request.post(neo4jBaseUrl + '/db/data/index/auto/node/properties')
+    request.post(config.neo4jUrl + '/db/data/index/auto/node/properties')
         .type('application/json')
         .send(property)
         .end(function (err, res) {
@@ -49,7 +50,8 @@ request.put(neo4jBaseUrl + '/db/data/index/auto/node/status')
             } else if (res.status !== 204) {
                 console.error(res.body);
             } else {
-                console.log('Added property ' + property + ' to neo4j auto-indexing.');
+                console.info('Added property ' + property +
+                        ' to neo4j auto-indexing.');
             }
         });
 });

@@ -3,7 +3,7 @@ describe('Movies', function () {
     var baseUrl = '/#/movies';
     var addMovieUrl = '/#/movies/new';
 
-    beforeEach(function ($document) {
+    beforeEach(function () {
         browser().navigateTo(baseUrl);
         element('table tbody').query(function (elements, done) {
             var children = elements.children();
