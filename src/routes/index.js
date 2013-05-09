@@ -25,7 +25,7 @@ exports = module.exports = function (db) {
     };
 
 
-    exports.movies = function (req, res) {
+    exports.getMovies = function (req, res) {
         db.getIndexedNodes('node_auto_index', 'type', 'movie',
                 function (err, nodes) {
             if (err) {

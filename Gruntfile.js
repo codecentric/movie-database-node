@@ -32,7 +32,7 @@ module.exports = function (grunt) {
                 timeout: 3000,
                 ignoreLeaks: false,
                 ui: 'bdd',
-                reporter: 'dot'
+                reporter: 'spec'
             },
             all: {
                 src: '<%= meta.server.test %>'
@@ -51,8 +51,10 @@ module.exports = function (grunt) {
                 options: {
                     node: true,
                     globalstrict: true,
+                    expr: true, // to allow the use of expet(val).to.be.empty
                     globals: {
                         describe: false,
+                        beforeEach: false,
                         it: false
                     }
                 }

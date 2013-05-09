@@ -36,7 +36,7 @@ if ('development' === app.get('env')) {
 }
 
 app.get('/hello', routes.hello);
-app.get('/movies', routes.movies);
+app.get('/movies', routes.getMovies);
 app.post('/movies', routes.addMovie);
 app.get('/movies/:id', routes.getMovie);
 app.put('/movies/:id', routes.updateMovie);
