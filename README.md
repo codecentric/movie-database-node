@@ -8,8 +8,6 @@ is being deployed to Heroku after every push. Feel free to check it out:
 
 ## System requirements
 
-### Node.js
-
 *Make sure that you have [node.js with NPM](http://nodejs.org/) installed on
 your machine. You also need a Neo4j instance listening
 on* `http://127.0.0.1:7474`.
@@ -26,74 +24,22 @@ To make use of Grunt, you further need to have its CLI tool on your path.
 npm install -g grunt-cli
 ```
 
-The most useful Grunt tasks currently are `simplemocha` for test execution and
-`jshint` for static source code analysis. To execute these tasks, simple call
+The most useful Grunt tasks currently is `travis` for test execution and
+`dev` to run a development mode. To execute these tasks, simple call
 Grunt:
 
 ```
-grunt simplemocha
+grunt dev
 ```
 
-## Technologies
-
-### Server
-The code for the server is in the `src`-folder.
-
-#### Express.js
-* Web: http://expressjs.com/
-* Source: https://github.com/visionmedia/express
-* Documentation: http://expressjs.com/api.html
-
-#### node-neo4j
-* Source: https://github.com/thingdom/node-neo4j
-* Documentation: http://coffeedoc.info/github/thingdom/node-neo4j/master/
-
-### Client
-The client-side code is in the `public`-folder. It is served via the express-server as static.
-
-#### AngularJS
-* Web: http://angularjs.org/
-* Source: https://github.com/angular/angular.js
-* Tutorial: http://docs.angularjs.org/tutorial/index
-* API-Documentation: http://docs.angularjs.org/api
-
-#### Bootstrap
-* Web: http://twitter.github.io
-* Source: https://github.com/twitter/bootstrap
-* Documentation: http://twitter.github.io/bootstrap/components.html
-
-### Testing
-
-#### Karma
-Test runner
-* Web: http://karma-runner.github.io/
-* Source: https://github.com/karma-runner/karma
-
-
-#### Angular Scenario
-Used to test the front-end
-* Documentation: http://docs.angularjs.org/guide/dev_guide.e2e-testing
-* Source: https://github.com/angular/angular.js/tree/master/src/ngScenario
-* Matchers: https://github.com/angular/angular.js/blob/master/src/ngScenario/matchers.js
-
-
-#### Mocha
-Test Framework
-* Web & Documentation: http://visionmedia.github.io/mocha/
-* Source: https://github.com/visionmedia/mocha
-
-#### Sinon.JS
-Spys, Stubs, Mocks for (node)js tests
-* Web: http://sinonjs.org
-* Documentation: http://sinonjs.org/docs/
-* Source: https://github.com/cjohansen/Sinon.JS
-
-#### Chai
-Library for for BDD and TDD style assertions
-* Web & Documentation: http://chaijs.com/
-* Source: https://github.com/chaijs/chai
+The development mode will automatically spin up a server which will be restarted
+upon file changes. Furthermore all tests will be executed whenever you change
+a file.
 
 ## Automatically restarting the express server on file changes
+
+*You can stop reading right now when you are using the `grunt dev` task. The
+task automatically restarts the server for you.*
 
 Automatically restarting the server on file changes is desirable as this
 increases your development pace.
@@ -111,6 +57,10 @@ supervisor src/server.js
 
  - [with Spring MVC](https://github.com/tobiasflohre/movie-database)
  - [with AngularJS and requireJS](https://github.com/bripkens/movie-database-spa)
+
+## Further reading
+
+You can find additional information in the `docs` directory.
 
 ## License (MIT)
 

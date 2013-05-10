@@ -1,6 +1,14 @@
 # Neo4j
 
-TODO: Links to Homepage, Documentation, Cheatsheet
+
+## Links
+
+ * [Hompeage](http://www.neo4j.org/)
+ * [Cypher Cheat Sheet](http://assets.neo4j.org/download/Neo4j_CheatSheet_v3.pdf)
+ * [REST API documentation](http://docs.neo4j.org/chunked/stable/rest-api.html)
+ * [Node.js client library](https://github.com/thingdom/node-neo4j)
+ * [Node.js client library API documentation](http://coffeedoc.info/github/thingdom/node-neo4j/master/)
+
 
 ## Neo4j Configuration
 

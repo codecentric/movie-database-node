@@ -25,6 +25,13 @@ app.use(express.bodyParser());
 // defines the request parameter.
 app.use(express.methodOverride());
 
+// we deactivate all caches. Really stupid idea in general, but hey, this is
+// a workshop and it needs to be simple :-)
+app.use(function cacheDeactivation (req, res, next) {
+    res.header('Cache-Control', 'no-cache');
+    next();
+});
+
 // Enable the routes which are defined at the bottom of the file
 app.use(app.router);
 
