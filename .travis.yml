@@ -6,7 +6,7 @@ services:
   - neo4j
 before_script:
   - npm install -g grunt-cli
-after_script:
+after_success:
   - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   - git remote add heroku git@heroku.com:movie-database-node.git
   - echo "Host heroku.com" >> ~/.ssh/config
