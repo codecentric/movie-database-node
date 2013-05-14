@@ -6,6 +6,41 @@ Another version of the legendary movie database. This time with NodeJS. The app
 is being deployed to Heroku after every push. Feel free to check it out:
 [http://movie-database-node.herokuapp.com/](http://movie-database-node.herokuapp.com/)!
 
+## Travis-CI and Heroku
+
+This project uses [Travis-CI](https://www.travis-ci.org/) for
+continuous integration. After every successfull build, the application
+is deployed automatically to [Heroku](https://www.heroku.com/).
+
+If you fork the project, you probably want to set up a CI/CD-pipeline
+yourself. For Travis-CI, follow these steps (or take a look at the
+guide [Travis-CI Getting started guide](http://about.travis-ci.org/docs/user/getting-started/)).
+1. Fork the project on GitHub.
+2. Create a Travis-CI account (you can login with your GitHub account).
+3. Activate the Travis service hook for your fork of the project (on your profile page).
+4. Change the build-status icon in this README.md file to the new travis project (https://travis-ci.org/YOUR_GITHUB_NAME/movie-database-node).
+
+Deployment on Heroku is also easy. Just follow the [Getting started with Heroku and NodeJS guide](https://devcenter.heroku.com/articles/nodejs).
+If you want your application to be deployed continuously, whenever a Travis-CI job succeeds, you have to encrypt your Heroku API Key and save it in the `.travis.yml`:
+1. Look up your Heroku API Key on the [Heroku Dashboard](https://dashboard.heroku.com/account)
+2. Install the travis utility gem
+```
+gem install  travis
+```
+3. Go to your project root folder and execute the following travis command (replace <YOUR_GITHUB_NAME> and <YOUR_HEROKU_API_KEY> with appropriate values:
+```
+travis encrypt --add -r <YOUR_GITHUB_NAME>/movie-database-node HEROKU_API_KEY=<YOUR_HEROKU_API_KEY>
+```
+
+This will automatically add encrypt your key and add it to the
+`.travis.yml`. Theoretically, you could also encrypt the key and add
+it manually to the `.travis.yml` (just leave out the `--add` in the
+above command), but that didn't work for me.
+
+## Documentation
+
+You can find additional information about the used technologies in the `docs` directory.
+
 ## System requirements
 
 *Make sure that you have [node.js with NPM](http://nodejs.org/) installed on
@@ -57,10 +92,6 @@ supervisor src/server.js
 
  - [with Spring MVC](https://github.com/tobiasflohre/movie-database)
  - [with AngularJS and requireJS](https://github.com/bripkens/movie-database-spa)
-
-## Further reading
-
-You can find additional information in the `docs` directory.
 
 ## License (MIT)
 
