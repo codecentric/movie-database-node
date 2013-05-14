@@ -14,7 +14,9 @@ is deployed automatically to [Heroku](https://www.heroku.com/).
 
 If you fork the project, you probably want to set up a CI/CD-pipeline
 yourself. For Travis-CI, follow these steps (or take a look at the
-guide [Travis-CI Getting started guide](http://about.travis-ci.org/docs/user/getting-started/)).
+guide [Travis-CI Getting started guide](http://about.travis-ci.org/docs/user/getting-started/)). If
+you are interested in the travis-configuration, take a look at the
+documented [.travis.yml](.travis.yml).
 
 1. Fork the project on GitHub.
 2. Create a Travis-CI account (you can login with your GitHub account).
@@ -34,7 +36,8 @@ travis encrypt --add -r <YOUR_GITHUB_NAME>/movie-database-node HEROKU_API_KEY=<Y
 This will automatically add encrypt your key and add it to the
 `.travis.yml`. Theoretically, you could also encrypt the key and add
 it manually to the `.travis.yml` (just leave out the `--add` in the
-above command), but that didn't work for me.
+above command), but that didn't work for me. For more information, take a look
+at the documented script [scripts/deploy-to-heroku.sh](scripts/deploy-to-heroku.sh).
 
 ## Documentation
 

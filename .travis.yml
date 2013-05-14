@@ -1,13 +1,29 @@
 ---
+# By setting the language to node_js, travis will execute the follwing steps:
+# 1. Install the required node.js version (including npm)
+# 2. Install dependencies with `npm install`
+# 3. Execute tests with `npm travis`
 language: node_js
 node_js:
   - '0.10'
+  
+# We need a running neo4j-instance for our end2end-tests.
+# The neo4j-server will listen on the standard port (7474)
 services:
   - neo4j
+  
+# We use the grunt command-line tool for test execution, so we
+# have to make sure, that the grunt executable is available
 before_script:
   - npm install -g grunt-cli
+
+# After a successfull build we want to deploy everything to heroku
 after_success:
   - ./scripts/deploy-to-heroku.sh
+
+# For heroku deployment, a HEROKU_API_KEY environment variable is needed.
+# The value was encrypted with the help of the travis-gem:
+# `travis encrypt --add -r <YOUR_GITHUB_NAME>/movie-database-node HEROKU_API_KEY=<YOUR_HEROKU_API_KEY>`
 env:
   global:
   - secure: ! 'oMQE0FSPxyi0G/eMlt6NRFfaKuEVQjcY/e28N/lncoIwb8hGylXjnmaQ6/ME

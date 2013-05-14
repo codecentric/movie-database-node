@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#
+# Automatically deploy to heroku from Travis-CI job using HEROKU_API_KEY.
+# 
+# See http://www.neilmiddleton.com/deploying-to-heroku-from-travis-ci/
+#
+
 HEROKU_APP_NAME="movie-database-node"
 
 if [ "$HEROKU_API_KEY" == "" ]
