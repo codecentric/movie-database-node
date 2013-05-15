@@ -19,7 +19,12 @@ module.exports.configureAutoIndex = function () {
             if (err) {
                 console.error(err);
             } else if (res.status !== 201) {
-                console.error(res.body);
+                if (res.body.message) {
+                    console.error(res.body.message);
+                    console.log(res.body);
+                } else {
+                    console.error(res.body);
+                }
             } else {
                 console.log('Added index "node_auto_index"');
             }

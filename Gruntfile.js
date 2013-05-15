@@ -1,6 +1,8 @@
 'use strict';
 var path = require('path');
 var supersivor = require('supervisor');
+var spawn = require('child_process').spawn;
+require('colors');
 
 module.exports = function (grunt) {
     // Project configuration.
@@ -122,7 +124,7 @@ module.exports = function (grunt) {
                 maxcomplexity: 4,
                 maxdepth: 3,
                 maxparams: 4,
-                maxstatements: 10,
+                maxstatements: 14,
                 maxlen: 120,
                 newcap: true,
                 noarg: true,
@@ -156,7 +158,6 @@ module.exports = function (grunt) {
 
     var runner = require('karma').runner;
     var server = require('karma').server;
-    function finished(code){ return this(code === 0); }
     var _ = grunt.util._;
     grunt.registerMultiTask('karma', 'run karma.', function() {
         var done = this.async();
@@ -178,11 +179,18 @@ module.exports = function (grunt) {
         }
         //allow karma to be run in the background so it doesn't block grunt
         if (this.data.background){
-            grunt.util.spawn({cmd: 'node', args: [path.join(__dirname, 'karma-server.js'), JSON.stringify(data)]}, function(){});
+            grunt.util.spawn({
+                cmd: 'node',
+                args: [path.join(__dirname, 'karma-server.js'), JSON.stringify(data)]
+            },function(){});
             done();
         }
         else {
-            server.start(data, finished.bind(done));
+            server.start(
+                data,
+                function(code) {
+                    done(code);
+                });
         }
     });
 
@@ -209,10 +217,29 @@ module.exports = function (grunt) {
         });
     });
 
+    grunt.registerTask(
+        'silentserver',
+        'Start the server without watch/supervisor in silent mode (no stdout, just stderr)',
+        function () {
+            var child = spawn(
+                'node',
+                ['src/server.js']);
+            child.stderr.on('data', function(data) {
+                console.error('ERROR [silentserver]: '.red + data);
+            });
+            process.on('exit', function() {
+                if (child) {
+                    ['SIGTERM', 'SIGINT', 'SIGHUP', 'SIGQUIT'].forEach(
+                        function(signal) {
+                            child.kill(signal);
+                        });
+                }
+            });
+        });
+
     grunt.registerTask('default', ['jshint', 'simplemocha']);
-    grunt.registerTask('travis', ['jshint',
-        'server',
-        'simplemocha',
-        'karma']);
+    grunt.registerTask(
+        'travis',
+        ['jshint', 'simplemocha', 'karma:unit', 'silentserver', 'karma:integration']);
     grunt.registerTask('dev', ['server', 'watch']);
 };
