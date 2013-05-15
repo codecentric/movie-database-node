@@ -5,8 +5,6 @@ frameworks = ['mocha'];
 
 // list of files / patterns to load in the browser
 files = [
-    MOCHA,
-    MOCHA_ADAPTER,
     'node_modules/chai/chai.js',
     'public/js/lib/angular.js',
     'public/js/**/*.js',
@@ -19,12 +17,7 @@ exclude = [];
 // use dolts reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit', 'teamcity'
 // CLI --reporters progress
-reporters = ['progress', 'junit', 'coverage'];
-
-junitReporter = {
-    // will be resolved to basePath (in the same way as files/exclude patterns)
-    outputFile: 'test-results.xml'
-};
+reporters = ['spec'];
 
 // web server port
 // CLI --port 9876
@@ -71,12 +64,13 @@ singleRun = true;
 reportSlowerThan = 500;
 
 preprocessors = {
-    '**/public/js/*.js': 'coverage'
+//    '**/public/js/*.js': 'coverage'
 };
 
 plugins = [
     'karma-mocha',
     'karma-chrome-launcher',
     'karma-firefox-launcher',
-    'karma-junit-reporter'
+    'karma-phantomjs-launcher',
+    'karma-spec-reporter'
 ];

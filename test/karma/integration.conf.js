@@ -2,12 +2,10 @@
 // to the configuration file
 basePath = '../..';
 
-frameworks = ['mocha'];
+frameworks = ['ng-scenario'];
 
 // list of files / patterns to load in the browser
 files = [
-    ANGULAR_SCENARIO,
-    ANGULAR_SCENARIO_ADAPTER,
     'test/karma/integration/**/*.spec.js'
 ];
 
@@ -17,12 +15,7 @@ exclude = [];
 // use dolts reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit', 'teamcity'
 // CLI --reporters progress
-reporters = ['dots', 'junit'];
-
-junitReporter = {
-    // will be resolved to basePath (in the same way as files/exclude patterns)
-    outputFile: 'test-results.xml'
-};
+reporters = ['spec'];
 
 // web server port
 // CLI --port 9876
@@ -69,10 +62,11 @@ singleRun = true;
 reportSlowerThan = 1000;
 
 plugins = [
-    'karma-mocha',
+    'karma-ng-scenario',
     'karma-chrome-launcher',
     'karma-firefox-launcher',
-    'karma-junit-reporter'
+    'karma-phantomjs-launcher',
+    'karma-spec-reporter'
 ];
 
 urlRoot = '/__karma/';

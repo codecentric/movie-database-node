@@ -1,5 +1,5 @@
 'use strict';
-
+var path = require('path');
 var supersivor = require('supervisor');
 
 module.exports = function (grunt) {
@@ -154,9 +154,41 @@ module.exports = function (grunt) {
         }
     });
 
+    var runner = require('karma').runner;
+    var server = require('karma').server;
+    function finished(code){ return this(code === 0); }
+    var _ = grunt.util._;
+    grunt.registerMultiTask('karma', 'run karma.', function() {
+        var done = this.async();
+        var options = this.options({
+            background: false
+        });
+        var data = this.data;
+        //merge options onto data, with data taking precedence
+        data = _.merge(options, data);
+        data.configFile = path.resolve(data.configFile);
+
+        if (data.configFile) {
+            data.configFile = grunt.template.process(data.configFile);
+        }
+        //support `karma run`, useful for grunt watch
+        if (this.flags.run){
+            runner.run(data, done);
+            return;
+        }
+        //allow karma to be run in the background so it doesn't block grunt
+        if (this.data.background){
+            grunt.util.spawn({cmd: 'node', args: [path.join(__dirname, 'karma-server.js'), JSON.stringify(data)]}, function(){});
+            done();
+        }
+        else {
+            server.start(data, finished.bind(done));
+        }
+    });
+
+
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('server',
