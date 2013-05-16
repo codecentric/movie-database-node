@@ -1,34 +1,45 @@
+
 describe('Movies', function () {
     'use strict';
     var baseUrl = '/#/movies';
     var addMovieUrl = '/#/movies/new';
 
     beforeEach(function () {
+        var deleteMovie = function () {
+            browser().navigateTo(baseUrl);
+            element('table tbody').query(function (tbody, done) {
+                var children = tbody.children();
+
+                if (children.length > 0) {
+                    browser().navigateTo(baseUrl);
+                    element('table tbody a').click();
+                    element('.btn-danger').click();
+                }
+
+                if (children.length > 1) {
+                    deleteMovie();
+                }
+
+                done();
+            });
+
+        };
+
+        deleteMovie();
         browser().navigateTo(baseUrl);
-        element('table tbody').query(function (elements, done) {
-            var children = elements.children();
-
-            if (children.length > 0) {
-                // for some reason we need to navigate back to the page, bug?
-                browser().navigateTo(baseUrl);
-                element('table tbody a').click();
-                element('.btn-danger').click();
-            }
-
-            done();
-        });
     });
 
+
+
     it('should be accessible', function () {
-        browser().navigateTo(baseUrl);
         expect(element('h1').text()).toEqual('Movie List');
     });
 
     it('should allow adding of movies', function () {
-        browser().navigateTo(baseUrl);
         element('.btn-primary').click();
         expect(browser().window().hash()).toEqual('/movies/new');
     });
+
 
     it('should add movies and forward to the detail view', function () {
         var title = 'Batman: The Dark Knight';
