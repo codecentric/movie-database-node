@@ -15,7 +15,7 @@ exclude = [];
 // use dolts reporter, as travis terminal does not support escaping sequences
 // possible values: 'dots', 'progress', 'junit', 'teamcity'
 // CLI --reporters progress
-reporters = ['spec'];
+reporters = ['progress'];
 
 // web server port
 // CLI --port 9876

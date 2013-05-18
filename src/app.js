@@ -3,8 +3,11 @@
 var express = require('express');
 var routes = require('./routes')();
 var config = require('./config');
+var historyApiFallback = require('connect-history-api-fallback');
 
 var app = module.exports = express();
+
+var serveDirectory = 'public';
 
 // all environments
 app.set('port', config.application.port);
@@ -32,14 +35,18 @@ app.use(function cacheDeactivation (req, res, next) {
     next();
 });
 
+// provide a fallback for the history API, i.e. change the requested URL
+app.use(historyApiFallback);
+
 // Enable the routes which are defined at the bottom of the file
 app.use(app.router);
 
 // Serve static files
-app.use(express.static('public'));
+app.use(express.static(serveDirectory));
 
 // development only => extra error handling
 if ('development' === app.get('env')) {
+    app.use(express.directory(serveDirectory));
     app.use(express.errorHandler());
 }
 
