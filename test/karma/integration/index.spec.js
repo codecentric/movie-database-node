@@ -11,7 +11,6 @@ describe('Movies', function () {
                 var children = tbody.children();
 
                 if (children.length > 0) {
-                    browser().navigateTo(baseUrl);
                     element('table tbody a').click();
                     element('.btn-danger').click();
                 }
