@@ -31,7 +31,7 @@ git remote add heroku git@heroku.com:$HEROKU_APP_NAME.git
 # If for some reason the key is not set (or not correct), the auth:login-command asks the user to type
 # his heroku-credentials (and thus blocks the terminal). Because we do not want to wait for travis-ci
 # to shutdown the stalled job in this case (normally after ~10min), we use timeout here.
-timeout --kill-after 10s heroku auth:login
+timeout --kill-after=10s 10s heroku auth:login
 
 if [ $? -ne 0 ]
 then 
