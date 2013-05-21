@@ -18,7 +18,7 @@ fi
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 # The timeout command is part of the coreutils package
-apt-get install -y coreutils
+sudo apt-get install -y coreutils
 
 # Get rid of ssh "The authenticity of host can't be established" warnings 
 # (and the blocking of the terminal caused by them).
