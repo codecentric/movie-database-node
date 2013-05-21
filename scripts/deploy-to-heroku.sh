@@ -17,9 +17,6 @@ fi
 # First, we have to install the heroku key belt
 wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-# The timeout command is part of the coreutils package
-sudo apt-get install -y coreutils
-
 # Get rid of ssh "The authenticity of host can't be established" warnings 
 # (and the blocking of the terminal caused by them).
 echo "Host heroku.com" >> ~/.ssh/config
@@ -34,7 +31,7 @@ git remote add heroku git@heroku.com:$HEROKU_APP_NAME.git
 # If for some reason the key is not set (or not correct), the auth:login-command asks the user to type
 # his heroku-credentials (and thus blocks the terminal). Because we do not want to wait for travis-ci
 # to shutdown the stalled job in this case (normally after ~10min), we use timeout here.
-timout --kill-after 10s heroku auth:login
+timeout --kill-after 10s heroku auth:login
 
 if [ $? -ne 0 ]
 then 
