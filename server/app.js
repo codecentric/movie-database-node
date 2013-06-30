@@ -1,13 +1,12 @@
 'use strict';
 
 var express = require('express');
-var routes = require('./routes')();
 var config = require('./config');
 var historyApiFallback = require('connect-history-api-fallback');
 
 var app = module.exports = express();
 
-var serveDirectory = 'public';
+var serveDirectory = 'client';
 
 // all environments
 app.set('port', config.application.port);
@@ -50,10 +49,11 @@ if ('development' === app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.get('/hello', routes.hello);
-app.get('/movies', routes.getMovies);
-app.post('/movies', routes.addMovie);
-app.get('/movies/:id', routes.getMovie);
-app.put('/movies/:id', routes.updateMovie);
+var routes = require('./routes')();
+app.get('/hello', routes.hello.sayHello);
+app.get('/movies', routes.movies.getMovies);
+app.post('/movies', routes.movies.addMovie);
+app.get('/movies/:id', routes.movies.getMovie);
+app.put('/movies/:id', routes.movies.updateMovie);
 // delete is a reserved word
-app['delete']('/movies/:id', routes.deleteMovie);
+app['delete']('/movies/:id', routes.movies.deleteMovie);

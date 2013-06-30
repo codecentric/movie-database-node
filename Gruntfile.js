@@ -9,14 +9,14 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: '<json:package.json>',
         meta: {
-            all: ['public/**/*', 'src/**/*', 'test/**/*'],
+            all: ['client/**/*', 'server/**/*', 'test/**/*'],
             gruntfile: 'Gruntfile.js',
             server: {
-                src: 'src/**/*.js',
+                src: 'server/**/*.js',
                 test: 'test/server/**/*.js'
             },
             client: {
-                js: ['public/js/**/*.js', '!public/js/lib/**/*'],
+                js: ['client/js/**/*.js', '!client/js/lib/**/*'],
                 tests: {
                     integration: {
                         config: 'test/karma/integration.conf.js',
@@ -204,7 +204,7 @@ module.exports = function (grunt) {
             function () {
         supersivor.run(['--ignore',
                 'coverage/,test-results.xml',
-                'src/server.js']);
+                'server/server.js']);
 
         process.on('exit', function() {
             var child = supersivor.child;
@@ -223,7 +223,7 @@ module.exports = function (grunt) {
         function () {
             var child = spawn(
                 'node',
-                ['src/server.js']);
+                ['server/server.js']);
             child.stderr.on('data', function(data) {
                 console.error('ERROR [silentserver]: '.red + data);
             });

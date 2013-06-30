@@ -6,10 +6,7 @@ var uuid = require('node-uuid');
 exports = module.exports = function (db) {
 
     if (!db) {
-        // Default database provider: Neo4j
-        var neo4j = require('neo4j');
-        var config = require('../config');
-        db = new neo4j.GraphDatabase(config.neo4j.url);
+        throw new Error("No database configured")
     }
 
     var exports = {};
@@ -18,12 +15,6 @@ exports = module.exports = function (db) {
         // we use req.get('host') as this also gives us the port
         return req.protocol + '://' + req.get('host');
     }
-
-
-    exports.hello = function (req, res) {
-        res.send('Hello World - now automatically deployed!');
-    };
-
 
     exports.getMovies = function (req, res) {
         db.getIndexedNodes('node_auto_index', 'type', 'movie',

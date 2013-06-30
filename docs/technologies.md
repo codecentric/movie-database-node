@@ -1,7 +1,7 @@
 # Technologies
 
 ## Server
-The code for the server is in the `src`-folder.
+The code for the server is in the `server`-folder.
 
 ### Express.js
 * Web: http://expressjs.com/
@@ -13,7 +13,7 @@ The code for the server is in the `src`-folder.
 * Documentation: http://coffeedoc.info/github/thingdom/node-neo4j/master/
 
 ## Client
-The client-side code is in the `public`-folder. It is served via the express-server as static.
+The client-side code is in the `client`-folder. It is served via the express-server as static.
 
 ### AngularJS
 * Web: http://angularjs.org/
