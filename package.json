@@ -2,9 +2,9 @@
   "name": "movie-database-node",
   "version": "0.0.1",
   "description": "Example express application",
-  "main": "src/server.js",
+  "main": "server/server.js", // Wofür ist das gut?
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server/server.js", // Kann man das weglassen? Oder durch den entsprechenden 'grunt silentserver' task ersetzen?
     "test": "grunt travis --verbose"
   },
   "dependencies": {
