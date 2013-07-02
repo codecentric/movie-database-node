@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "Example express application",
 
-  "//":"Wofür ist das gut?"
+  "//":"Wofür ist das gut?",
   "main": "server/server.js", 
 
   "scripts": {
 
-    "//":"Kann man das weglassen? Oder durch den entsprechenden 'grunt silentserver' task ersetzen?"
+    "//":"Kann man das weglassen? Oder durch den entsprechenden 'grunt silentserver' task ersetzen?",
     "start": "node server/server.js",
 
     "test": "grunt travis --verbose"
