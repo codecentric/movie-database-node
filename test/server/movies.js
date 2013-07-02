@@ -8,11 +8,13 @@ var ResponseMock = require('./helper/response-mock');
 describe('getMovie', function () {
     var dbStub;
     var routes;
+    var movies;
     var res;
 
     beforeEach(function() {
         dbStub = sinon.createStubInstance(neo4j.GraphDatabase);
-        routes = require('../../src/routes')(dbStub);
+        routes = require('../../server/routes')(dbStub);
+        movies = routes.movies;
         res = new ResponseMock();
     });
 
@@ -24,7 +26,7 @@ describe('getMovie', function () {
                 null
             );
 
-        routes.getMovies({}, res);
+        movies.getMovies({}, res);
 
         res.verifySend(function() {
             expect(res.statusCode).to.equal(200);
@@ -42,7 +44,7 @@ describe('getMovie', function () {
                 null
             );
 
-        routes.getMovies({}, res);
+        movies.getMovies({}, res);
 
         res.verifySend(function() {
             expect(res.statusCode).to.equal(200);
@@ -60,7 +62,7 @@ describe('getMovie', function () {
                 null
             );
 
-        routes.getMovies({}, res);
+        movies.getMovies({}, res);
 
         res.verifySend(function() {
             expect(res.statusCode).to.equal(500);
@@ -77,7 +79,7 @@ describe('getMovie', function () {
                  {data: {title:'Django Unchained', description:'Another Description'}}]
             );
 
-        routes.getMovies({}, res);
+        movies.getMovies({}, res);
 
         res.verifySend(function() {
             expect(res.statusCode).to.equal(200);

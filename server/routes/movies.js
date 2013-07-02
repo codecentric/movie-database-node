@@ -6,7 +6,7 @@ var uuid = require('node-uuid');
 exports = module.exports = function (db) {
 
     if (!db) {
-        throw new Error("No database configured")
+        throw new Error('No database configured');
     }
 
     var exports = {};

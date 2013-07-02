@@ -1,7 +1,6 @@
 /*jshint maxstatements:50 */
 
 'use strict';
-var uuid = require('node-uuid');
 
 exports = module.exports = function (db) {
 

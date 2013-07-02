@@ -6,8 +6,8 @@ frameworks = ['mocha'];
 // list of files / patterns to load in the browser
 files = [
     'node_modules/chai/chai.js',
-    'public/js/lib/angular.js',
-    'public/js/**/*.js',
+    'client/js/lib/angular.js',
+    'client/js/**/*.js',
     'test/karma/unit/**/*.spec.js'
 ];
 
@@ -64,7 +64,7 @@ singleRun = true;
 reportSlowerThan = 500;
 
 preprocessors = {
-//    '**/public/js/*.js': 'coverage'
+//    '**/client/js/*.js': 'coverage'
 };
 
 plugins = [
