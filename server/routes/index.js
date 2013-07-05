@@ -14,7 +14,6 @@ exports = module.exports = function (db) {
     var exports = {};
 
     exports.movies = require('./movies')(db);
-    exports.hello = require('./hello')();
 
     return exports;
 };

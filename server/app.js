@@ -50,7 +50,6 @@ if ('development' === app.get('env')) {
 }
 
 var routes = require('./routes')();
-app.get('/hello', routes.hello.sayHello);
 app.get('/movies', routes.movies.getMovies);
 app.post('/movies', routes.movies.addMovie);
 app.get('/movies/:id', routes.movies.getMovie);
