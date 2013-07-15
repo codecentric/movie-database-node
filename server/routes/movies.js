@@ -2,6 +2,7 @@
 
 'use strict';
 var uuid = require('node-uuid');
+var logger = require('log4js').getLogger('routes/movies');
 
 exports = module.exports = function (db) {
 
@@ -17,10 +18,11 @@ exports = module.exports = function (db) {
     }
 
     exports.getMovies = function (req, res) {
+        logger.debug('Retrieving a list of all movies');
         db.getIndexedNodes('node_auto_index', 'type', 'movie',
                 function (err, nodes) {
             if (err) {
-                console.error(err);
+                logger.error('Failed to load a list of all movies', err);
                 return res.status(500).send();
             }
 
@@ -31,6 +33,7 @@ exports = module.exports = function (db) {
                 return node.data;
             });
 
+            logger.debug('Successfully loaded %d movies.', movies.length);
             res.send(movies);
         });
     };
@@ -38,30 +41,32 @@ exports = module.exports = function (db) {
 
     exports.getMovie = function (req, res) {
         var id = req.params.id;
+        logger.debug('Retrieving movie#%s from database.', id);
 
         db.getIndexedNode('node_auto_index', 'id', id, function (err, node) {
             if (err) {
-                res.status(500).send();
-                console.error(err);
+                logger.error('Failed to retrieve movie#%s: %s', id, err);
+                return res.status(500).send();
             } else if (!node) {
-                res.status(404).send();
-            } else {
-                res.send(node.data);
+                logger.debug('Movie#%s could not be found.', id);
+                return res.status(404).send();
             }
+            logger.debug('Found movie#%s with title: %s', id, node.data.title);
+            res.send(node.data);
         });
     };
 
 
     exports.deleteMovie = function (req, res) {
         var id = req.params.id;
-        console.log('Deleting movie ' + id);
+        logger.debug('Deleting movie#%s', id);
 
         var cypher = 'START node=node:node_auto_index(id={id}) ' +
             'MATCH node-[relationship?]-() ' +
             'DELETE node, relationship';
         db.query(cypher, { id: id }, function (err) {
             if (err) {
-                console.error(err);
+                logger.error('Failed to delete movie#%s: %s', id, err);
                 return res.status(500).send();
             }
 
@@ -74,12 +79,14 @@ exports = module.exports = function (db) {
         var node = db.createNode(req.body);
         node.data.type = 'movie';
         node.data.id = uuid.v4();
+        logger.debug('Adding a new movie');
         node.save(function (err, savedNode) {
             if (err) {
-                console.error(err);
+                logger.error('Failed to add movie: %s', err);
                 return res.status(500).send();
             }
 
+            logger.debug('Added new movie with id %s', savedNode.data.id);
             res.status(201)
                 .header('Location', getAbsoluteUriBase(req) +
                     '/movies/' + node.data.id)
@@ -92,19 +99,23 @@ exports = module.exports = function (db) {
         var id = req.params.id;
         db.getIndexedNode('node_auto_index', 'id', id, function (err, node) {
             if (err) {
-                console.error(err);
+                logger.error('Failed to retrieve movie#%s for update: %s',
+                    id,
+                    err);
                 return res.status(500).send();
             } else if (!node) {
+                logger.debug('Movie#%s could not be found for update.', id);
                 return res.status(404).send();
             }
             node.data.title = req.body.title;
             node.data.description = req.body.description;
             node.save(function (err, savedNode) {
                 if (err) {
-                    console.error(err);
+                    logger.error('Failed to update movie#%s: %s', id, err);
                     return res.status(500).send();
                 }
 
+                logger.debug('Successfully updated movie#%s.', id);
                 res.send(savedNode.data);
             });
         });
