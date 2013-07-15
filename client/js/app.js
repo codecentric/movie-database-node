@@ -43,7 +43,11 @@ angular.module('MovieDatabase', []).config(
         controller: ErrorCtrl,
         templateUrl: '/partial/error.html'
     })
-    .otherwise({ redirectTo: '/404' });
+    .otherwise({
+        redirectTo: function () {
+            return '/404?culprit=client';
+        }
+    });
 
     // use the new History API (Angular provides automatic fallback)
     $locationProvider.html5Mode(true);
@@ -61,8 +65,10 @@ angular.module('MovieDatabase', []).config(
                 var status = response.status;
                 if (status === 404) {
                     $location.path('/404');
+                    $location.search('culprit', 'server');
                 } else if (status >= 500) {
                     $location.path('/error');
+                    $location.search('culprit', 'server');
                 }
 
                 return $q.reject(response);

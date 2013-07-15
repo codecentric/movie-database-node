@@ -1,3 +1,8 @@
 body {
     margin-top: 40px;
 }
+
+.culprit {
+    color: darkred;
+    font-weight: bold;
+}

@@ -69,8 +69,9 @@ MovieEditCtrl.resolve = {
     moviesResponse: movieDetailResolver
 };
 
-function NotFoundCtrl () {
+function NotFoundCtrl ($scope, $location) {
+    'use strict';
+    $scope.culprit = $location.search().culprit || 'unknown beast';
 }
 
-function ErrorCtrl() {
-}
+var ErrorCtrl = NotFoundCtrl;
