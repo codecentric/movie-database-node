@@ -2,6 +2,7 @@
 
 var express = require('express');
 var config = require('./config');
+var logger = require('log4js').getLogger('app');
 var historyApiFallback = require('connect-history-api-fallback');
 
 var app = module.exports = express();
@@ -35,6 +36,7 @@ app.use(function cacheDeactivation (req, res, next) {
 });
 
 // provide a fallback for the history API, i.e. change the requested URL
+historyApiFallback.setLogger(logger.trace.bind(logger));
 app.use(historyApiFallback);
 
 // Enable the routes which are defined at the bottom of the file

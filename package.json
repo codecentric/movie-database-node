@@ -4,7 +4,7 @@
   "description": "Example express application",
 
   "//":"Wofür ist das gut?",
-  "main": "server/server.js", 
+  "main": "server/server.js",
 
   "scripts": {
 
@@ -37,6 +37,6 @@
     "karma-spec-reporter": "0.0.1",
     "supervisor": "~0.5.2",
     "grunt-contrib-watch": "~0.4.0",
-    "connect-history-api-fallback": "~0.0.1"
+    "connect-history-api-fallback": "~0.0.2"
   }
 }
