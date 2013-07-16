@@ -1,9 +1,17 @@
 'use strict';
 
 module.exports = function (grunt) {
-    // Project configuration.
     grunt.initConfig({
+        /*
+         * Information can be loaded from the package.json and reused in the
+         * Gruntfile. This is nice in order to avoid duplication of information.
+         */
         pkg: '<json:package.json>',
+
+        /*
+         * Just a definition of all the sources files and their location. We
+         * put them in a meta section so that we only need to declare them once.
+         */
         meta: {
             all: ['client/**/*', 'server/**/*', 'test/**/*'],
             gruntfile: 'Gruntfile.js',
@@ -25,6 +33,11 @@ module.exports = function (grunt) {
                 }
             }
         },
+
+        /*
+         * Simplemocha is executing our Mocha tests (Mocha is our test runner
+         * for the server-side tests).
+         */
         simplemocha: {
             options: {
                 timeout: 3000,
@@ -36,6 +49,15 @@ module.exports = function (grunt) {
                 src: '<%= meta.server.test %>'
             }
         },
+
+        /*
+         * Statis source code analyses. JSHint verifies that we are adhering
+         * to good coding styles, avoid pitfalls and much more.
+         * http://jshint.com/docs/
+         *
+         * We are configuring different settings for the different parts of our
+         * code, as browser environments are different to NodeJS environments.
+         */
         jshint: {
             src: {
                 files: { src: '<%= meta.server.src %>' },
@@ -134,6 +156,12 @@ module.exports = function (grunt) {
                 unused: true
             }
         },
+
+        /*
+         * Karma is out super awesome test runner. It starts up a browser for
+         * you and can even observe file changes. We have our own Grunt
+         * plugin as we want the tests to be run asynchronously.
+         */
         karma: {
             unit: {
                 configFile: '<%= meta.client.tests.unit.config %>',
@@ -146,6 +174,11 @@ module.exports = function (grunt) {
                 singleRun: true
             }
         },
+
+        /*
+         * Watch is handy when you want to execute tasks upon file changes, e.g.
+         * execute tests and static source code analysis.
+         */
         watch: {
             files: '<%= meta.all %>',
             tasks: ['jshint', 'simplemocha', 'karma']
