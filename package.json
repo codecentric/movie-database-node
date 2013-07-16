@@ -7,10 +7,6 @@
   "main": "server/server.js",
 
   "scripts": {
-
-    "//":"Kann man das weglassen? Oder durch den entsprechenden 'grunt silentserver' task ersetzen?",
-    "start": "node server/server.js",
-
     "test": "grunt travis --verbose"
   },
   "dependencies": {
