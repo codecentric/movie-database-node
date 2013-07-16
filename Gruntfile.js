@@ -1,8 +1,4 @@
 'use strict';
-var path = require('path');
-var supersivor = require('supervisor');
-var spawn = require('child_process').spawn;
-require('colors');
 
 module.exports = function (grunt) {
     // Project configuration.
@@ -156,75 +152,10 @@ module.exports = function (grunt) {
         }
     });
 
-    var runner = require('karma').runner;
-    var server = require('karma').server;
-    var _ = grunt.util._;
-    grunt.registerMultiTask('karma', 'run karma.', function() {
-        var done = this.async();
-        var options = this.options({
-            background: false
-        });
-        var data = this.data;
-        //merge options onto data, with data taking precedence
-        data = _.merge(options, data);
-        data.configFile = path.resolve(data.configFile);
-
-        if (data.configFile) {
-            data.configFile = grunt.template.process(data.configFile);
-        }
-        //support `karma run`, useful for grunt watch
-        if (this.flags.run) {
-            runner.run(data, done);
-            return;
-        }
-        //allow karma to be run in the background so it doesn't block grunt
-        if (this.data.background) {
-            grunt.util.spawn({
-                cmd: 'node',
-                args: [path.join(__dirname, 'karma-server.js'), JSON.stringify(data)]
-            }, function () {});
-            done();
-        } else {
-            server.start(data, done);
-        }
-    });
-
-
     grunt.loadNpmTasks('grunt-simple-mocha');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-
-    grunt.registerTask('server',
-            'Start the server for testing purposes',
-            function () {
-        supersivor.run(['--ignore',
-                'coverage/,test-results.xml',
-                'server/server.js']);
-
-        process.on('exit', function() {
-            var child = supersivor.child;
-            if (child) {
-                var signals = ['SIGTERM', 'SIGINT', 'SIGHUP', 'SIGQUIT'];
-                signals.forEach(child.kill.bind(child));
-            }
-        });
-    });
-
-    grunt.registerTask(
-        'silentserver',
-        'Start the server without watch/supervisor in silent mode (no stdout, just stderr)',
-        function () {
-            var child = spawn('node', ['server/server.js']);
-            child.stderr.on('data', function(data) {
-                console.error('ERROR [silentserver]: '.red + data);
-            });
-            process.on('exit', function() {
-                if (child) {
-                    var signals = ['SIGTERM', 'SIGINT', 'SIGHUP', 'SIGQUIT'];
-                    signals.forEach(child.kill.bind(child));
-                }
-            });
-        });
+    grunt.loadTasks('./tasks');
 
     grunt.registerTask('default', ['jshint', 'simplemocha']);
     grunt.registerTask('travis', [
