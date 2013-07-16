@@ -3,7 +3,6 @@
 var express = require('express');
 var config = require('./config');
 var log4js = require('log4js');
-var logger = log4js.getLogger('app');
 var historyApiFallback = require('connect-history-api-fallback');
 
 var app = module.exports = express();
