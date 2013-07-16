@@ -1,11 +1,15 @@
-# Stories for codemotion tech lab
+# Stories / Tasks
 
   1. As a user I want to see the movie overview list on the application's
-     landing page.
-  2. As a user I want to see the movies sorted by name.
-  3. As a user I want to be able to change the sorting order of movies.
+     landing page. The welcome page should still feature the *Welcome to...*
+     message and should not contain the *Add Movie* button.
+  2. As a user I want to see the movies sorted by name (ascending).
+  3. As a user I want to be able to change the sorting order of movies. Sorting
+     order can be toggled between ascending and descending by clicking on the
+     column header *Title*.
   4. As a user I want to be able to open the *add movie* page in a new tab
-     using web browsers' standard mechanisms.
+     using web browsers' standard mechanisms, i.e. CTRL / CMD click, right click
+     open in new tab etc..
   5. As a user I want to be able to create actors. Each actor has a name
      and a short biography.
   6. As a user I want to be able to see a list of actors.
@@ -28,7 +32,11 @@ before starting the implementation.**
 
 ## Tips
 
+ 1.) This story can be resolved by rearranging code. See how the movie form is
+     reused as part of the *add movie* and *edit movie* pages.
+
  2.) AngularJS has an [*orderBy* filter](http://docs.angularjs.org/api/ng.filter:orderBy).
+     The filter can be used in the HTML code.
 
  3.) The AngularJS *orderBy* filter can reverse the sorting order.
 
