@@ -38,7 +38,11 @@ module.exports = function (grunt) {
             }, function () {});
             done();
         } else {
-            server.start(data, done);
+            server.start(data, function(status) {
+                // unfortunately, the return-code (or status) of karma-server means
+                // means sth different than the status expected by grunt
+                done(!status)
+            });
         }
     });
 };
