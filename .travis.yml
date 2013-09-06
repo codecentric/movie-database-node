@@ -17,15 +17,12 @@ services:
 before_script:
   - npm install -g grunt-cli
 
-# After a successfull build we want to deploy everything to heroku
-after_success:
-  - ./scripts/deploy-to-heroku.sh
-
-# For heroku deployment, a HEROKU_API_KEY environment variable is needed.
-# The value was encrypted with the help of the travis-gem:
-# `travis encrypt --add -r <YOUR_GITHUB_NAME>/movie-database-node HEROKU_API_KEY=<YOUR_HEROKU_API_KEY>`
-env:
-  global:
-  - secure: ! 'eDRp9ej1JDqwp0aORLVu7hzmtMrUqw6hqToYHqDff9urH8ZXua1ZUj/42N/J
-      4zgYxCXoOg/R44JVQgSbllJvv6JKL8hPSTUcLGgqhhZzSWCJ7+URIvpL765Y
-      moInFll2mbF0lvWHrISA42dC/0X9BO5UTOnTYmRSJVx5uUplmao='
+# See http://about.travis-ci.org/docs/user/deployment/heroku/ for
+# more information on automatic deployment to heroku
+deploy:
+  provider: heroku
+  app: movie-database-node
+  api_key:
+    secure: ! 'VM4D68593b50AlKIJLnBJjukmf6XzR0lX8t/GBT8JBklxnXQKHUcfwNjE9jf
+      mra/rYws45pRyWjJzITPHScTtmK82bcj+5FCoB4sjEvOqAKWAcFPSbK+oJ/g
+      P3UPGArmHC73gZ/YFoD6TCzRJDLOYCekaiscPEQr9Bs9cwXCRp0='
