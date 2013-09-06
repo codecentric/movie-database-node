@@ -1,3 +1,7 @@
 *~
 /coverage
 /test-results.xml
+
+# We cannot commit phantomjs to our repository, because it contains 
+# environmant specific configuration
+/node_modules/karma-phantomjs-launcher
