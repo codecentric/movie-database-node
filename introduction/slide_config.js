@@ -2,7 +2,7 @@ var SLIDE_CONFIG = {
   // Slide settings
   settings: {
     title: 'Agile JavaScript Workshop',
-    subtitle: 'codecentric introduction',
+    subtitle: 'Introduction',
     useBuilds: true,
     usePrettify: true,
     enableSlideAreas: true,
