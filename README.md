@@ -23,20 +23,7 @@ documented [.travis.yml](.travis.yml).
 4. Change the build-status icon in this README.md file to the new travis project (https://travis-ci.org/YOUR_GITHUB_NAME/movie-database-node).
 
 Deployment on Heroku is also easy. Just follow the [Getting started with Heroku and NodeJS guide](https://devcenter.heroku.com/articles/nodejs).
-If you want your application to be deployed continuously, whenever a Travis-CI job succeeds, you have to encrypt your Heroku API Key and save it in the `.travis.yml`:
-
-1. Look up your Heroku API Key on the [Heroku Dashboard](https://dashboard.heroku.com/account)
-2. Install the travis utility gem (simply `gem install  travis`)
-3. Go to your project root folder and execute the following travis command (replace <YOUR_GITHUB_NAME> and <YOUR_HEROKU_API_KEY> with appropriate values:
-```
-travis encrypt --add -r <YOUR_GITHUB_NAME>/movie-database-node HEROKU_API_KEY=<YOUR_HEROKU_API_KEY>
-```
-
-This will automatically add encrypt your key and add it to the
-`.travis.yml`. Theoretically, you could also encrypt the key and add
-it manually to the `.travis.yml` (just leave out the `--add` in the
-above command), but that didn't work for me. For more information, take a look
-at the documented script [scripts/deploy-to-heroku.sh](scripts/deploy-to-heroku.sh).
+If you want your application to be deployed continuously, whenever a Travis-CI job succeeds, you have to encrypt your Heroku API Key and save it in the `.travis.yml` according to the [Travis CI documentation](http://about.travis-ci.org/docs/user/deployment/heroku/):
 
 ## Documentation
 
