@@ -2,10 +2,8 @@
   "name": "movie-database-node",
   "version": "0.0.1",
   "description": "Example express application",
-
-  "//":"Wofür ist das gut?",
+  "//": "Wofür ist das gut?",
   "main": "server/server.js",
-
   "scripts": {
     "test": "grunt travis --verbose"
   },
@@ -13,15 +11,16 @@
     "express": "~3.2.1",
     "neo4j": "~0.2.20",
     "node-uuid": "~1.4.0",
-    "superagent": "~0.14.2"
+    "superagent": "~0.14.2",
+    "log4js": "~0.6.9"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/codecentric/movie-database-node.git"
+    "type": "git",
+    "url": "https://github.com/codecentric/movie-database-node.git"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "colors":"~0.6.0",
+    "colors": "~0.6.0",
     "grunt-simple-mocha": "~0.4.0",
     "grunt-contrib-jshint": "~0.4.3",
     "sinon": "~1.7.1",
@@ -32,7 +31,6 @@
     "karma-firefox-launcher": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.0",
     "karma-script-launcher": "~0.1.0",
-    "karma-firefox-launcher": "~0.1.0",
     "karma-mocha": "~0.1.0",
     "karma-jasmine": "~0.1.0",
     "karma-coffee-preprocessor": "~0.1.0",
