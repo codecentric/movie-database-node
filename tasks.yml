@@ -1,0 +1,124 @@
+---
+
+ - id: 1
+   description:
+     As a user I want to see the movie overview list on the application's
+     <em>landing page</em>
+   acceptanceCriteria:
+     The landing page should continue to feature the
+     <em>Welcome to...</em> message and should not contain the
+     <em>Add Movie</em> button.
+   hints:
+     This story can be resolved by rearranging code. See how the movie form
+     is reused as part of the <em>add movie</em> and <em>edit movie</em>
+     pages.
+
+ - id: 2
+   description:
+     As a user I want to see the movies sorted by name (ascending).
+   acceptanceCriteria:
+     Movies should be sorted like this on the landing page and on the
+     movie overview page.
+   hints:
+     AngularJS has an
+     <a href="http://docs.angularjs.org/api/ng.filter:orderBy">
+       <em>orderBy</em> filter
+     </a>
+     which can be used in the HTML templates.
+
+ - id: 3
+   description:
+     As a user I want to be able to change the sorting order of movies.
+   acceptanceCriteria:
+     Sorting should be toggled between ascending and descending by
+     clicking on the column header <em>Title</em>.
+     Functionality should be available on the landing page and on the
+     movie overview page.
+   hints:
+     The AngularJS <em>orderBy</em> filter can reverse the sorting order.
+
+ - id: 4
+   description:
+     As a user I want to be able to open the *add movie* page in a new tab
+     using web browsers' standard mechanisms, i.e. CTRL / CMD click, right
+     click open in new tab etc..
+   hints:
+     Take a look at the difference between the links to the movie detail
+     pages and the add movie button.
+
+ - id: 5
+   description:
+     As a user I want to be able to create actors. Each actor has a name
+     and a short biography.
+
+ - id: 6
+   description:
+     As a user I want to be able to see a list of actors.
+
+ - id: 7
+   description:
+     As a user I want to connect actors and movies.
+   acceptanceCriteria:
+     A simple multi select box on the create actor form suffices. Connected
+     actors should be shown on the movie detail page.
+   hints:
+     To create
+     relationships between nodes, you can call the function
+     <code>createRelationshipTo(otherNode, type, data, callback)</code> on the
+     node object. Also refer to the API documentation for
+     <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">
+       the neo4j client library</a>.
+ - id: 8
+   description:
+     As a user I want to remove actors from a movie.
+   hints: |
+     <p>
+     Check out the cypher query for deleting relationships. You can find
+     some information about the Cypher query in the
+     <a href="http://docs.neo4j.org/refcard/1.9/">cheat sheet</a>
+     and in the
+     <a href="http://docs.neo4j.org/chunked/milestone/query-delete.html">
+     official Neo4j documentation</a>.
+     </p>
+     <pre>
+       START n = node(3)\n
+       MATCH n-[r]-()
+       DELETE r
+     </pre>
+
+ - id: 9
+   description:
+     As a user I want to be able to define movies' release years.
+
+ - id: 10
+   description:
+     As a user I want to be able to sort movies either by
+     movie title or release year.
+
+ - id: 11
+   description:
+     As a user I want my input to be validated when creating movies.
+     Movies need a title and a release year.
+   acceptanceCriteria:
+     The server rejects invalid movies with an HTTP status
+     <code>422 Unprocessable Entity</code>.
+   hints:
+     A very simple way to add validation on the client side is to use the
+     <a href="http://docs.angularjs.org/api/ng.directive:ngChange">
+       AngularJS ngChange directive</a>.
+
+ - id: 12
+   description:
+     As a user I want to search for movies and actors.
+
+ - id: 13
+   description:
+     As a user I want to be able to tell my friends about movies through a
+     Twitter integration.
+
+   hints:
+     Twitter provides
+     <a href="https://twitter.com/about/resources/buttons">
+      a few buttons
+     </a>
+     that are simple to integrate.

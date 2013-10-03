@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+  <meta charset="UTF-8">
+  <title>AgileJS Workshop Tasks</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/tasks.css">
+</head>
+<body>
+<div class="container">
+  <h1 class="page-header">
+    Tasks
+  </h1>
+
+  <p>
+    This document lists the tasks that participants are supposed to work on
+    during the workshop. Tasks are ordered in such a way that participants
+    are slowly introduced to the used technologies, i.e. starting with
+    simple frontend improvements and slowly progressing towards server
+    and database tasks.
+  </p>
+
+  <p>
+    Each task can be expanded by clicking on the task description or the
+    small arrows. Once expanded, one can see additional information such as
+    the acceptance criteria and hints. One may also track one's work through
+    the status section. A task's status is indicated through the icon next
+    to the arrow.
+  </p>
+
+  <ol ng-controller="TaskCtrl">
+    <li ng-repeat="task in tasks">
+      <div ng-bind-html-unsafe="task.description"
+           ng-click="toggle(task)">
+      </div>
+      <a href=""
+         ng-click="toggle(task)"
+         ng-class="{'icon-collapse': !task.visible, 'icon-collapse-top': task.visible}"
+         title="Toggle task details"
+         class="toggle">
+      </a>
+      <i title='Status indicator'
+         class="status-indicator"
+         ng-class="{'icon-check': task.status == 'done',
+                    'icon-cogs': task.status == 'inProgress',
+                    'icon-check-empty': task.status == 'notStarted'}">
+      </i>
+
+      <div class="acceptance-criteria"
+           ng-show="task.visible && task.acceptanceCriteria">
+        <h2>Acceptance Criteria</h2>
+        <div ng-bind-html-unsafe="task.acceptanceCriteria"></div>
+      </div>
+
+      <div class="hints"
+           ng-show="task.visible && task.hints">
+        <h2>Hints</h2>
+        <div ng-bind-html-unsafe="task.hints"></div>
+      </div>
+
+      <div class="management"
+           ng-show="task.visible">
+        <h2>Status</h2>
+        <div ng-show="task.status == 'notStarted'">
+          <p>This task was not yet started!</p>
+          <button class="btn btn-sm btn-primary"
+                  ng-click="start(task)">
+            Start this task
+          </button>
+        </div>
+        <div ng-show="task.status == 'inProgress'">
+          <p>Somebody is currently working on this task!</p>
+          <button class="btn btn-sm btn-success"
+                  ng-click="finish(task)">
+            Mark this task as finished
+          </button>
+        </div>
+        <div ng-show="task.status == 'done'">
+          <p>You finished this task, good job!</p>
+          <button class="btn btn-sm btn-warning"
+                  ng-click="reopen(task)">
+            Reopen task
+          </button>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <script src="vendor/angularjs/angular.min.js"></script>
+  <script src="vendor/js-yaml/js-yaml.min.js"></script>
+  <script src="js/tasks.js"></script>
+</div>
+</body>
+</html>
