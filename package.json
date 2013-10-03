@@ -1,9 +1,7 @@
 {
   "name": "movie-database-node",
   "version": "0.0.1",
-  "description": "Example express application",
-  "//": "Wofür ist das gut?",
-  "main": "server/server.js",
+  "description": "Agile JS Workshop application",
   "scripts": {
     "test": "grunt travis --verbose"
   },
