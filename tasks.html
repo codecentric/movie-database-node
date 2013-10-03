@@ -32,7 +32,7 @@
   </p>
 
   <ol ng-controller="TaskCtrl">
-    <li ng-repeat="task in tasks">
+    <li ng-repeat="task in tasks" ng-cloak>
       <div class="description"
            ng-bind-html-unsafe="task.description"
            ng-click="toggle(task)">

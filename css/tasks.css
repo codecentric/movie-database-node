@@ -42,3 +42,7 @@ a:hover {
 .description {
   padding-right: 40px;
 }
+
+[ng-cloak] {
+  display: none !important;
+}
