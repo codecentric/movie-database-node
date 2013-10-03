@@ -33,7 +33,8 @@
 
   <ol ng-controller="TaskCtrl">
     <li ng-repeat="task in tasks">
-      <div ng-bind-html-unsafe="task.description"
+      <div class="description"
+           ng-bind-html-unsafe="task.description"
            ng-click="toggle(task)">
       </div>
       <a href=""

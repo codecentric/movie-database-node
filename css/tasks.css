@@ -38,3 +38,7 @@ h2 {
 a:hover {
   opacity: 1;
 }
+
+.description {
+  padding-right: 40px;
+}
