@@ -139,7 +139,7 @@ module.exports = function (grunt) {
                 immed: true,
                 indent: 4,
                 latedef: true,
-                maxcomplexity: 4,
+                maxcomplexity: 6,
                 maxdepth: 3,
                 maxparams: 4,
                 maxstatements: 14,
