@@ -45,17 +45,38 @@
    hints:
      Take a look at the difference between the links to the movie detail
      pages and the add movie button.
-
+     
  - id: 5
+   description:
+     As a user I want to be able to define movies' release years.
+
+ - id: 6
+   description:
+     As a user I want to be able to sort movies either by
+     movie title or release year.
+
+ - id: 7
+   description:
+     As a user I want my input to be validated when creating movies.
+     Movies need a title and a release year.
+   acceptanceCriteria:
+     The server rejects invalid movies with an HTTP status
+     <code>422 Unprocessable Entity</code>.
+   hints:
+     A very simple way to add validation on the client side is to use the
+     <a href="http://docs.angularjs.org/api/ng.directive:ngChange">
+       AngularJS ngChange directive</a>.
+
+ - id: 8
    description:
      As a user I want to be able to create actors. Each actor has a name
      and a short biography.
 
- - id: 6
+ - id: 9
    description:
      As a user I want to be able to see a list of actors.
 
- - id: 7
+ - id: 10
    description:
      As a user I want to connect actors and movies.
    acceptanceCriteria:
@@ -68,7 +89,8 @@
      node object. Also refer to the API documentation for
      <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">
        the neo4j client library</a>.
- - id: 8
+       
+ - id: 11
    description:
      As a user I want to remove actors from a movie.
    hints: |
@@ -85,27 +107,6 @@
        MATCH n-[r]-()
        DELETE r
      </pre>
-
- - id: 9
-   description:
-     As a user I want to be able to define movies' release years.
-
- - id: 10
-   description:
-     As a user I want to be able to sort movies either by
-     movie title or release year.
-
- - id: 11
-   description:
-     As a user I want my input to be validated when creating movies.
-     Movies need a title and a release year.
-   acceptanceCriteria:
-     The server rejects invalid movies with an HTTP status
-     <code>422 Unprocessable Entity</code>.
-   hints:
-     A very simple way to add validation on the client side is to use the
-     <a href="http://docs.angularjs.org/api/ng.directive:ngChange">
-       AngularJS ngChange directive</a>.
 
  - id: 12
    description:
