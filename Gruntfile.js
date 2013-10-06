@@ -190,12 +190,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadTasks('./tasks');
 
-    grunt.registerTask('default', ['jshint', 'simplemocha']);
     grunt.registerTask('travis', [
         'jshint',
         'simplemocha',
         'karma:unit',
-        'silentserver',
+        'server',
         'karma:integration'
     ]);
     grunt.registerTask('dev', ['server', 'watch']);

@@ -7,7 +7,7 @@ require('colors');
 
 module.exports = function (grunt) {
     var _ = grunt.util._;
-    grunt.registerMultiTask('karma', 'run karma.', function() {
+    grunt.registerMultiTask('karma', 'Run browser unit- and integration-tests with karma.', function() {
         var done = this.async();
         var options = this.options({
             background: false
@@ -28,7 +28,7 @@ module.exports = function (grunt) {
         //allow karma to be run in the background so it doesn't block grunt
         if (this.data.background) {
             var args = [];
-            args.push(path.join(__dirname, 'tasks/karma-server.js'));
+            args.push(path.join(__dirname, 'tasks/helper/karma-server.js'));
             args.push(JSON.stringify(data));
             grunt.util.spawn({
                 cmd: 'node',
