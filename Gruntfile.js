@@ -181,7 +181,7 @@ module.exports = function (grunt) {
          */
         watch: {
             files: '<%= meta.all %>',
-            tasks: ['jshint', 'simplemocha', 'karma']
+            tasks: ['jshint', 'simplemocha', 'karma:unit']
         }
     });
 
