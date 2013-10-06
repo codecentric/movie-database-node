@@ -27,10 +27,6 @@ documented [.travis.yml](.travis.yml).
 Deployment on Heroku is also easy. Just follow the [Getting started with Heroku and NodeJS guide](https://devcenter.heroku.com/articles/nodejs).
 If you want your application to be deployed continuously, whenever a Travis-CI job succeeds, you have to encrypt your Heroku API Key and save it in the `.travis.yml` according to the [Travis CI documentation](http://about.travis-ci.org/docs/user/deployment/heroku/):
 
-## Documentation
-
-You can find additional information about the used technologies in the `docs` directory.
-
 ## System requirements
 
 *Make sure that you have [node.js with NPM](http://nodejs.org/) installed on
