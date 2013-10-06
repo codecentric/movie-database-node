@@ -12,11 +12,13 @@ exports = module.exports = function (db) {
 
     var exports = {};
 
+    // helper function to return the absolute base uri used in the request
     function getAbsoluteUriBase (req) {
         // we use req.get('host') as this also gives us the port
         return req.protocol + '://' + req.get('host');
     }
 
+    // return a list of all movies
     exports.getMovies = function (req, res) {
         logger.debug('Retrieving a list of all movies');
         db.getIndexedNodes('node_auto_index', 'type', 'movie',
@@ -28,7 +30,10 @@ exports = module.exports = function (db) {
 
             // fallback in case no movies are stored in the database
             nodes = nodes || [];
-
+                    
+            // the attributes of the movie (like title, description) are stored inside 
+            // the data-attribute, so we loop through all retrieved nodes and extract
+            // the data-attribute
             var movies = nodes.map(function (node) {
                 return node.data;
             });
@@ -38,11 +43,13 @@ exports = module.exports = function (db) {
         });
     };
 
-
+    // return a single movie identified by url-parameter 
     exports.getMovie = function (req, res) {
+        // extract the id from the request-object
         var id = req.params.id;
         logger.debug('Retrieving movie#%s from database.', id);
 
+        // movies are indexed by id
         db.getIndexedNode('node_auto_index', 'id', id, function (err, node) {
             if (err) {
                 logger.error('Failed to retrieve movie#%s: %s', id, err);
@@ -88,7 +95,7 @@ exports = module.exports = function (db) {
 
             logger.debug('Added new movie with id %s', savedNode.data.id);
             res.status(201)
-                .header('Location', getAbsoluteUriBase(req) +
+                .location(getAbsoluteUriBase(req) +
                     '/movies/' + node.data.id)
                 .send(savedNode.data);
         });

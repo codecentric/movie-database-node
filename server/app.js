@@ -52,6 +52,9 @@ if ('development' === app.get('env')) {
     app.use(express.errorHandler());
 }
 
+
+// all requests, that are not handled by static or historyApiFallback
+// are handled by the following routing mechanism.
 var routes = require('./routes')();
 app.get('/movies', routes.movies.getMovies);
 app.post('/movies', routes.movies.addMovie);
