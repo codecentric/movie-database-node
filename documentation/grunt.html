@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agile JavaScript - Documentation</title>
+
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.media.css">
+  <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="page-header">
+    Agile JavaScript
+    <small>a codecentric AG workshop</small>
+  </h1>
+  <p class="well">
+    If you are reading this, then you are probably here because one of the
+    trainers has given you this URI. If not, then most of this information
+    may not be of interest to you. Should you be interested in this
+    workshop, please contact our
+    <a href="mailto:agilejs@codecentric.de">training team</a> (workshop is
+    available in German and English).
+  </p>
+
+  <h2>Build-Tool: Grunt</h2>
+  <p>
+    Probably the most important tool, when developing a JavaScript application,
+    is <strong>Grunt</strong>. All steps, that are needed to verify, test and
+    build the application, are defined as grunt-tasks. To see a list of
+    available tasks, simply execute <code>grunt --help</code>:
+    <pre>$ grunt --help
+Available tasks
+   simplemocha  Run tests with mocha *
+        jshint  Validate files with JSHint. *
+         watch  Run predefined tasks whenever watched files change.
+         karma  Run browser unit- and integration-tests with karma. *
+        server  Start the server for testing purposes. When used directly from
+                command-line, be sure to specify the '--wait' option. Otherwise
+                the process will exit immediately.
+        travis  Alias for "jshint", "simplemocha", "karma:unit", "server",     
+                "karma:integration" tasks.
+           dev  Alias for "server", "watch" tasks.</pre>
+    The configuration for all tasks lies in the <code>Gruntfile.js</code>. Custom tasks are loaded from the <code>tasks</code> directory.
+  </p>
+  
+  <p>
+    Some tasks are in fact multitasks. To execute only a single substep of a multitask, use ":" as separator. At the moment only jshint and karma are multitasks. The subtasks are: jshint:server, jshint:servertest, jshint:gruntfile, jshint:client, jshint:karmaIntegration and jshint:karmaUnit for jshint and karma:unit and karma:integration for karma</p>
+  </p>
+  
+  <p>The most important grunt-tasks are <strong>travis</strong>
+  and <strong>dev</strong> (in fact, these two include all other available
+  tasks), but it can be useful to know about the other ones, too.</p>
+
+  <h3>grunt travis</h3>
+  <p>This task is executed during a build on Travis-CI. The following steps are performed:
+    <ul>
+      <li><strong>grunt jshint</strong>: Static code analysis for all project files.</li>
+      <li><strong>grunt simplemocha</strong>: Unit-tests for server-side code.</li>
+      <li><strong>grunt karma:unit</strong>: Unit-tests for client-side code (using karma and phantomjs).</li>
+      <li><strong>grunt server</strong>: Start a server with our application (needed for integration-tests). Note, that the server keeps running until grunt itself exits. In particular, the server can be used by the subsequent integration-test task.</li>
+      <li><strong>grunt karma:integration</strong>: Integration-tests using the server started by the precedent server-task.</li>
+    </ul>
+  </p>
+
+  <h3>grunt dev</h3>
+  <p>The <strong>dev</strong>-task is the most important task during local development. It has two functions:
+    <ul>
+      <li>It starts a server listening on port 3000. The server is automatically restarted whenever a file changes.</li>
+      <li>It uses the watch task to execute jshint, simplemocha and karma:integration whenever a file changes.</li>
+    </ul>
+  </p>
+  <pre>$ grunt dev
+Running "server" task
+
+DEBUG: Running node-supervisor with
+DEBUG:   program 'server/server.js'
+...
+
+Running "watch" task
+Express server listening on port 3000
+Activated neo4j auto-indexing
+Added property type to neo4j auto-indexing.
+...</pre>
+    
+  <h3>grunt simplemocha</h3>
+  <p>Executes the unit-tests for server-side code. The unit-tests are in the <code>test/server</code> directory. The simplemocha task uses a simple console-reporter. Unfortunately, the log-output of the server-code is also directly written to the console. This makes it difficult to detect test-errors, but it is the easiest way to make all necessary information available during Travis-CI runs (note, that only console-output is archived for Travis-CI runs).
+  </p>
+  <pre>$ grunt simplemocha
+Running "simplemocha:all" (simplemocha) task
+
+  getMovie
+    ◦ should return an empty list when neo returns null: [2013-10-06 19:21:49.369] [DEBUG] routes/movies - Retrieving a list of all movies
+[2013-10-06 19:21:49.370] [DEBUG] routes/movies - Successfully loaded 0 movies.
+    ✓ should return an empty list when neo returns null
+...
+
+  4 passing (21ms)</pre>
+
+  <h3>grunt jshint</h3>
+  <p>
+    The <strong>jshint</strong> tasks runs static code on all files. With the available subtasks, you can run static code analysis only on specific code files.
+    <pre>$ grunt jshint
+Running "jshint:server" (jshint) task
+>> 6 files lint free.
+
+Running "jshint:servertest" (jshint) task
+>> 2 files lint free.
+
+Running "jshint:gruntfile" (jshint) task
+>> 1 file lint free.
+
+Running "jshint:client" (jshint) task
+>> 2 files lint free.
+
+Running "jshint:karmaIntegration" (jshint) task
+>> 1 file lint free.
+
+Running "jshint:karmaUnit" (jshint) task
+>> 1 file lint free.
+
+Done, without errors.</pre>
+  </p>
+  
+  <h3>grunt watch</h3>
+  <p>
+    Watch for file changes and execute the tasks jshing, simplemocha and karma:unit whenever a file is changed.
+    <pre>$ grunt watch
+Running "watch" task
+Waiting...OK
+>> File "server/app.js" changed.
+
+Running "jshint:server" (jshint) task
+...
+Running "simplemocha:all" (simplemocha) task
+...
+Running "karma:unit" (karma) task
+...
+
+Done, without errors.
+Completed in 2.105s at Sun Oct 06 2013 19:47:50 GMT+0200 (CEST) - Waiting...</pre>
+  </p>
+  
+  <h3>grunt server --wait</h3>
+  <p>
+    The server task starts a NodeJS server running the movie-database application. If used directly from command-line (and not from within other tasks), be sure to add the <code>--wait</code> option. Otherwise grunt will exit and the server will be shutdown immediately.
+  </p>
+  <p>
+    The server-tasks is used for three purposes: First, the travis task include a call to the server task to start the application for the end-to-end tests. Second, the dev-task uses it to start the server for local development. And last, you can use it directly from command-line (with the --wait option), if you do not want the overhead of the dev task.
+  </p>
+  <pre>$ grunt server --wait
+Running "server" task
+...
+Express server listening on port 3000
+...
+</pre>
+
+  <h3>grunt karma [--debug]</h3>
+  <p>
+    Execute tests using karma. By default karma uses PhantomJS as (headless) browser. The test-results are printed to console. The karma-configuration-files are located in <code>test/karma</code>.
+  </p>
+  <p><strong>If you want to debug karma-tests, you can use the <code>--debug</code> option. </strong> With this option, the tests will be executed using the Chrome-browser. Moreover, karma will not exit after the first test-run, but the browser will remain open instead. If you click the "Debug" button, you can use your browser's debugger to execute your tests step by step.
+  </p>
+  <p>
+    There are two subtasks:
+    <ul>
+      <li><strong>grunt karma:unit [--debug]</strong>: The client-side unit-tests are located in the <code>test/karma/unit</code> directory. The test-framework in use is simplemocha. If you debug these tests, the browser-window will remain blank. <strong>Take a look at the JavaScript console</strong> of your browser to see the test results.</li>
+      <li><strong>karma:integration [--debug]</strong>: The integration (or end-to-end-tests) are based on angular-scenario. Make sure, that you have your application running on port 3000 when executing this task!</li>
+    </ul>
+  </p>
+      
+</div>
+
+</body>
+</html>

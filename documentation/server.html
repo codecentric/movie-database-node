@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agile JavaScript - Documentation</title>
+
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.media.css">
+  <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="page-header">
+    Agile JavaScript
+    <small>a codecentric AG workshop</small>
+  </h1>
+  <p class="well">
+    If you are reading this, then you are probably here because one of the
+    trainers has given you this URI. If not, then most of this information
+    may not be of interest to you. Should you be interested in this
+    workshop, please contact our
+    <a href="mailto:agilejs@codecentric.de">training team</a> (workshop is
+    available in German and English).
+  </p>
+
+  <h2>Server-Side: Node.JS, Express.JS</h2>
+  <p>
+    The server-implementation has two responsibilities: On the one hand it serves static files for the AngularJS Frontend. On the other hand it provides (REST-)interface to our persistence layer.
+  </p>
+
+  <h3>Static Files</h3>
+  <p>
+    Every request that points directly to a file inside the <code>client</code> directory is simply answered by serving exactly the requested file. For example, a request to <code>/js/lib/angular.js</code> will result in the file <code>/client/js/lib/angular.js</code> being served. <strong>Moreover, any other request, that does not include a <code>Accept: application/json</code> header will result in the <code>index.html</code> file being served!</strong> For more information on this behaviour, see the <a href="https://github.com/bripkens/connect-history-api-fallback">History API Fallback</a>.
+  </p>
+
+  <h3>REST-API</h3>
+  <p> The easiest way to explain the REST-API is by example (using curl): </p>
+  <pre>$ curl -v -XGET \
+    -H "Accept: application/json" \
+    http://localhost:3000/movies
+> GET /movies HTTP/1.1
+> User-Agent: curl/7.27.0
+> Host: localhost:3000
+> Accept: application/json
+> 
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Cache-Control: no-cache
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 1916
+< ETag: "499684216"
+< Date: Sun, 06 Oct 2013 18:06:14 GMT
+< Connection: keep-alive
+< 
+<[
+<  {
+<    "id": "b2251a97-ea3c-4b7f-a01d-125817babceb",
+<    "type": "movie",
+<    "description": "When Batman, Gordon...",
+<    "title": "The Dark Knight"
+<  },
+<  {
+<    "id": "e7b1ccf2-68ca-4595-83e4-2bed1f59c846",
+<    "type": "movie",
+<    "description": "Eight years on, ... ",
+<    "title": "The Dark Knight Rises"
+<  },
+<  ...
+<]
+
+$ curl -v -XGET \
+    -H "Accept: application/json" \
+    http://localhost:3000/movies/41d18190-16ca-48a1-83c2-7bdfe540d901
+> GET /movies/41d18190-16ca-48a1-83c2-7bdfe540d901 HTTP/1.1
+> User-Agent: curl/7.27.0
+> Host: localhost:3000
+> Accept: application/json
+> 
+< HTTP/1.1 200 OK
+< X-Powered-By: Express
+< Cache-Control: no-cache
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 271
+< Date: Sun, 06 Oct 2013 18:07:35 GMT
+< Connection: keep-alive
+< 
+< {
+<  "id": "41d18190-16ca-48a1-83c2-7bdfe540d901",
+<  "type": "movie",
+<  "description": "Sequel to the 2002 film...",
+<  "title": "Undisputed II: Last Man Standing"
+< }
+
+$ curl -v -XPOST \
+   -H "Content-Type: application/json" \
+   -H "Accept: application/json" \
+   --data '{"title":"A new movie"}' \
+   http://localhost:3000/movies
+> POST /movies HTTP/1.1
+> User-Agent: curl/7.27.0
+> Host: localhost:3000
+> Content-Type: application/json
+> Accept: application/json
+> Content-Length: 23
+> 
+< HTTP/1.1 201 Created
+< X-Powered-By: Express
+< Cache-Control: no-cache
+< Location: http://localhost:3000/movies/2fc69159-a744-4d46-a8bf-d62457fb64a2
+< Content-Type: application/json; charset=utf-8
+< Content-Length: 95
+< Date: Sun, 06 Oct 2013 18:09:09 GMT
+< Connection: keep-alive
+< 
+< {
+<  "id": "2fc69159-a744-4d46-a8bf-d62457fb64a2",
+<  "type": "movie",
+<  "title": "A new movie"
+<}</pre>
+      
+</div>
+
+</body>
+</html>

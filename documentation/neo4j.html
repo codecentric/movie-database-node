@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agile JavaScript - Movie Database Documentation</title>
+
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.media.css">
+  <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="page-header">
+    Agile JavaScript
+    <small>a codecentric AG workshop</small>
+  </h1>
+  <p class="well">
+    If you are reading this, then you are probably here because one of the
+    trainers has given you this URI. If not, then most of this information
+    may not be of interest to you. Should you be interested in this
+    workshop, please contact our
+    <a href="mailto:agilejs@codecentric.de">training team</a> (workshop is
+    available in German and English).
+  </p>
+
+  <h2>Persistence: Neo4J</h2>
+  <p>
+    Normally, you shouldn't have to worry about neo4j. Once the service is started, everything should work out of the box. You can check if neo4j is running by navigating to <a href="http://localhost:7474/">http://localhost:7474</a>. If you wonder about the log-lines <pre>Activated neo4j auto-indexing. 
+Added property title to neo4j auto-indexing.
+...
+Added property type to neo4j auto-indexing.</pre>
+    that you can see when the NodeJS server starts, they initialise the necessary Neo4J indexes. By default Neo4J does not index node-properties (at least in version 1.x - this will change with version 2). To free you of the necessary configuration, this is done automatically during the movie-database startup.
+  </p>
+  <p>
+    To clear the database, you only need to delete the directory <code>data/graph.db</code>.
+    Please note that you should only do this once Neo4j is shut down (at the very
+    least, Neo4j requires a restart in order to properly work again after deleting
+    the directory). Also, please note that you should create the node auto index
+    after resetting the database (as mentioned above). A convenient way to do this
+    is the following bash script. It needs to be executed in your Neo4j installation
+    directory.
+    <pre># stop the server, delete the current graph, restart it and create the auto index
+sudo /etc/init.d/neo4j-service stop && \
+sudo rm -rf data/graph.db/ && \
+sudo /etc/init.d/neo4j-service start && \
+bin/neo4j-shell -c "index --create node_auto_index -t Node"</pre>
+  </p>
+      
+</div>
+
+</body>
+</html>
