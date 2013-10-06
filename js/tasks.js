@@ -35,7 +35,8 @@ function TaskCtrl($scope, $http) {
   $http.get('./tasks.yml')
   .then(function(response) {
     var tasks = jsyaml.load(response.data);
-    tasks.forEach(function(task) {
+    tasks.forEach(function(task, index) {
+      task.id = index+1
       task.status = getStatus(task.id);
       task.visible = false;
     })

@@ -1,7 +1,6 @@
 ---
 
- - id: 1
-   description:
+ - description:
      As a user I want to see the movie overview list on the application's
      <em>landing page</em>
    acceptanceCriteria:
@@ -13,8 +12,7 @@
      is reused as part of the <em>add movie</em> and <em>edit movie</em>
      pages.
 
- - id: 2
-   description:
+ - description:
      As a user I want to see the movies sorted by name (ascending).
    acceptanceCriteria:
      Movies should be sorted like this on the landing page and on the
@@ -26,8 +24,7 @@
      </a>
      which can be used in the HTML templates.
 
- - id: 3
-   description:
+ - description:
      As a user I want to be able to change the sorting order of movies.
    acceptanceCriteria:
      Sorting should be toggled between ascending and descending by
@@ -36,48 +33,116 @@
      movie overview page.
    hints:
      The AngularJS <em>orderBy</em> filter can reverse the sorting order.
+     
+ - description:
+     As a user I want active tab in the top-navigation to be highlighted.
+   acceptanceCriteria:
+     Currently, the "Home" tab is always highlighted. When I click on the "Movies" tab, 
+     I want this tab to be highlighted instead.
+   hints:
+     We have no idea, how this can be accomplished. We are curious, what you come up with...
 
- - id: 4
-   description:
-     As a user I want to be able to open the *add movie* page in a new tab
+ - description:
+     As a developer I want Travis-CI to create a nice html report with test results.
+   acceptanceCriteria:
+     Currently the only output of a Travis-CI run is the console-output. Unfortunately this
+     is cluttered with karma-logs and server-logs. Both karma and mocha provide a html-reporter.
+     It would be nice, if this reporter could somehow be integrated into the Travis-CI build.
+   hints:
+     Using the html-reporter instead of the console reporter is quite easy (just change the 
+     reporter configuration in <code>Gruntfile.js</code>). The tricky part is how to make the
+     html-files accessible after a Travis-CI run (by default only the console-output is 
+     archived). Take a look at <a href="http://about.travis-ci.org/blog/2012-12-18-travis-artifacts/">
+     Travis Artifacts</a>.
+     
+ - description:
+     As a user I want to be able to open the <em>add movie</em> page in a new tab
      using web browsers' standard mechanisms, i.e. CTRL / CMD click, right
      click open in new tab etc..
    hints:
      Take a look at the difference between the links to the movie detail
      pages and the add movie button.
      
- - id: 5
-   description:
+ - description:
      As a user I want to be able to define movies' release years.
-
- - id: 6
-   description:
+   acceptanceCriteria:
+     The <em>add movie</em> and <em>edit movie</em> page should both contain
+     a new form-field, where the user can enter the release year. The release-year
+     should be displayed on both the overview (list) page and the detail page.
+     When the release year is empty, a placeholder text (like "unknown") should be displayed.
+   hints:
+     There is no explicit definition of the data-model. To extend the data-model by adding 
+     a new attribute, you simply have to pass the additional attribute to the server. The
+     server will persist any attributes, it receives. Moreover, any attributes, that are 
+     stored in the neo4j-db will automatically be part of the server-responses for GET requests.
+     
+ - description:
      As a user I want to be able to sort movies either by
      movie title or release year.
-
- - id: 7
-   description:
-     As a user I want my input to be validated when creating movies.
-     Movies need a title and a release year.
    acceptanceCriteria:
-     The server rejects invalid movies with an HTTP status
-     <code>422 Unprocessable Entity</code>.
+     See task 2 and 3 for details.
+     
+ - description:
+     As a user I want my input to be validated when creating movies.
+   acceptanceCriteria:
+     Movies need a title and a release year. The release-year must consist of 4 digits and 
+     must be greater than 1900. <strong>The validation should be implemented on client-side</strong>. No
+     communication with the server should happen for invalid data (see task 8 for server-side 
+     validation).
    hints:
      A very simple way to add validation on the client side is to use the
      <a href="http://docs.angularjs.org/api/ng.directive:ngChange">
        AngularJS ngChange directive</a>.
+       
+ - description:
+     As an admin I want to prevent bad boy from corrupting the database by bypassing the 
+     client-side-validation and sending invalid data directly to the server.
+   acceptanceCriteria:
+     On top of the client-side validation, the server should validate any incoming PUT and 
+     POST requests. In case of invalid data (e.g. empty movie title), the server should respond 
+     with an HTTP status <code>422 Unprocessable Entity</code>. The client must be able to cope 
+     with 422 responses.
+   hints: |
+     Use curl to interact with the server directly and to test your implementation, e.g.
+     <pre>curl -v -XPOST \ 
+          --data '{"title":"Some title"}' \
+          -H 'Content-Type: application/json' \
+          -H 'Accept: application/json' \
+          http://localhost:3000/movies
+     > POST /movies HTTP/1.1
+     > User-Agent: curl/7.27.0
+     > Host: movie-database-node.herokuapp.com
+     > Content-Type: application/json
+     > Accept: application/json
+     > Content-Length: 22
+     > 
+     < HTTP/1.1 201 Created
+     < Cache-Control: no-cache
+     < Content-Type: application/json; charset=utf-8
+     < Date: Sun, 06 Oct 2013 13:34:24 GMT
+     < Location: http://movie-database-node.herokuapp.com/movies/6f4e2f21-b020-450a-9afd-c037520afda9
+     < X-Powered-By: Express
+     < Content-Length: 94
+     < Connection: keep-alive
+     < 
+     < {
+     <  "id": "6f4e2f21-b020-450a-9afd-c037520afda9",
+     <  "type": "movie",
+     <  "title": "Some title"
+     < }
+     </pre>
 
- - id: 8
-   description:
+ - description:
      As a user I want to be able to create actors. Each actor has a name
      and a short biography.
+   hints:
+     This task has a client- and a server-side part. Take a look at the implementation
+     of the movie-feature and it shouldn't be a problem.
 
- - id: 9
-   description:
+ - description:
      As a user I want to be able to see a list of actors.
 
- - id: 10
-   description:
+ - description:
      As a user I want to connect actors and movies.
    acceptanceCriteria:
      A simple multi select box on the create actor form suffices. Connected
@@ -90,8 +155,7 @@
      <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">
        the neo4j client library</a>.
        
- - id: 11
-   description:
+ - description:
      As a user I want to remove actors from a movie.
    hints: |
      <p>
@@ -108,15 +172,12 @@
        DELETE r
      </pre>
 
- - id: 12
-   description:
+ - description:
      As a user I want to search for movies and actors.
 
- - id: 13
-   description:
+ - description:
      As a user I want to be able to tell my friends about movies through a
      Twitter integration.
-
    hints:
      Twitter provides
      <a href="https://twitter.com/about/resources/buttons">
