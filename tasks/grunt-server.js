@@ -5,7 +5,6 @@ var supersivor = require('supervisor');
 module.exports = function (grunt) {
     var server = function () {
         var doWait = grunt.option("wait");
-        console.log(doWait)
         supersivor.run(['--ignore',
                         'coverage/,test-results.xml',
                         'server/server.js']);

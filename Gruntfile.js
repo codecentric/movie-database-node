@@ -59,14 +59,14 @@ module.exports = function (grunt) {
          * code, as browser environments are different to NodeJS environments.
          */
         jshint: {
-            src: {
+            server: {
                 files: { src: '<%= meta.server.src %>' },
                 options: {
                     node: true,
                     globalstrict: true
                 }
             },
-            test: {
+            servertest: {
                 files: { src: '<%= meta.server.test %>' },
                 options: {
                     node: true,
