@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agile JavaScript - Useful Links</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.media.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="page-header">
+    Agile JavaScript
+    <small>a codecentric AG workshop</small>
+  </h1>
+  <p class="well">
+    If you are reading this, then you are probably here because one of the
+    trainers has given you this URI. If not, then most of this information
+    may not be of interest to you. Should you be interested in this
+    workshop, please contact our
+    <a href="mailto:agilejs@codecentric.de">training team</a> (workshop is
+    available in German and English).
+  </p>
+
+  <h2>Server</h2>
+  <p>The code for the server is in the <code>server</code>-folder.</p>
+
+  <h3>Express.js</h3>
+  <ul>
+    <li>Web: <a href="http://expressjs.com/">http://expressjs.com/</a>
+    </li>
+    <li>Source: <a href="https://github.com/visionmedia/express">https://github.com/visionmedia/express</a>
+    </li>
+    <li>Documentation: <a href="http://expressjs.com/api.html">http://expressjs.com/api.html</a>
+    </li>
+  </ul>
+  
+  <h3>node-neo4j</h3>
+  <ul>
+    <li>Source: <a href="https://github.com/thingdom/node-neo4j">https://github.com/thingdom/node-neo4j</a>
+    </li>
+    <li>Documentation: <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">http://coffeedoc.info/github/thingdom/node-neo4j/master/</a>
+    </li>
+  </ul>
+
+  <h3>Neo4J</h3>
+  <p>We use the graph-database neo4j as persistence backend</p>
+  <ul>
+    <li>Homepage: <a href="http://www.neo4j.org/">http://www.neo4j.org</a></li>
+    <li>Cypher Cheat Sheet: <a href="http://assets.neo4j.org/download/Neo4j_CheatSheet_v3.pdf">http://assets.neo4j.org/download/Neo4j_CheatSheet_v3.pdf</a></li>
+    <li>REST API documentation: <a href="http://docs.neo4j.org/chunked/stable/rest-api.html">http://docs.neo4j.org/chunked/stable/rest-api.html</a></li>
+  </ul>
+
+  <h2>Client</h2>
+  <p>The client-side code is in the <code>client</code>-folder. It is served via the express-server as static.</p>
+  
+  <h3>AngularJS</h3>
+  <ul>
+    <li>Web: <a href="http://angularjs.org/">http://angularjs.org/</a>
+    </li>
+    <li>Source: <a href="https://github.com/angular/angular.js">https://github.com/angular/angular.js</a>
+    </li>
+    <li>Tutorial: <a href="http://docs.angularjs.org/tutorial/index">http://docs.angularjs.org/tutorial/index</a>
+    </li>
+    <li>API-Documentation: <a href="http://docs.angularjs.org/api">http://docs.angularjs.org/api</a>
+    </li>
+  </ul>
+
+  <h3>Bootstrap</h3>
+  <ul>
+    <li>Web: <a href="http://twitter.github.io">http://twitter.github.io</a>
+    </li>
+    <li>Source: <a href="https://github.com/twitter/bootstrap">https://github.com/twitter/bootstrap</a>
+    </li>
+    <li>Documentation: <a href="http://twitter.github.io/bootstrap/components.html">http://twitter.github.io/bootstrap/components.html</a>
+    </li>
+  </ul>
+
+  <h2>Testing</h2>
+  <p>The testing code is in the <code>test</code>-folder. There are three types of tests: server-unit-tests (inside <code>test/server</code>), client-unit-tests (inside <code>test/client/unit</code>) and end-to-end-tests (inside <code>test/client/integration</code>). The unit-tests use the mocha-framework. For end-to-end-tests angular-scenario is used.</p>
+
+  <h3>Karma</h3>
+  <p>Test runner</p>
+  <ul>
+    <li>Web: <a href="http://karma-runner.github.io/">http://karma-runner.github.io/</a>
+    </li>
+    <li>Source: <a href="https://github.com/karma-runner/karma">https://github.com/karma-runner/karma</a>
+    </li>
+  </ul>
+
+  <h3>Angular Scenario</h3>
+  <p>Used to test the front-end</p>
+  <ul>
+    <li>Documentation: <a href="http://docs.angularjs.org/guide/dev_guide.e2e-testing">http://docs.angularjs.org/guide/dev_guide.e2e-testing</a>
+    </li>
+    <li>Source: <a href="https://github.com/angular/angular.js/tree/master/src/ngScenario">https://github.com/angular/angular.js/tree/master/src/ngScenario</a>
+    </li>
+    <li>Matchers: <a href="https://github.com/angular/angular.js/blob/master/src/ngScenario/matchers.js">https://github.com/angular/angular.js/blob/master/src/ngScenario/matchers.js</a>
+    </li>
+  </ul>
+
+  <h3>Mocha</h3>
+  <p>Test Framework</p>
+  <ul>
+    <li>Web &amp; Documentation: <a href="http://visionmedia.github.io/mocha/">http://visionmedia.github.io/mocha/</a>
+    </li>
+    <li>Source: <a href="https://github.com/visionmedia/mocha">https://github.com/visionmedia/mocha</a>
+    </li>
+  </ul>
+
+  <h3>Sinon.JS</h3>
+  <p>Spys, Stubs, Mocks for (node)js tests</p>
+  <ul>
+    <li>Web: <a href="http://sinonjs.org">http://sinonjs.org</a>
+    </li>
+    <li>Documentation: <a href="http://sinonjs.org/docs/">http://sinonjs.org/docs/</a>
+    </li>
+    <li>Source: <a href="https://github.com/cjohansen/Sinon.JS">https://github.com/cjohansen/Sinon.JS</a>
+    </li>
+  </ul>
+
+  <h3>Chai</h3>
+  <p>Library for for BDD and TDD style assertions</p>
+  <ul>
+    <li>Web &amp; Documentation: <a href="http://chaijs.com/">http://chaijs.com/</a>
+    </li>
+    <li>Source: <a href="https://github.com/chaijs/chai">https://github.com/chaijs/chai</a>
+    </li>
+  </ul>
+
+</body>
+</html>

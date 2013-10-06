@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agile JavaScript - Quickstart</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.media.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="page-header">
+    Agile JavaScript
+    <small>a codecentric AG workshop</small>
+  </h1>
+  <p class="well">
+    If you are reading this, then you are probably here because one of the
+    trainers has given you this URI. If not, then most of this information
+    may not be of interest to you. Should you be interested in this
+    workshop, please contact our
+    <a href="mailto:agilejs@codecentric.de">training team</a> (workshop is
+    available in German and English).
+  </p>
+
+  <h2>Quickstart</h2>
+  <p>
+    You have downloaded the necessary software and cloned the movie-database repository. So now you are ready to start hacking.
+    <ol>
+      <li>
+        Make sure your neo4j-database is running: Open your browser and navigate to <a href="http://localhost:7474">http://localhost:7474</a>. If you see the neo4j webadmin interface, everything is fine. If the neo4j webadmin interface doesn't show up, you have to start neo4j manually:
+        <pre>cd &lt;neo4j-installation-directory&gt;
+bin/neo4j start</pre>
+      <li>
+        Change to your movie-database directory:
+        <pre>cd &lt;movie-database-directory&gt;</pre>
+      </li>
+      <li>
+        Let npm download the required dependencies:
+        <pre>npm install</pre>
+      </li>
+      <li>
+        Make sure you have the grunt command line interface installed:
+        <pre>npm install -g grunt-cli</pre>
+      </li>
+      <li>
+        Test your movie-database application using the <code>travis</code> task. This is exactly what happens during a build on Travis-CI. <strong>Be sure, that this step succeeds, before moving on!</strong>. If the build fails, re-check your setup (neo4j running? phantomjs installed? nodejs-version up-to-date?).
+        <pre>grunt travis</pre>
+      </li>
+      <li>
+        Finally, you can start developing. The most useful grunt-task during development is <code>dev</code>. This task start a web-server in the background (on port 3000). The webserver is restarted automatically, whenever a file changes. Moreover, on each file-change, the jshint and unit-test tasks are executed. If you keep an eye on the console output, you will always know, when your code changes break existing tests.
+        <pre>grunt dev</pre>
+      </li>
+      <li>Open your browser and navigate to <a href="http://localhost:3000/">http://localhost:3000/</a>.</li>
+      <li>Change some code, watch for the automatically triggered test-run and see the result instantly in your web-browser.</li> 
+    </ol>
+  </p>
+</body>
+</html>

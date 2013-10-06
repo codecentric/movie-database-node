@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agile JavaScript - Installation of necessary software</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.media.css">
+  <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="page-header">
+    Agile JavaScript
+    <small>a codecentric AG workshop</small>
+  </h1>
+  <p class="well">
+    If you are reading this, then you are probably here because one of the
+    trainers has given you this URI. If not, then most of this information
+    may not be of interest to you. Should you be interested in this
+    workshop, please contact our
+    <a href="mailto:agilejs@codecentric.de">training team</a> (workshop is
+    available in German and English).
+  </p>
+
+  <h2>Installation of necessary software</h2>
+  <p>
+    Make sure that every team member has a PC/Mac that can be used for
+    development. Unix based operating systems work best in our experience, but
+    Windows can also be used. If you are willing to, then you can install the
+    necessary software on your own machine. Being able to run the software
+    outside of any virtual machine is superb and will result in the best
+    experience for you during the workshop. For those who are unable to install
+    the software or are not willing to, we provide an Ubuntu-based virtual
+    machine that can be run using
+    <a href="https://www.virtualbox.org/">Oracle VirtualBox</a>.
+  </p>
+
+  <h3>Native installation</h3>
+  <p>
+    Providing installation instructions for all the tools is out of scope for
+    this document. Most of the necessary tools feature an excellent
+    documentation that you can refer to should you run into any issues. In case
+    of any outstanding issues, please contact us by mail through
+    <a href="mailto:agilejs@codecentric.de?subject=Setup problems">
+      agilejs@codecentric.de</a>.
+  </p>
+
+  <p>Please make sure that the following tools are installed:</p>
+  <ul>
+    <li>
+      <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">
+        Java version 6 or later
+      </a>
+       (preferably Oracle JDK or Open JDK 7)</li>
+    <li>
+      <a href="http://git-scm.com/">git</a> (the version control system)
+    </li>
+    <li>
+      <a href="http://nodejs.org/">Node.JS version 10 and NPM</a>
+      (node package manager). On OS X and Linux you should use
+      <a href="https://github.com/creationix/nvm">NVM</a>
+      (Node Version Manager) which allows you to install global modules without
+      super user privileges. To install NVM you need to have git and cURL
+      installed.
+    </li>
+    <li>
+      Once NPM is installed, you will need to globally install the Grunt
+      command line interface. You can do so by running
+      <code>npm install -g grunt-cli</code>. Depending on your setup, you might
+      need to prepend <code>sudo</code> to get the necessary privileges.
+    </li>
+    <li>
+      <a href="http://phantomjs.org/">PhantomJS</a> to execute the tests
+    </li>
+    <li>
+      <a href="http://www.neo4j.org/">Neo4j</a> as this is the database that
+      we are using. Installation normally only requires an extraction of the
+      downloaded archive.
+    </li>
+    <li>
+      Some code editor that supports HTML, CSS and JavaScript. We
+      recommend either
+      <a href="http://www.sublimetext.com/">Sublime Text</a> or
+      <a href="http://www.jetbrains.com/webstorm/">WebStorm</a>.
+    </li>
+    <li>
+      At last, you will need a relatively new web browser. Chromium derivatives
+      like Google Chrome, Chrome Canary or Chromium itself would be our choice.
+    </li>
+  </ul>
+
+  <h3>Using the Virtual Machine</h3>
+  <p>
+    Make sure that you have
+    <a href="https://www.virtualbox.org/">Oracle VirtualBox</a> installed.
+    With VirtualBox Version 4.X (where X is larger than 1) you should not run
+    into any issues. Once installed you can start VirtualBox and import the
+    virtual machine using <em>File -> Import Appliance</em>. Follow the wizard
+    till the end and start the virtual machine. You should now be good to go!
+  </p>
+
+</div>
+
+</body>
+</html>
