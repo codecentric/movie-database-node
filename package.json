@@ -1,0 +1,21 @@
+{
+  "name": "movie-database-node-scripts",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codecentric/movie-database-node.git"
+  },
+  "author": "Ben Ripkens <ben.ripkens@codecentric.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codecentric/movie-database-node/issues"
+  },
+  "dependencies": {
+    "q": "~0.9.7"
+  }
+}
