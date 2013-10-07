@@ -35,19 +35,19 @@
         <h4 class="media-heading">
           <a href="introduction">Introduction</a>
         </h4>
-        <p>Who we are, what we do, what the workshop is about ...</p>
+        <p>Who we are, what we do and what the workshop is about</p>
       </div>
     </li>
 
     <li class="media">
       <a class="pull-left" href="frameworks-tools-services-slides/agile-javascript-frameworks-tools-services.pdf">
         <img class="media-object" style="width: 128px" src="images/frameworks-tools-services.png"/>
-      </a> 
+      </a>
       <div class="media-body">
         <h4 class="media-heading">
           <a href="frameworks-tools-services-slides/agile-javascript-frameworks-tools-services.pdf">Frameworks, Tools and Services</a>
         </h4>
-        <p>Short overview and explanation of the frameworks, tools and services, that we use during the workshop. Start here, if you want to know, how a typical tool stack for agile software development with JavaScript can look like ...</p>
+        <p>Short overview and explanation of the frameworks, tools and services, that we use during the workshop. Start here, if you want to know, how a typical tool stack for agile software development with JavaScript can look like.</p>
       </div>
     </li>
 
@@ -59,7 +59,7 @@
         <h4 class="media-heading">
           <a href="javascript-basics-slides">JavaScript Basics</a>
         </h4>
-        <p>Introduction to JavaScript, basic features and common pitfalls. Start here, if you are new to JavaScript or want to learn more about the language of the workshop ...</p>
+        <p>Introduction to JavaScript, basic features and common pitfalls. Start here, if you are new to JavaScript or want to learn more about the language of the workshop.</p>
       </div>
     </li>
 
@@ -71,7 +71,7 @@
         <h4 class="media-heading">
           <a href="application-intro-slides">About the Movie Database</a>
         </h4>
-        <p>Presentation of the demo-project, that is used throughout the workshop ...</p>
+        <p>Presentation of the demo-project that is used throughout the workshop.</p>
       </div>
     </li>
   </ul>
@@ -161,9 +161,6 @@
       need to prepend <code>sudo</code> to get the necessary privileges.
     </li>
     <li>
-      <a href="http://phantomjs.org/">PhantomJS</a> to execute the tests
-    </li>
-    <li>
       <a href="http://www.neo4j.org/">Neo4j</a> as this is the database that
       we are using. Installation normally only requires an extraction of the
       downloaded archive.
@@ -184,64 +181,58 @@
   <p>
     Make sure that you have
     <a href="https://www.virtualbox.org/">Oracle VirtualBox</a> installed.
-    With VirtualBox Version 4.X (where X is larger than 1) you should not run
+    With VirtualBox Version 4.2.18 you should not run
     into any issues. Once installed you can start VirtualBox and import the
     virtual machine using <em>File -> Import Appliance</em>. Follow the wizard
     till the end and start the virtual machine. You should now be good to go!
   </p>
+  <p>
+    The virtual machine is
+    <a href="https://public.centerdevice.de/70cf98fd-58c3-4f36-8174-5b449299dee7">
+      available through CenterDevice
+    </a>
+    (hit the download button in the upper-right corner).
+  </p>
 
   <h2>Workshop Material</h2>
   <p>
-    So now you have installed all necessary software, you have cloned the movie-database repository and you want to start hacking! Here are some information, you might find useful.
+    So now you have installed all necessary software, you have cloned the
+    movie-database repository and you want to start hacking! Here are some
+    information, you might find useful.
   </p>
-  <ul class="media-list">
-    <li class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <a href="quickstart.html">Quickstart Guide</a>
-        </h4>
-        <p>
-          The fastest way to get you working on the movie-database. Explanation of the most important grunt-task <code>grunt dev</code> ...
-        </p>
-      </div>
-    </li>
-
-    <li class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <a href="tasks.html">Tasks and User Stories</a>
-        </h4>
-        <p>
-          The tasks for the workshop. Starting from some easy ones to make you familiar with AngularJS and NodeJS, up to completely new features like Twitter integration. 
-        </p>
-      </div>
-    </li>
-
-    <li class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <a href="documentation">Documentation</a>
-        </h4>
-        <p>Documentation of the movie-database internals, configuration, available grunt-tasks...
-        <ul>
-          <li><a href="documentation/grunt.html">Available grunt tasks</a></li>
-          <li><a href="documentation/server.html">Documentation of server-side code</a></li>
-          <li><a href="documentation/neo4j.html">Persistence with Neo4J</a></li>
-        </ul>
-      </div>
-    </li>
-
-    <li class="media">
-      <div class="media-body">
-        <h4 class="media-heading">
-          <a href="useful-links.html">Useful Links</a>
-        </h4>
-        <p>
-          A list of links to tutorials and reference documentation of the frameworks used in the movie-database project ...
-        </p>
-      </div>
-    </li>
-  </ul>
+  <dl class="dl-horizontal">
+    <dt><a href="quickstart.html">Quickstart Guide</a></dt>
+    <dd>
+      The fastest way to get you working on the movie-database. Explanation of
+      the most important grunt-task <code>grunt dev</code> and more.
+    </dd>
+    <dt><a href="tasks.html">Tasks and User Stories</a></dt>
+    <dd>
+      The tasks for the workshop. Starting from some easy ones to make you
+      familiar with AngularJS and NodeJS, up to completely new features
+      like Twitter integration.
+    </dd>
+    <dt><a href="documentation">Documentation</a></dt>
+    <dd>
+      <p>
+        Documentation of the movie-database internals, configuration,
+        available grunt-tasks.
+      <ul>
+        <li><a href="documentation/grunt.html">Available grunt tasks</a></li>
+        <li>
+          <a href="documentation/server.html">
+            Documentation of server-side code
+          </a>
+        </li>
+        <li><a href="documentation/neo4j.html">Persistence with Neo4J</a></li>
+      </ul>
+    </dd>
+    <dt><a href="useful-links.html">Useful Links</a></dt>
+    <dd>
+      A list of links to tutorials and reference documentation of the
+      frameworks used in the movie-database project.
+    </dd>
+  </dl>
 
   <h2>Trainers</h2>
   <ul class="trainers">
@@ -299,8 +290,6 @@
     </li>
   </ul>
 
-  <!--<h2>About the codecentric AG</h2>
-  <p>TODO</p>-->
 </div>
 
 </body>
