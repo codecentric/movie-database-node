@@ -35,8 +35,11 @@
     </hgroup>
     <article>
         <pre class="prettyprint" data-lang="javascript">
+// use double or single quotes
 var str = 'foo';
 
+// numbers are double-precision 64-bit format IEEE 754 values
+// http://www.ecma-international.org/ecma-262/5.1/#sec-8.5
 var num = 4.52;
 
 var boolVal = true;
@@ -114,7 +117,7 @@ var increment = function(num) {
 
   <slide>
     <hgroup>
-      <h2>Objects</h2>
+      <h2>Objects (think Maps)</h2>
     </hgroup>
     <article>
         <pre class="prettyprint" data-lang="javascript">
@@ -143,7 +146,7 @@ true
     <article>
         <pre class="prettyprint" data-lang="javascript">
 var details = [];
-for (property key in person) {
+for (property in person) {
   if (person.hasOwnProperty(property)) {
     details.push(person[property]);
   }
@@ -218,6 +221,54 @@ false
 > Number.MIN_VALUE + 1
 1
 </pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Setting up a prototype chain</h2>
+    </hgroup>
+    <article>
+        <pre class="prettyprint" data-lang="javascript">
+var a = {
+  name: 'Ben Ripkens'
+};
+var b = Object.create(a);
+var c = Object.create(b);
+console.log(c.name);
+// 'Ben Ripkens'
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>'this' is unreliable</h2>
+    </hgroup>
+    <article>
+        <pre class="prettyprint" data-lang="javascript">
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.getName = function() {
+  return this.name;
+};
+
+var p = new Person('Barack Obama');
+console.log(p.getName()); // 'Barack Obama'
+
+var getter = p.getName;
+console.log(getter()); // undefined or '' (when run in a browser)
+
+console.log(getter.call({ name: 'John McCain' })); // 'John McCain'
+</pre>
+
+      <p class="footnote">
+        <a href="https://blog.codecentric.de/en/2012/11/javascript-function-contexts-this-proxy/">
+          https://blog.codecentric.de/en/2012/11/javascript-function-contexts-this-proxy/
+        </a>
+      </p>
     </article>
   </slide>
 
