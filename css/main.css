@@ -51,3 +51,15 @@
   min-width: 30px;
   display: inline-block;
 }
+
+.alert-warning {
+  background-color: #fad79e;
+  border-color: #fad79e;
+  color: #444;
+}
+
+.alert-info {
+  background-color: #a4d1ef;
+  border-color: #a4d1ef;
+  color: #333;
+}
