@@ -5,6 +5,6 @@ module.exports = {
         port: process.env.PORT || 3000
     },
     neo4j: {
-        url: process.env.NEO4J_URL || 'http://localhost:7474'
+        url: process.env.GRAPHENEDB_URL || 'http://localhost:7474'
     }
 };
