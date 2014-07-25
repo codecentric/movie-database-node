@@ -1,7 +1,6 @@
 # Movie Database - NodeJS version
 [![Build Status](https://travis-ci.org/codecentric/movie-database-node.png)](https://travis-ci.org/codecentric/movie-database-node)
 
-
 Another version of the legendary movie database. This time with NodeJS. The app
 is being deployed to Heroku after every push. Feel free to check it out:
 [http://movie-database-node.herokuapp.com/](http://movie-database-node.herokuapp.com/)!
