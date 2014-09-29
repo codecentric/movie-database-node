@@ -33,27 +33,27 @@
      movie overview page.
    hints:
      The AngularJS <em>orderBy</em> filter can reverse the sorting order.
-     
+
  - description:
      As a user I want active tab in the top-navigation to be highlighted.
    acceptanceCriteria:
-     Currently, the "Home" tab is always highlighted. When I click on the "Movies" tab, 
+     Currently, the "Home" tab is always highlighted. When I click on the "Movies" tab,
      I want this tab to be highlighted instead.
    hints:
      We have no idea, how this can be accomplished. We are curious, what you come up with...
 
- - description:
-     As a developer I want Travis-CI to create a nice html report with test results.
-   acceptanceCriteria:
-     Currently the only output of a Travis-CI run is the console-output. Unfortunately this
-     is cluttered with karma-logs and server-logs. Both karma and mocha provide a html-reporter.
-     It would be nice, if this reporter could somehow be integrated into the Travis-CI build.
-   hints:
-     Using the html-reporter instead of the console reporter is quite easy (just change the 
-     reporter configuration in <code>Gruntfile.js</code>). The tricky part is how to make the
-     html-files accessible after a Travis-CI run (by default only the console-output is 
-     archived). Take a look at <a href="http://about.travis-ci.org/blog/2012-12-18-travis-artifacts/">
-     Travis Artifacts</a>.
+ # - description:
+ #     As a developer I want Travis-CI to create a nice html report with test results.
+ #   acceptanceCriteria:
+ #     Currently the only output of a Travis-CI run is the console-output. Unfortunately this
+ #     is cluttered with karma-logs and server-logs. Both karma and mocha provide a html-reporter.
+ #     It would be nice, if this reporter could somehow be integrated into the Travis-CI build.
+ #   hints:
+ #     Using the html-reporter instead of the console reporter is quite easy (just change the
+ #     reporter configuration in <code>Gruntfile.js</code>). The tricky part is how to make the
+ #     html-files accessible after a Travis-CI run (by default only the console-output is
+ #     archived). Take a look at <a href="http://about.travis-ci.org/blog/2012-12-18-travis-artifacts/">
+ #     Travis Artifacts</a>.
      
  - description:
      As a user I want to be able to open the <em>add movie</em> page in a new tab
@@ -62,7 +62,7 @@
    hints:
      Take a look at the difference between the links to the movie detail
      pages and the add movie button.
-     
+
  - description:
      As a user I want to be able to define movies' release years.
    acceptanceCriteria:
@@ -71,40 +71,40 @@
      should be displayed on both the overview (list) page and the detail page.
      When the release year is empty, a placeholder text (like "unknown") should be displayed.
    hints:
-     There is no explicit definition of the data-model. To extend the data-model by adding 
+     There is no explicit definition of the data-model. To extend the data-model by adding
      a new attribute, you simply have to pass the additional attribute to the server. The
-     server will persist any attributes, it receives. Moreover, any attributes, that are 
+     server will persist any attributes, it receives. Moreover, any attributes, that are
      stored in the neo4j-db will automatically be part of the server-responses for GET requests.
-     
+
  - description:
      As a user I want to be able to sort movies either by
      movie title or release year.
    acceptanceCriteria:
      See task 2 and 3 for details.
-     
+
  - description:
      As a user I want my input to be validated when creating movies.
    acceptanceCriteria:
-     Movies need a title and a release year. The release-year must consist of 4 digits and 
+     Movies need a title and a release year. The release-year must consist of 4 digits and
      must be greater than 1900. <strong>The validation should be implemented on client-side</strong>. No
-     communication with the server should happen for invalid data (see task 8 for server-side 
+     communication with the server should happen for invalid data (see task 8 for server-side
      validation).
    hints:
      A very simple way to add validation on the client side is to use the
      <a href="http://docs.angularjs.org/api/ng.directive:ngChange">
        AngularJS ngChange directive</a>.
-       
+
  - description:
-     As an admin I want to prevent bad boy from corrupting the database by bypassing the 
+     As an admin I want to prevent bad boy from corrupting the database by bypassing the
      client-side-validation and sending invalid data directly to the server.
    acceptanceCriteria:
-     On top of the client-side validation, the server should validate any incoming PUT and 
-     POST requests. In case of invalid data (e.g. empty movie title), the server should respond 
-     with an HTTP status <code>422 Unprocessable Entity</code>. The client must be able to cope 
+     On top of the client-side validation, the server should validate any incoming PUT and
+     POST requests. In case of invalid data (e.g. empty movie title), the server should respond
+     with an HTTP status <code>422 Unprocessable Entity</code>. The client must be able to cope
      with 422 responses.
    hints: |
      Use curl to interact with the server directly and to test your implementation, e.g.
-     <pre>curl -v -XPOST \ 
+     <pre>curl -v -XPOST \
           --data '{"title":"Some title"}' \
           -H 'Content-Type: application/json' \
           -H 'Accept: application/json' \
@@ -115,7 +115,7 @@
      > Content-Type: application/json
      > Accept: application/json
      > Content-Length: 22
-     > 
+     >
      < HTTP/1.1 201 Created
      < Cache-Control: no-cache
      < Content-Type: application/json; charset=utf-8
@@ -124,7 +124,7 @@
      < X-Powered-By: Express
      < Content-Length: 94
      < Connection: keep-alive
-     < 
+     <
      < {
      <  "id": "6f4e2f21-b020-450a-9afd-c037520afda9",
      <  "type": "movie",
@@ -154,7 +154,7 @@
      node object. Also refer to the API documentation for
      <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">
        the neo4j client library</a>.
-       
+
  - description:
      As a user I want to remove actors from a movie.
    hints: |
