@@ -31,6 +31,23 @@
 
   <slide>
     <hgroup>
+      <h2>Starter</h2>
+    </hgroup>
+    <article>
+      <ul>
+        <li>
+          written <span class="blue">J</span>ava<span class="blue">S</span>cript
+        </li>
+        <li>not related to Java</li>
+        <li>started out at Netscape</li>
+        <li>is an implementation of the ECMAScript standard</li>
+        <li>jQuery ⊆ JavaScript</li>
+      </ul>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
       <h2>Variable Declarations</h2>
     </hgroup>
     <article>
@@ -226,17 +243,75 @@ false
 
   <slide>
     <hgroup>
+      <h2>Though its scoping rules may confuse you</h2>
+    </hgroup>
+    <article>
+        <pre class="prettyprint" data-lang="javascript">
+> for (var i = 0; i < 3; i++) {
+    setTimeout(function() {
+      console.log(i);
+    }, 1000 /* millis */);
+  }
+
+// 1 second later...
+3
+3
+3
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Immediately Invoked Function Expression (IIFE) to the rescue!</h2>
+    </hgroup>
+    <article>
+        <pre class="prettyprint" data-lang="javascript">
+> (function() { // this actually creates a new scope
+    var b = 2
+    console.log(b);
+  })();
+2
+
+> console.log(b);
+ReferenceError: b is not defined
+</pre>
+
+      <pre class="prettyprint" data-lang="javascript">
+(                  // turn the function declaration into an expression
+  function() {}    // define a new function with a new lexical scope
+)
+();                // call the function
+
+// in short
+(function() { /* A new scope, hallelujah */ })();
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
       <h2>Setting up a prototype chain</h2>
     </hgroup>
     <article>
         <pre class="prettyprint" data-lang="javascript">
 var a = {
-  name: 'Ben Ripkens'
+  name: 'Leonard Hofstadter'
 };
 var b = Object.create(a);
 var c = Object.create(b);
 console.log(c.name);
-// 'Ben Ripkens'
+// 'Leonard Hofstadter'
+</pre>
+
+      <pre class="prettyprint" data-lang="javascript">
+{                   // c
+  __proto__: {      // b
+    __proto__: {    // a
+      name: 'Leonard Hofstadter'
+    }
+  }
+}
 </pre>
     </article>
   </slide>
@@ -255,13 +330,13 @@ Person.prototype.getName = function() {
   return this.name;
 };
 
-var p = new Person('Barack Obama');
-console.log(p.getName()); // 'Barack Obama'
+var p = new Person('Amy Farrah Fowler');
+console.log(p.getName()); // 'Amy Farrah Fowler'
 
 var getter = p.getName;
 console.log(getter()); // undefined or '' (when run in a browser)
 
-console.log(getter.call({ name: 'John McCain' })); // 'John McCain'
+console.log(getter.call({ name: 'Penny' })); // 'Penny'
 </pre>
 
       <p class="footnote">
