@@ -100,12 +100,16 @@ module.exports = function (grunt) {
             clientUi: {
                 files: { src: '<%= meta.client.tests.ui.src %>' },
                 options: {
+                    node: true,
+                    globalstrict: true,
                     globals: {
                         browser: false,
                         expect: false,
                         describe: false,
                         it: false,
-                        beforeEach: false
+                        beforeEach: false,
+                        element: false,
+                        by: false
                     }
                 }
             },
