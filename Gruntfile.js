@@ -200,7 +200,6 @@ module.exports = function (grunt) {
         'simplemocha',
         'karma:unit',
         'server',
-        'sauce_connect:tests',
         'protractor:travis'
     ]);
 
