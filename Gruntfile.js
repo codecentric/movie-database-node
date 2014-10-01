@@ -22,13 +22,14 @@ module.exports = function (grunt) {
             client: {
                 js: ['client/js/**/*.js', '!client/js/lib/**/*'],
                 tests: {
-                    integration: {
-                        config: 'test/karma/integration.conf.js',
-                        src: 'test/karma/integration/**/*.js'
+                    ui: {
+                        configLocal: 'test/client/ui-local.conf.js',
+                        configSauce: 'test/client/ui-saucelabs.conf.js',
+                        src: 'test/client/ui/**/*.js'
                     },
                     unit: {
-                        config: 'test/karma/unit.conf.js',
-                        src: 'test/karma/unit/**/*.js'
+                        config: 'test/client/unit.conf.js',
+                        src: 'test/client/unit/**/*.js'
                     }
                 }
             }
@@ -96,22 +97,19 @@ module.exports = function (grunt) {
                     }
                 }
             },
-            karmaIntegration: {
-                files: { src: '<%= meta.client.tests.integration.src %>' },
+            clientUi: {
+                files: { src: '<%= meta.client.tests.ui.src %>' },
                 options: {
                     globals: {
                         browser: false,
                         expect: false,
-                        element: false,
                         describe: false,
                         it: false,
-                        beforeEach: false,
-                        input: false,
-                        repeater: false
+                        beforeEach: false
                     }
                 }
             },
-            karmaUnit: {
+            clientUnit: {
                 files: { src: '<%= meta.client.tests.unit.src %>' },
                 options: {
                     newcap: false,
@@ -158,7 +156,7 @@ module.exports = function (grunt) {
         },
 
         /*
-         * Karma is out super awesome test runner. It starts up a browser for
+         * Karma is our super awesome test runner. It starts up a browser for
          * you and can even observe file changes. We have our own Grunt
          * plugin as we want the tests to be run asynchronously.
          */
@@ -167,11 +165,20 @@ module.exports = function (grunt) {
                 configFile: '<%= meta.client.tests.unit.config %>',
                 browsers: ['PhantomJS'],
                 singleRun: true
+            }
+        },
+
+        /*
+         * Protractor is the preferred AngularJS test runner. It is basically
+         * a small wrapper around WebDriverJS and Selenium which enables
+         * tests of AngularJS-based applications.
+         */
+        protractor: {
+            local: {
+                configFile: '<%= meta.client.tests.ui.configLocal %>'
             },
-            integration: {
-                configFile: '<%= meta.client.tests.integration.config %>',
-                browsers: ['PhantomJS'],
-                singleRun: true
+            travis: {
+                configFile: '<%= meta.client.tests.ui.configSauce %>'
             }
         },
 
@@ -185,9 +192,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-simple-mocha');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    require('load-grunt-tasks')(grunt);
     grunt.loadTasks('./tasks');
 
     grunt.registerTask('travis', [
@@ -195,7 +200,17 @@ module.exports = function (grunt) {
         'simplemocha',
         'karma:unit',
         'server',
-        'karma:integration'
+        'sauce_connect:tests',
+        'protractor:travis'
     ]);
+
+    grunt.registerTask('test', [
+        'jshint',
+        'simplemocha',
+        'karma:unit',
+        'server',
+        'protractor:local'
+    ]);
+
     grunt.registerTask('dev', ['server', 'watch']);
 };

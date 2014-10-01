@@ -11,7 +11,7 @@ module.exports = function(config) {
       'node_modules/chai/chai.js',
       'client/js/lib/angular.js',
       'client/js/**/*.js',
-      'test/karma/unit/**/*.spec.js'
+      'test/client/unit/**/*.spec.js'
     ],
 
     // list of files to exclude
