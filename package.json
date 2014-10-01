@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Agile JS Workshop application",
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "grunt travis"
   },
   "dependencies": {
     "express": "~3.4.0",
