@@ -1,5 +1,8 @@
 'use strict';
 
+var Promise = require('bluebird');
+var request = Promise.promisify(require('request'));
+
 var MovieOverview = require('./MovieOverview');
 var NewMovie = require('./NewMovie');
 var MovieDetail = require('./MovieDetail');
@@ -10,27 +13,30 @@ describe('Movies', function() {
     var movieDetail;
 
     function deleteMovies() {
-        movieOverview.open();
-        return movieOverview.movieTitles.then(function(elements) {
-            if (elements.length > 0) {
-                elements[0].click();
-                movieDetail.delete();
-            }
-
-            if (elements.length > 1) {
-                return deleteMovies();
-            }
+        return request({
+            method: 'GET',
+            uri: 'http://localhost:3000/movies',
+            json: true
+        })
+        .then(function(response) {
+            var movies = response[1];
+            return Promise.all(movies.map(function(movie) {
+                return request({
+                    method: 'DELETE',
+                    uri: 'http://localhost:3000/movies/' + movie.id
+                });
+            }));
         });
     }
 
-    beforeEach(function() {
+    beforeEach(function(done) {
         movieOverview = new MovieOverview();
         newMovie = new NewMovie();
         movieDetail = new MovieDetail();
 
-        deleteMovies()
-        .then(function() {
+        return deleteMovies().then(function() {
             movieOverview.open();
+            done();
         });
     });
 
