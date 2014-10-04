@@ -43,7 +43,7 @@ are locally installed.
 To make use of Grunt, you further need to have its CLI tool on your path.
 
 ```
-npm install -g grunt-cli bower
+npm install -g grunt-cli
 ```
 
 The most useful Grunt tasks currently is `test` for test execution and
