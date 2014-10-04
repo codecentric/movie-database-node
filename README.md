@@ -1,4 +1,5 @@
 # Movie Database - NodeJS version
+
 [![Build Status](https://travis-ci.org/codecentric/movie-database-node.png)](https://travis-ci.org/codecentric/movie-database-node)
 
 Another version of the legendary movie database. This time with NodeJS. The app
