@@ -78,5 +78,5 @@ describe('Movies', function() {
         movieOverview.movieTitles.then(function(elements) {
             expect(elements.length).toEqual(6);
         });
-    });
+    }, 60000);
 });
