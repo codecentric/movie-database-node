@@ -2,6 +2,7 @@
   "name": "movie-database-node",
   "version": "0.0.1",
   "description": "Agile JS Workshop application",
+  "main": "server/server.js",
   "scripts": {
     "test": "grunt travis --verbose"
   },
