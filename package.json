@@ -3,40 +3,45 @@
   "version": "0.0.1",
   "description": "Agile JS Workshop application",
   "main": "server/server.js",
+  "engines": {
+    "node": "0.10.x"
+  },
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "grunt travis",
+    "postinstall": "./node_modules/.bin/bower install"
   },
   "dependencies": {
+    "bower": "^1.3.12",
+    "connect-history-api-fallback": "~0.0.5",
     "express": "~3.4.0",
+    "log4js": "~0.6.9",
     "neo4j": "~1.0.0",
     "node-uuid": "~1.4.1",
-    "superagent": "~0.15.4",
-    "log4js": "~0.6.9",
-    "connect-history-api-fallback": "~0.0.4"
+    "superagent": "~0.15.4"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/codecentric/movie-database-node.git"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
+    "bluebird": "^2.3.4",
+    "chai": "~1.9.2",
     "colors": "~0.6.2",
-    "grunt-simple-mocha": "~0.4.0",
+    "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.4",
-    "sinon": "~1.7.3",
-    "chai": "~1.8.0",
-    "karma": "~0.10.2",
-    "karma-ng-scenario": "~0.1.0",
-    "karma-chrome-launcher": "~0.1.0",
-    "karma-firefox-launcher": "~0.1.0",
-    "karma-phantomjs-launcher": "~0.1.0",
-    "karma-script-launcher": "~0.1.0",
-    "karma-mocha": "0.1.3",
-    "karma-jasmine": "~0.1.3",
-    "karma-coffee-preprocessor": "~0.1.0",
-    "karma-requirejs": "~0.2.0",
-    "karma-spec-reporter": "~0.0.5",
-    "supervisor": "~0.5.6",
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-protractor-runner": "^1.1.4",
+    "grunt-simple-mocha": "~0.4.0",
+    "karma": "~0.12.24",
+    "karma-chrome-launcher": "~0.1.5",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-mocha": "0.1.9",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-spec-reporter": "~0.0.13",
+    "load-grunt-tasks": "^0.6.0",
+    "protractor": "^1.3.1",
+    "request": "^2.44.0",
+    "sinon": "~1.10.3",
+    "supervisor": "~0.5.6"
   }
 }

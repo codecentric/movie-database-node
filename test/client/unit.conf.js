@@ -9,9 +9,10 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files : [
       'node_modules/chai/chai.js',
-      'client/js/lib/angular.js',
+      'client/components/angular/angular.js',
+      'client/components/angular-route/angular-route.js',
       'client/js/**/*.js',
-      'test/karma/unit/**/*.spec.js'
+      'test/client/unit/**/*.spec.js'
     ],
 
     // list of files to exclude

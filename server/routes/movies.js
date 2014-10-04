@@ -30,8 +30,8 @@ exports = module.exports = function (db) {
 
             // fallback in case no movies are stored in the database
             nodes = nodes || [];
-                    
-            // the attributes of the movie (like title, description) are stored inside 
+
+            // the attributes of the movie (like title, description) are stored inside
             // the data-attribute, so we loop through all retrieved nodes and extract
             // the data-attribute
             var movies = nodes.map(function (node) {
@@ -43,7 +43,7 @@ exports = module.exports = function (db) {
         });
     };
 
-    // return a single movie identified by url-parameter 
+    // return a single movie identified by url-parameter
     exports.getMovie = function (req, res) {
         // extract the id from the request-object
         var id = req.params.id;
@@ -69,11 +69,11 @@ exports = module.exports = function (db) {
         logger.debug('Deleting movie#%s', id);
 
         var cypher = 'START node=node:node_auto_index(id={id}) ' +
-            'MATCH node-[relationship?]-() ' +
+            'OPTIONAL MATCH node-[relationship]-() ' +
             'DELETE node, relationship';
         db.query(cypher, { id: id }, function (err) {
             if (err) {
-                logger.error('Failed to delete movie#%s: %s', id, err);
+                logger.error('Failed to delete movie#%s: %s', id, JSON.stringify(err));
                 return res.status(500).send();
             }
 
