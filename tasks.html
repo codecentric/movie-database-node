@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="tasks">
 <head>
   <meta charset="UTF-8">
   <title>AgileJS Workshop Tasks</title>
@@ -34,7 +34,7 @@
   <ol ng-controller="TaskCtrl">
     <li ng-repeat="task in tasks" ng-cloak>
       <div class="description"
-           ng-bind-html-unsafe="task.description"
+           ng-bind-html="task.description"
            ng-click="toggle(task)">
       </div>
       <a href=""
@@ -53,13 +53,13 @@
       <div class="acceptance-criteria"
            ng-show="task.visible && task.acceptanceCriteria">
         <h2>Acceptance Criteria</h2>
-        <div ng-bind-html-unsafe="task.acceptanceCriteria"></div>
+        <div ng-bind-html="task.acceptanceCriteria"></div>
       </div>
 
       <div class="hints"
            ng-show="task.visible && task.hints">
         <h2>Hints</h2>
-        <div ng-bind-html-unsafe="task.hints"></div>
+        <div ng-bind-html="task.hints"></div>
       </div>
 
       <div class="management"
@@ -91,6 +91,7 @@
   </ol>
 
   <script src="vendor/angularjs/angular.js"></script>
+  <script src="vendor/angularjs/angular-sanitize.js"></script>
   <script src="vendor/js-yaml/js-yaml.min.js"></script>
   <script src="js/tasks.js"></script>
 </div>

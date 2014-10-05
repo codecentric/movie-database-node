@@ -1,4 +1,6 @@
-function TaskCtrl($scope, $http) {
+var module = angular.module('tasks', ['ngSanitize']);
+
+module.controller('TaskCtrl', function TaskCtrl($scope, $http) {
   $scope.tasks = null;
 
   function getTaskStorageId(id) {
@@ -39,9 +41,9 @@ function TaskCtrl($scope, $http) {
       task.id = index+1
       task.status = getStatus(task.id);
       task.visible = false;
-    })
+    });
     $scope.tasks = tasks;
   }, function(err) {
     alert('Failed to load the tasks, sorry!', JSON.stringify(err));
   });
-}
+});
