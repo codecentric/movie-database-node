@@ -1,9 +1,14 @@
 'use strict';
 
-var express = require('express');
+var bodyParser = require('body-parser');
 var config = require('./config');
-var log4js = require('log4js');
+var errorhandler = require('errorhandler');
+var express = require('express');
 var historyApiFallback = require('connect-history-api-fallback');
+var log4js = require('log4js');
+var methodOverride = require('method-override');
+var morgan = require('morgan');
+var serveStatic = require('serve-static');
 
 var app = module.exports = express();
 
@@ -12,21 +17,16 @@ var serveDirectory = 'client';
 // all environments
 app.set('port', config.application.port);
 
-// shortcut for favicon requests. Favicon requests do not need to go through
-// the whole middleware (static middleware is the last in the chain).
-app.use(express.favicon());
-
 // Logs requests to the console
-app.use(express.logger('dev'));
+app.use(morgan('combined'));
 
 // Parses form data and makes this form data available through the request
 // object: req.body
-app.use(express.bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// This middleware allows simulation of DELETE and other HTTP request types
-// through a form parameter called _method. The value of this parameter then
-// defines the request parameter.
-app.use(express.methodOverride());
+// This middleware allows simulation of DELETE and other HTTP request types.
+app.use(methodOverride());
 
 // we deactivate all caches. Really stupid idea in general, but hey, this is
 // a workshop and it needs to be simple :-)
@@ -40,19 +40,6 @@ var fallbackLogger = log4js.getLogger('historyApiFallback');
 historyApiFallback.setLogger(fallbackLogger.trace.bind(fallbackLogger));
 app.use(historyApiFallback);
 
-// Enable the routes which are defined at the bottom of the file
-app.use(app.router);
-
-// Serve static files
-app.use(express.static(serveDirectory));
-
-// development only => extra error handling
-if ('development' === app.get('env')) {
-    app.use(express.directory(serveDirectory));
-    app.use(express.errorHandler());
-}
-
-
 // all requests, that are not handled by static or historyApiFallback
 // are handled by the following routing mechanism.
 var routes = require('./routes')();
@@ -62,3 +49,13 @@ app.get('/movies/:id', routes.movies.getMovie);
 app.put('/movies/:id', routes.movies.updateMovie);
 // delete is a reserved word
 app['delete']('/movies/:id', routes.movies.deleteMovie);
+
+// Serve static files
+app.use(serveStatic(serveDirectory));
+
+// development only => extra error handling
+if (process.env.NODE_ENV === 'development') {
+    console.log('app is in dev mode');
+    app.use(errorhandler());
+}
+
