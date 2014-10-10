@@ -74,7 +74,7 @@ var date = new Date();
     </hgroup>
     <article>
         <pre class="prettyprint" data-lang="javascript">
-var max = function(a, b) {
+function max(a, b) {
   if (a > b) {
     return a;
   } else {
@@ -84,6 +84,13 @@ var max = function(a, b) {
 
 max(2, 3);
 // 3
+
+var min = function(a, b) {
+  ...
+};
+
+min(2, 3);
+// 2
 </pre>
     </article>
   </slide>
@@ -140,18 +147,41 @@ var increment = function(num) {
         <pre class="prettyprint" data-lang="javascript">
 > var person = {
 ..  name: 'Sheldon Cooper',
-..  occupation: 'Theoretical Physisist'
+..  occupation: 'Theoretical Physicist',
+..  brag: function() {
+..    console.log('I am the smartest person on earth!');
+..  }
 ..}
 
 > person.name
 'Sheldon Cooper'
 
 > person['occupation']
-'Theoretical Physisist'
+'Theoretical Physicist'
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Objects contd.</h2>
+    </hgroup>
+    <article>
+        <pre class="prettyprint" data-lang="javascript">
+> var person = {
+..  name: 'Sheldon Cooper',
+..  occupation: 'Theoretical Physicist',
+..  brag: function() {
+..    console.log('I am the smartest person on earth!');
+..  }
+..}
 
 > person.age = 33
 > person.age > 30
 true
+
+> person.brag();
+I am the smartest person on earth!
 </pre>
     </article>
   </slide>
@@ -169,13 +199,13 @@ for (property in person) {
   }
 }
 console.log(details.join(', '));
-// Sheldon Cooper, Theoretical Physisist, 33
+// Sheldon Cooper, Theoretical Physicist, 33
 </pre>
         <pre class="prettyprint" data-lang="javascript">
 Object.keys(person)
   .map(function(property) { return person[property]; })
   .join(', ');
-// Sheldon Cooper, Theoretical Physisist, 33
+// Sheldon Cooper, Theoretical Physicist, 33
 </pre>
     </article>
   </slide>
