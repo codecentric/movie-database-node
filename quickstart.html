@@ -47,7 +47,7 @@ bin/neo4j start</pre>
       </li>
       <li>
         Test your movie-database application using the <code>travis</code> task. This is exactly what happens during a build on Travis-CI. <strong>Be sure, that this step succeeds, before moving on!</strong>. If the build fails, re-check your setup (neo4j running? phantomjs installed? nodejs-version up-to-date?).
-        <pre>grunt travis</pre>
+        <pre>grunt test</pre>
       </li>
       <li>
         Finally, you can start developing. The most useful grunt-task during development is <code>dev</code>. This task start a web-server in the background (on port 3000). The webserver is restarted automatically, whenever a file changes. Moreover, on each file-change, the jshint and unit-test tasks are executed. If you keep an eye on the console output, you will always know, when your code changes break existing tests.
