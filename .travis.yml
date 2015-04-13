@@ -11,9 +11,9 @@ before_script:
 
 before_install:
   # install Neo4j locally:
-  - wget dist.neo4j.org/neo4j-community-2.0.4-unix.tar.gz
-  - tar -xzf neo4j-community-2.0.4-unix.tar.gz
-  - neo4j-community-2.0.4/bin/neo4j start
+  - wget dist.neo4j.org/neo4j-community-2.1.7-unix.tar.gz
+  - tar -xzf neo4j-community-2.1.7-unix.tar.gz
+  - neo4j-community-2.1.7/bin/neo4j start
 
 addons:
   sauce_connect: true
