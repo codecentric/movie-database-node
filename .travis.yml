@@ -20,7 +20,7 @@ addons:
 
 before_deploy:
   - neo4j-community-2.1.7/bin/neo4j stop
-  - rm -rf neo4j-community-2.1.7 neo4j-community-2.0.4-unix.tar.gz
+  - rm -rf neo4j-community-2.1.7 neo4j-community-2.1.7-unix.tar.gz
 
 deploy:
   provider: heroku
