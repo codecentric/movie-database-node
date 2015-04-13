@@ -9,6 +9,8 @@ module.exports.request = function request(params) {
     if (params.user && params.password) {
       options.auth = params.user + ":" + params.password;
     }
+    options.headers = options.headers || {};
+    options.headers['User-Agent'] = 'agilejs';
 
     var deferred = Q.defer();
 
@@ -17,6 +19,11 @@ module.exports.request = function request(params) {
         if (statusCode >= 200 && statusCode < 300) {
             deferred.resolve(response);
         } else {
+            // response.setEncoding('utf8');
+            // response.on('data', function (chunk) {
+            //   console.log('BODY: ' + chunk);
+            // });
+            // console.error('Request failed:', params);
             deferred.reject(new Error('Status code was: ' + statusCode));
         }
     });
@@ -51,6 +58,15 @@ module.exports.readBody = function readBody(response) {
 
   return deferred.promise;
 };
+
+module.exports.parseJson = function(s) {
+  try {
+    return JSON.parse(s);
+  } catch (e) {
+    console.error(e);
+    throw new Error('Failed to parse JSON');
+  }
+}
 
 module.exports.exec = function exec(cmd, env) {
   console.log('Executing command: %s', cmd);

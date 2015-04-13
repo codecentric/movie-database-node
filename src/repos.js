@@ -1,65 +1,31 @@
 module.exports = [
   {
-    "name": "ermahgerd",
+    "name": "2015-04-team-1",
     "collaborators": [
-      "cihadkirhan",
-      "karsten-gentges",
-      "Moritz-Mueller",
-      "psurrey"
+      "Colorfulstan",
+      // "Vanessa	Marcinczak",
+      "simonwegbuender",
+      "danieldeppe",
+      "mpbecker"
     ]
   },
   {
-    "name": "nyanCat",
+    "name": "2015-04-team-2",
     "collaborators": [
-      "JeanOchmann",
-      "SKrempel",
-      "Synisse",
-      "FlinGit"
+      "juliandortmund",
+      "dlittig",
+      "79tobias",
+      "derSchueler"//,
+      // "Michael	Schaar"
     ]
   },
   {
-    "name": "mustache",
+    "name": "2015-04-team-3",
     "collaborators": [
-      "Lebbing",
-      "Devmapall",
-      "jbeulen",
-      "efrank1"
-    ]
-  },
-  {
-    "name": "fancyTeam",
-    "collaborators": [
-      "danielvdwal",
-      "shantich",
-      "p3na",
-      "kamil02",
-      "Michel2508"
-    ]
-  },
-  {
-    "name": "bacon",
-    "collaborators": [
-      "dwitk",
-      "M4rtinW",
-      "Slawago4",
-      "srenkel"
-    ]
-  },
-  {
-    "name": "ninja",
-    "collaborators": [
-      "Tyerell",
-      "Vitmaster",
-      "rs-jumper"
-    ]
-  },
-  {
-    "name": "teachersInSpace",
-    "collaborators": [
-      "Rvandenham",
-      "homberghp",
-      "odenhovenf",
-      "thijsdorssers"
+      "b-oern",
+      "kaikrebs",
+      "danepod",
+      "philipphager"
     ]
   }
-]
+];

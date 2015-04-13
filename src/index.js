@@ -2,10 +2,13 @@ var settings = require('./settings');
 var newRepositories = require('./repos');
 var util = require('./util');
 var Q = require('q');
+var os = require('os');
 var format = require('util').format;
+var path = require('path');
 
 var baseUrl = 'https://api.github.com';
 var origin = 'https://github.com/codecentric/movie-database-node.git';
+var tmppath = path.join(os.tmpdir(), 'agilejs');
 
 var log = console.log.bind(console);
 
@@ -34,7 +37,7 @@ function tap(prefix) {
 function getAllExistingReposities() {
   return get(format('%s/users/%s/repos', baseUrl, settings.user))
   .then(util.readBody)
-  .then(JSON.parse)
+  .then(util.parseJson)
   .then(function(repos) {
     return repos.map(function(repo) {
       return repo.name;
@@ -108,17 +111,17 @@ function pushTo(repo) {
     repo.name);
   log('Addting remote %s', endpoint);
   return util.exec(format('git remote add %s %s', repo.name, endpoint),
-      {'GIT_DIR': format('%s/.git', settings.tmp)})
+      {'GIT_DIR': format('%s/.git', tmppath)})
   .then(function() {
     log('Pushing to remote %s', endpoint);
     return util.exec(format('git push %s master',repo.name),
-        {'GIT_DIR': format('%s/.git', settings.tmp)});
+        {'GIT_DIR': format('%s/.git', tmppath)});
   });
 }
 
 function doInitialCommits() {
-  log('Cloning %s into %s', origin, settings.tmp);
-  return util.exec(format('git clone %s %s', origin, settings.tmp))
+  log('Cloning %s into %s', origin, tmppath);
+  return util.exec(format('git clone %s %s', origin, tmppath))
   .then(function() {
     log('Finished cloning. Progressing to update of each repository');
     var promise = Q(null);
@@ -133,9 +136,11 @@ function doInitialCommits() {
   });
 }
 
-getAllExistingReposities()
-.then(assertNoDuplicatedRepository)
-.then(assertCollaboratorsExist)
-.then(createRepositories)
-.then(doInitialCommits)
-.done();
+// getAllExistingReposities()
+// .then(assertNoDuplicatedRepository)
+// .then(assertCollaboratorsExist)
+// .then(createRepositories)
+// .then(doInitialCommits)
+// .done();
+
+doInitialCommits();
