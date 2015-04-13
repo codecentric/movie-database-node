@@ -6,12 +6,8 @@ node_js:
 jdk:
 - oraclejdk7
 
-services:
-- neo4j
-
 before_script:
 - npm install -g grunt-cli
-
 
 before_install:
   # install Neo4j locally:
