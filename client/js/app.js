@@ -1,46 +1,52 @@
-/*global
-  WelcomeCtrl:false,
-  NotFoundCtrl:false,
-  MoviesListCtrl:false,
-  MoviesAddCtrl:false,
-  MovieDetailCtrl:false,
-  MovieEditCtrl:false,
-  ErrorCtrl:false */
-
-angular.module('MovieDatabase', ['ngRoute']).config(
-        function ($routeProvider, $locationProvider, $httpProvider) {
+angular
+.module('MovieDatabase', ['ngRoute'])
+.config(function ($routeProvider, $locationProvider, $httpProvider, $provide) {
     'use strict';
 
     $routeProvider
     .when('/', {
-        controller: WelcomeCtrl,
+        controller: 'WelcomeController',
         templateUrl: '/partial/index.html'
     })
     .when('/movies', {
-        controller: MoviesListCtrl,
-        resolve: MoviesListCtrl.resolve,
+        controller: 'MoviesListController',
+        resolve: {
+            movieList: function(MovieService) {
+                return MovieService.loadList();
+            },
+        },
         templateUrl: '/partial/movies/list.html'
     })
     .when('/movies/new', {
-        controller: MoviesAddCtrl,
+        controller: 'MoviesAddController',
         templateUrl: '/partial/movies/add.html'
     })
     .when('/movies/:id', {
-        controller: MovieDetailCtrl,
-        resolve: MovieDetailCtrl.resolve,
+        controller: 'MovieDetailController',
+        resolve: {
+            movie: function(MovieService, $route) {
+                var movieId = $route.current.params.id;
+                return MovieService.load(movieId);
+            },
+        },
         templateUrl: '/partial/movies/detail.html'
     })
     .when('/movies/:id/edit', {
-        controller: MovieEditCtrl,
-        resolve: MovieEditCtrl.resolve,
+        controller: 'MovieEditController',
+        resolve: {
+            movie: function(MovieService, $route) {
+                var movieId = $route.current.params.id;
+                return MovieService.load(movieId);
+            },
+        },
         templateUrl: '/partial/movies/edit.html'
     })
     .when('/404', {
-        controller: NotFoundCtrl,
+        controller: 'NotFoundController',
         templateUrl: '/partial/notFound.html'
     })
     .when('/error', {
-        controller: ErrorCtrl,
+        controller: 'ErrorController',
         templateUrl: '/partial/error.html'
     })
     .otherwise({
@@ -56,12 +62,9 @@ angular.module('MovieDatabase', ['ngRoute']).config(
     // crawlable hash prefix.
     $locationProvider.hashPrefix('!');
 
-    $httpProvider.responseInterceptors.push(function ($q, $location) {
-        return function (promise) {
-            return promise.then(function () {
-                // no success handler
-                return promise;
-            }, function (response) {
+    $provide.factory('errorInterceptor', function($q, $location) {
+        return {
+            responseError: function(response) {
                 var status = response.status;
                 if (status === 404) {
                     $location.path('/404');
@@ -70,9 +73,10 @@ angular.module('MovieDatabase', ['ngRoute']).config(
                     $location.path('/error');
                     $location.search('culprit', 'server');
                 }
-
                 return $q.reject(response);
-            });
+            }
         };
     });
+
+    $httpProvider.interceptors.push('errorInterceptor');
 });

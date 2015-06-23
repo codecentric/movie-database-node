@@ -1,77 +1,64 @@
-function AppCtrl ($scope) {
+(function() {
     'use strict';
-    $scope.title = 'The Movie Database';
-}
 
-function WelcomeCtrl () {
-}
+    var app = angular.module('MovieDatabase');
 
-function MoviesListCtrl ($scope, $location, moviesResponse) {
-    'use strict';
-    $scope.movies = moviesResponse.data;
-    $scope.add = function () {
-        $location.path('/movies/new');
-    };
-}
+    app.controller('AppController', function($scope) {
+        $scope.title = 'The Movie Database';
+    });
 
-MoviesListCtrl.resolve = {
-    moviesResponse: function ($http) {
-        'use strict';
-        return $http.get('/movies');
+    app.controller('WelcomeController', function() {
+    });
+
+    app.controller('MoviesListController',
+        function($scope, $location, movieList) {
+
+        $scope.movies = movieList.data;
+        $scope.add = function () {
+            $location.path('/movies/new');
+        };
+    });
+
+    app.controller('MoviesAddController',
+        function($scope, $http, $location) {
+        $scope.movie = {};
+        $scope.save = function (movie) {
+            $http.post('/movies', movie)
+            .success(function(res) {
+                $location.path('/movies/' + res.id);
+            });
+        };
+    });
+
+    app.controller('MovieDetailController',
+        function($scope, $http, $location, movie) {
+
+        $scope.movie = movie.data;
+        $scope['delete'] = function () {
+            $http['delete']('/movies/' + $scope.movie.id).success(function (res) {
+                $location.path('/movies');
+            });
+        };
+    });
+
+    app.controller('MovieEditController',
+        function($scope, $http, $location, movie) {
+
+        $scope.movie = movie.data;
+        $scope.save = function () {
+            $http.put('/movies/' + $scope.movie.id, $scope.movie)
+            .success(function (res) {
+                $location.path('/movies/' + $scope.movie.id);
+            });
+        };
+    });
+
+    function ProblemController($scope, $location) {
+        $scope.culprit = $location.search().culprit || 'unknown beast';
     }
-};
 
-function MoviesAddCtrl ($scope, $http, $location) {
-    'use strict';
-    $scope.movie = {};
-    $scope.save = function (movie) {
-        $http.post('/movies', movie)
-        .success(function(res) {
-            $location.path('/movies/' + res.id);
-        });
-    };
-}
+    app.controller('NotFoundController', ProblemController);
+    app.controller('ErrorController', ProblemController);
+})();
 
-function MovieDetailCtrl ($scope, $http, $location, moviesResponse) {
-    'use strict';
-    $scope.movie = moviesResponse.data;
 
-    $scope['delete'] = function () {
-        $http['delete']('/movies/' + $scope.movie.id).success(function (res) {
-            $location.path('/movies');
-        });
-    };
-}
-
-function movieDetailResolver ($http, $route) {
-    'use strict';
-    var id = $route.current.params.id;
-    return $http.get('/movies/' + id);
-}
-
-MovieDetailCtrl.resolve = {
-    moviesResponse: movieDetailResolver
-};
-
-function MovieEditCtrl ($scope, $http, $location, moviesResponse) {
-    'use strict';
-    $scope.movie = moviesResponse.data;
-
-    $scope.save = function () {
-        $http.put('/movies/' + $scope.movie.id, $scope.movie)
-        .success(function (res) {
-            $location.path('/movies/' + $scope.movie.id);
-        });
-    };
-}
-
-MovieEditCtrl.resolve = {
-    moviesResponse: movieDetailResolver
-};
-
-function NotFoundCtrl ($scope, $location) {
-    'use strict';
-    $scope.culprit = $location.search().culprit || 'unknown beast';
-}
-
-var ErrorCtrl = NotFoundCtrl;

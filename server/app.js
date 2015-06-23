@@ -12,8 +12,6 @@ var serveStatic = require('serve-static');
 
 var app = module.exports = express();
 
-var serveDirectory = 'client';
-
 // all environments
 app.set('port', config.application.port);
 
@@ -51,7 +49,8 @@ app.put('/movies/:id', routes.movies.updateMovie);
 app['delete']('/movies/:id', routes.movies.deleteMovie);
 
 // Serve static files
-app.use(serveStatic(serveDirectory));
+app.use(serveStatic('client'));
+app.use(serveStatic('node_modules'));
 
 // development only => extra error handling
 if (process.env.NODE_ENV === 'development') {
