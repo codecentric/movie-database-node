@@ -34,8 +34,8 @@
         function($scope, $http, $location, movie) {
 
         $scope.movie = movie.data;
-        $scope['delete'] = function () {
-            $http['delete']('/movies/' + $scope.movie.id).success(function (res) {
+        $scope.delete = function () {
+            $http.delete('/movies/' + $scope.movie.id).success(function (res) {
                 $location.path('/movies');
             });
         };

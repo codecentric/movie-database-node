@@ -45,8 +45,7 @@ app.get('/movies', routes.movies.getMovies);
 app.post('/movies', routes.movies.addMovie);
 app.get('/movies/:id', routes.movies.getMovie);
 app.put('/movies/:id', routes.movies.updateMovie);
-// delete is a reserved word
-app['delete']('/movies/:id', routes.movies.deleteMovie);
+app.delete('/movies/:id', routes.movies.deleteMovie);
 
 // Serve static files
 app.use(serveStatic('client'));
