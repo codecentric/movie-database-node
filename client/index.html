@@ -4,31 +4,26 @@
     <meta charset="utf-8">
     <base href="/">
     <title ng-bind="title">Movie Database</title>
-
-    <link rel="stylesheet" href="/components/bootstrap/docs/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="/">Movie Database</a>
-                <ul class="nav">
-                    <li class="active">
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/movies">Movies</a>
-                    </li>
-                    <li>
-                        <a href="/actors">Actors</a>
-                    </li>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Movie Database</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/movies">Movies</a></li>
+                    <li><a href="/actors">Actors</a></li>
                 </ul>
-                <div class="navbar-search pull-right">
-                    <input type="text"
-                        class="search-query span2"
-                        placeholder="Search">
-                </div>
+                <form class="navbar-form navbar-left pull-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                </form>
             </div>
         </div>
     </nav>

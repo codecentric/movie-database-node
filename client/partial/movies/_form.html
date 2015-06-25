@@ -1,32 +1,29 @@
 <form class="form-horizontal">
-  <div class="control-group">
+  <div class="form-group">
     <label class="control-label" for="inputTitle">Title</label>
-    <div class="controls">
-      <input type="text"
-             id="inputTitle"
-             name="title"
-             class="input-block-level"
-             autofocus
-             ng-model="movie.title">
-    </div>
+    <input type="text"
+           id="inputTitle"
+           name="title"
+           class="form-control"
+           autofocus
+           ng-model="movie.title">
   </div>
-  <div class="control-group">
+  <div class="form-group">
     <label class="control-label" for="inputDescription">Description</label>
-    <div class="controls">
-      <textarea rows="5"
-                id="inputDescription"
-                name="description"
-                class="input-block-level"
-                ng-model="movie.description">
-      </textarea>
+    <textarea rows="5"
+              id="inputDescription"
+              name="description"
+              class="form-control"
+              ng-model="movie.description">
+    </textarea>
     </div>
   </div>
-  <div class="form-actions">
+  <div>
     <button type="submit"
             class="btn btn-primary"
             ng-click="save(movie)">
       Save
     </button>
-    <a href="/movies/{{movie.id}}" class="btn">Cancel</a>
+    <a href="/movies/{{movie.id}}" class="btn btn-default">Cancel</a>
   </div>
 </form>
