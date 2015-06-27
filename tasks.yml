@@ -1,219 +1,251 @@
+# Tracks of tasks (that is, tasks grouped into different categories)
 ---
 
- - description:
-     As a user I want to see the movie overview list on the application's
-     <em>landing page</em>
-   acceptanceCriteria:
-     The landing page should continue to feature the
-     <em>Welcome to...</em> message and should not contain the
-     <em>Add Movie</em> button.
-   hints:
-     This story can be resolved by rearranging code. See how the movie form
-     is reused as part of the <em>add movie</em> and <em>edit movie</em>
-     pages.
+################################################################################
+# Front End Tasks
+################################################################################
+- Front End:
 
- - description:
-     As a user I want to see the movies sorted by name (ascending).
-   acceptanceCriteria:
-     Movies should be sorted like this on the landing page and on the
-     movie overview page.
-   hints:
-     AngularJS has an
-     <a href="http://docs.angularjs.org/api/ng.filter:orderBy">
-       <em>orderBy</em> filter
+  - description:
+      As a user I want to see the movie overview list on the application's
+      <em>landing page</em>
+    acceptanceCriteria:
+      The landing page should continue to feature the
+      <em>Welcome to...</em> message and should not contain the
+      <em>Add Movie</em> button.
+    hints:
+      This story can be resolved by rearranging code. See how the movie form
+      is reused as part of the <em>add movie</em> and <em>edit movie</em>
+      pages.
+
+  - description:
+      As a user I want to see the movies sorted by name (ascending).
+    acceptanceCriteria:
+      Movies should be sorted like this on the landing page and on the
+      movie overview page.
+    hints:
+      AngularJS has an
+      <a href="https://docs.angularjs.org/api/ng/filter/orderBy">
+        <em>orderBy</em> filter
+      </a>
+      which can be used in the HTML templates.
+
+  - description:
+      As a user I want to be able to change the sorting order of movies.
+    acceptanceCriteria:
+      Sorting should be toggled between ascending and descending by
+      clicking on the column header <em>Title</em>.
+      Functionality should be available on the landing page and on the
+      movie overview page.
+    hints:
+      The AngularJS <em>orderBy</em> filter can reverse the sorting order.
+
+  - description:
+      As a user I want active tab in the top-navigation to be highlighted.
+    acceptanceCriteria:
+      Currently, the "Home" tab is always highlighted. When I click on the "Movies" tab,
+      I want this tab to be highlighted instead.
+    hints:
+      We have no idea, how this can be accomplished. We are curious, what you come up with...
+
+
+  - description:
+      As a user I want to be able to open the <em>add movie</em> page in a new tab
+      using web browsers' standard mechanisms, i.e. CTRL / CMD click, right
+      click open in new tab etc..
+    hints:
+      Take a look at the difference between the links to the movie detail
+      pages and the add movie button.
+
+  - description:
+      As a user I want to be able to define movies' release years.
+    acceptanceCriteria:
+      The <em>add movie</em> and <em>edit movie</em> page should both contain
+      a new form-field, where the user can enter the release year. The release-year
+      should be displayed on both the overview (list) page and the detail page.
+      When the release year is empty, a placeholder text (like "unknown") should be displayed.
+    hints:
+      There is no explicit definition of the data-model. To extend the data-model by adding
+      a new attribute, you simply have to pass the additional attribute to the server. The
+      server will persist any attributes, it receives. Moreover, any attributes, that are
+      stored in the neo4j-db will automatically be part of the server-responses for GET requests.
+
+  - description:
+      As a user I want to be able to sort movies either by
+      movie title or release year.
+    acceptanceCriteria:
+      See task 2 and 3 for details.
+
+  - description:
+     As a user I want to be able to tell my friends about movies through a
+     Twitter integration.
+    hints:
+     Twitter provides
+     <a href="https://twitter.com/about/resources/buttons">
+      a few buttons
      </a>
-     which can be used in the HTML templates.
+     that are simple to integrate.
 
- - description:
-     As a user I want to be able to change the sorting order of movies.
-   acceptanceCriteria:
-     Sorting should be toggled between ascending and descending by
-     clicking on the column header <em>Title</em>.
-     Functionality should be available on the landing page and on the
-     movie overview page.
-   hints:
-     The AngularJS <em>orderBy</em> filter can reverse the sorting order.
+#  This task is disabled for now because the current versions of textAngular
+#  (1.4.x) break the unit tests because PhantomJS throws an error
+#  (ReferenceError: required is not defined) when the textAngular JavaScript
+#  libraries areincluded. Futhermore, they seem to break existing E2E tests
+#  because the description field can not be cleared anymore. BK, 2015-06-27
+#  - description:
+#     As a user I want to apply rich formatting options to
+#     movie's descriptions.
+#    hints:
+#     <a href="http://textangular.com/">textAngular</a> and other
+#     Angular-wrapped libraries may be helpful.
+#    acceptanceCriteria:
+#     The formatting options must not require knowledge about HTML.
+#     Markdown and rich text editing are acceptable.
 
- - description:
-     As a user I want active tab in the top-navigation to be highlighted.
-   acceptanceCriteria:
-     Currently, the "Home" tab is always highlighted. When I click on the "Movies" tab,
-     I want this tab to be highlighted instead.
-   hints:
-     We have no idea, how this can be accomplished. We are curious, what you come up with...
+  - description:
+      As a user I want to search for movies.
+    hints:
+      Is is acceptable to implement the search logic on the client side. Check
+      out Angular's
+      <a href="https://docs.angularjs.org/api/ng/filter/filter">
+        filter
+      </a> filter. You could also go wild here and implement the search on the
+      backend with a Neo4j cypher query. Be warned though, this will involve a
+      significantly more effort for the communication between client and server.
+    acceptanceCriteria:
+      There should only be one search field which searches in the
+      movies' titles and descriptions at the same time. Searching
+      should be case insensitive.
 
- # - description:
- #     As a developer I want Travis-CI to create a nice html report with test results.
- #   acceptanceCriteria:
- #     Currently the only output of a Travis-CI run is the console-output. Unfortunately this
- #     is cluttered with karma-logs and server-logs. Both karma and mocha provide a html-reporter.
- #     It would be nice, if this reporter could somehow be integrated into the Travis-CI build.
- #   hints:
- #     Using the html-reporter instead of the console reporter is quite easy (just change the
- #     reporter configuration in <code>Gruntfile.js</code>). The tricky part is how to make the
- #     html-files accessible after a Travis-CI run (by default only the console-output is
- #     archived). Take a look at <a href="http://about.travis-ci.org/blog/2012-12-18-travis-artifacts/">
- #     Travis Artifacts</a>.
+  - description:
+      As a user I want my input to be validated when creating movies.
+    acceptanceCriteria:
+      Movies need a title and a release year. The release-year must consist of 4 digits and
+      must be greater than 1900. <strong>The validation should be implemented on client-side</strong>. No
+      communication with the server should happen for invalid data (see task 8 for server-side
+      validation).
+    hints:
+      A very simple way to add validation on the client side is to use the
+      <a href="https://docs.angularjs.org/api/ng/directive/ngChange">
+        AngularJS ngChange directive</a>.
 
- - description:
-     As a user I want to be able to open the <em>add movie</em> page in a new tab
-     using web browsers' standard mechanisms, i.e. CTRL / CMD click, right
-     click open in new tab etc..
-   hints:
-     Take a look at the difference between the links to the movie detail
-     pages and the add movie button.
 
- - description:
-     As a user I want to be able to define movies' release years.
-   acceptanceCriteria:
-     The <em>add movie</em> and <em>edit movie</em> page should both contain
-     a new form-field, where the user can enter the release year. The release-year
-     should be displayed on both the overview (list) page and the detail page.
-     When the release year is empty, a placeholder text (like "unknown") should be displayed.
-   hints:
-     There is no explicit definition of the data-model. To extend the data-model by adding
-     a new attribute, you simply have to pass the additional attribute to the server. The
-     server will persist any attributes, it receives. Moreover, any attributes, that are
-     stored in the neo4j-db will automatically be part of the server-responses for GET requests.
+################################################################################
+# Server Side Tasks
+################################################################################
 
- - description:
-     As a user I want to be able to sort movies either by
-     movie title or release year.
-   acceptanceCriteria:
-     See task 2 and 3 for details.
+- Server Side (Node.js and Neo4j):
+  - description:
+      As an admin I want to prevent bad boy from corrupting the database by bypassing the
+      client-side-validation and sending invalid data directly to the server.
+    acceptanceCriteria:
+      On top of the client-side validation, the server should validate any incoming PUT and
+      POST requests. In case of invalid data (e.g. empty movie title), the server should respond
+      with an HTTP status <code>422 Unprocessable Entity</code>. The client must be able to cope
+      with 422 responses.
+    hints: |
+      Use curl to interact with the server directly and to test your implementation, e.g.
+      <pre>curl -v -XPOST \
+           --data '{"title":"Some title"}' \
+           -H 'Content-Type: application/json' \
+           -H 'Accept: application/json' \
+           http://localhost:3000/movies
+      > POST /movies HTTP/1.1
+      > User-Agent: curl/7.27.0
+      > Host: movie-database-node.herokuapp.com
+      > Content-Type: application/json
+      > Accept: application/json
+      > Content-Length: 22
+      >
+      < HTTP/1.1 201 Created
+      < Cache-Control: no-cache
+      < Content-Type: application/json; charset=utf-8
+      < Date: Sun, 06 Oct 2013 13:34:24 GMT
+      < Location: http://movie-database-node.herokuapp.com/movies/6f4e2f21-b020-450a-9afd-c037520afda9
+      < X-Powered-By: Express
+      < Content-Length: 94
+      < Connection: keep-alive
+      <
+      < {
+      <  "id": "6f4e2f21-b020-450a-9afd-c037520afda9",
+      <  "type": "movie",
+      <  "title": "Some title"
+      < }
+      </pre>
 
- - description:
-    As a user I want to be able to tell my friends about movies through a
-    Twitter integration.
-   hints:
-    Twitter provides
-    <a href="https://twitter.com/about/resources/buttons">
-     a few buttons
-    </a>
-    that are simple to integrate.
+  - description:
+      As a user I want to be able to create actors. Each actor has a name
+      and a short biography.
+    hints:
+      This task has a client- and a server-side part. Take a look at the
+      implementation of the movie-feature and you should get a good idea how to
+      implement it. You can also create the necessary backend services for this
+      feature without (or before) implementing the client side, just use tests
+      to drive the implementation.
 
- - description:
-    As a user I want to apply rich formatting options to
-    movie's descriptions.
-   hints:
-    <a href="http://textangular.com/">textAngular</a> and other
-    Angular-wrapped libraries may be helpful.
-   acceptanceCriteria:
-    The formatting options must not require knowledge about HTML.
-    Markdown and rich text editing are acceptable.
+  - description:
+      As a user I want to be able to see a list of actors.
 
- - description:
-     As a user I want to search for movies.
-   hints:
-     Is is acceptable to implement the search logic on the client side. Check
-     out Angular's
-     <a href="https://code.angularjs.org/1.2.26/docs/api/ng/filter/filter">
+  - description:
+      As a user I want to connect actors and movies.
+    acceptanceCriteria:
+      A simple multi select box on the create actor form suffices. Connected
+      actors should be shown on the movie detail page.
+    hints:
+      To create
+      relationships between nodes, you can call the function
+      <code>createRelationshipTo(otherNode, type, data, callback)</code> on the
+      node object. Also refer to the API documentation for
+      <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">
+        the neo4j client library</a>.
+
+  - description:
+      As a user I want to remove actors from a movie.
+    hints: |
+      <p>
+      Check out the cypher query for deleting relationships. You can find
+      some information about the Cypher query in the
+      <a href="http://docs.neo4j.org/refcard/1.9/">cheat sheet</a>
+      and in the
+      <a href="http://docs.neo4j.org/chunked/milestone/query-delete.html">
+      official Neo4j documentation</a>.
+      </p>
+      <pre>
+        START n = node(3)\n
+        MATCH n-[r]-()
+        DELETE r
+      </pre>
+
+  - description:
+     As a user I want to search for actors.
+    hints:
+     You could implement the search logic completely on the client side, in a
+     similar fashion to the movie search (for this alternative, check out
+     Angular's <a href="https://docs.angularjs.org/api/ng/filter/filter">
        filter
-     </a> filter.
-   acceptanceCriteria:
-     There should only be one search field which searches in the
-     movies' titles and descriptions at the same time. Searching
+     </a> filter. You could also go wild here and implement the search on the
+     backend with a Neo4j cypher query. Be warned though, this will involve a
+     significantly more effort for the communication between client and server.
+    acceptanceCriteria:
+     There should only be one search field which searches in all
+     the actors' properties at the same time. Searching
      should be case insensitive.
 
- - description:
-     As a user I want my input to be validated when creating movies.
-   acceptanceCriteria:
-     Movies need a title and a release year. The release-year must consist of 4 digits and
-     must be greater than 1900. <strong>The validation should be implemented on client-side</strong>. No
-     communication with the server should happen for invalid data (see task 8 for server-side
-     validation).
-   hints:
-     A very simple way to add validation on the client side is to use the
-     <a href="http://docs.angularjs.org/api/ng.directive:ngChange">
-       AngularJS ngChange directive</a>.
 
- - description:
-     As an admin I want to prevent bad boy from corrupting the database by bypassing the
-     client-side-validation and sending invalid data directly to the server.
-   acceptanceCriteria:
-     On top of the client-side validation, the server should validate any incoming PUT and
-     POST requests. In case of invalid data (e.g. empty movie title), the server should respond
-     with an HTTP status <code>422 Unprocessable Entity</code>. The client must be able to cope
-     with 422 responses.
-   hints: |
-     Use curl to interact with the server directly and to test your implementation, e.g.
-     <pre>curl -v -XPOST \
-          --data '{"title":"Some title"}' \
-          -H 'Content-Type: application/json' \
-          -H 'Accept: application/json' \
-          http://localhost:3000/movies
-     > POST /movies HTTP/1.1
-     > User-Agent: curl/7.27.0
-     > Host: movie-database-node.herokuapp.com
-     > Content-Type: application/json
-     > Accept: application/json
-     > Content-Length: 22
-     >
-     < HTTP/1.1 201 Created
-     < Cache-Control: no-cache
-     < Content-Type: application/json; charset=utf-8
-     < Date: Sun, 06 Oct 2013 13:34:24 GMT
-     < Location: http://movie-database-node.herokuapp.com/movies/6f4e2f21-b020-450a-9afd-c037520afda9
-     < X-Powered-By: Express
-     < Content-Length: 94
-     < Connection: keep-alive
-     <
-     < {
-     <  "id": "6f4e2f21-b020-450a-9afd-c037520afda9",
-     <  "type": "movie",
-     <  "title": "Some title"
-     < }
-     </pre>
+################################################################################
+# CI/Tooling Tasks
+################################################################################
+- Continuous Integration and Tooling:
 
- - description:
-     As a user I want to be able to create actors. Each actor has a name
-     and a short biography.
-   hints:
-     This task has a client- and a server-side part. Take a look at the implementation
-     of the movie-feature and it shouldn't be a problem.
+   - description:
+       As a developer I want Travis-CI to create a nice html report with test results.
+     acceptanceCriteria:
+       Currently the only output of a Travis-CI run is the console-output. Unfortunately this
+       is cluttered with karma-logs and server-logs. Both karma and mocha provide a html-reporter.
+       It would be nice, if this reporter could somehow be integrated into the Travis-CI build.
+     hints:
+       Using the html-reporter instead of the console reporter is quite easy (just change the
+       reporter configuration in <code>Gruntfile.js</code>). The tricky part is how to make the
+       html-files accessible after a Travis-CI run (by default only the console-output is
+       archived). Take a look at <a href="http://about.travis-ci.org/blog/2012-12-18-travis-artifacts/">
+       Travis Artifacts</a>.
 
- - description:
-     As a user I want to be able to see a list of actors.
-
- - description:
-     As a user I want to connect actors and movies.
-   acceptanceCriteria:
-     A simple multi select box on the create actor form suffices. Connected
-     actors should be shown on the movie detail page.
-   hints:
-     To create
-     relationships between nodes, you can call the function
-     <code>createRelationshipTo(otherNode, type, data, callback)</code> on the
-     node object. Also refer to the API documentation for
-     <a href="http://coffeedoc.info/github/thingdom/node-neo4j/master/">
-       the neo4j client library</a>.
-
- - description:
-     As a user I want to remove actors from a movie.
-   hints: |
-     <p>
-     Check out the cypher query for deleting relationships. You can find
-     some information about the Cypher query in the
-     <a href="http://docs.neo4j.org/refcard/1.9/">cheat sheet</a>
-     and in the
-     <a href="http://docs.neo4j.org/chunked/milestone/query-delete.html">
-     official Neo4j documentation</a>.
-     </p>
-     <pre>
-       START n = node(3)\n
-       MATCH n-[r]-()
-       DELETE r
-     </pre>
-
- - description:
-    As a user I want to search for actors.
-   hints:
-    Is is acceptable to implement the search logic on the client side.
-    Check out Angular's
-    <a href="https://code.angularjs.org/1.2.26/docs/api/ng/filter/filter">
-      filter
-    </a> filter.
-   acceptanceCriteria:
-    There should only be one search field which searches in all
-    the actors' properties at the same time. Searching
-    should be case insensitive.

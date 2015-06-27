@@ -12,15 +12,33 @@
 <body>
 <div class="container">
   <h1 class="page-header">
-    Tasks
+    Tracks and Tasks
   </h1>
 
   <p>
     This document lists the tasks that participants are supposed to work on
-    during the workshop. Tasks are ordered in such a way that participants
-    are slowly introduced to the used technologies, i.e. starting with
-    simple frontend improvements and slowly progressing towards server
-    and database tasks.
+    during the workshop. You can work on the tasks in the given order, from top
+    to bottom, if you want to. The tasks are ordered in such a way that
+    you are slowly introduced to the used technologies, that is, starting with
+    simple frontend improvements and slowly progressing towards server and
+    database tasks.
+  </p>
+
+  <p>
+    However, if you are interested in a particular topic (like Node.js, Neo4j or
+    CI tooling instead of front end topics), feel free to work on the tasks out
+    of order or skip some of the earlier tasks. You will probably not be able to
+    finish all tasks during the workshop so make sure to pick the tasks that
+    match your interests.
+  </p>
+
+  <p>
+    Also, make sure you take the time to test your code. The workshop situation
+    might create an atmoshpere of competition (who can finish more tasks in the
+    given time). However, this workshop is about agile best practices and just
+    hacking away as fast as possible without writing new tests is not the goal.
+    So, take your time and write tests, even if that means that you complete
+    less tasks. That is totally fine.
   </p>
 
   <p>
@@ -31,64 +49,69 @@
     to the arrow.
   </p>
 
-  <ol ng-controller="TaskCtrl">
-    <li ng-repeat="task in tasks" ng-cloak>
-      <div class="description"
-           ng-bind-html="task.description"
-           ng-click="toggle(task)">
-      </div>
-      <a href=""
-         ng-click="toggle(task)"
-         ng-class="{'icon-collapse': !task.visible, 'icon-collapse-top': task.visible}"
-         title="Toggle task details"
-         class="toggle">
-      </a>
-      <i title='Status indicator'
-         class="status-indicator"
-         ng-class="{'icon-check': task.status == 'done',
-                    'icon-cogs': task.status == 'inProgress',
-                    'icon-check-empty': task.status == 'notStarted'}">
-      </i>
+  <ul ng-controller="TaskCtrl">
+    <li ng-repeat="track in tracks" ng-cloak>
+      <h2>Track: {{ track.name }}</h2>
+      <ul>
+        <li ng-repeat="task in track.tasks">
+          <div class="description"
+               ng-bind-html="task.description"
+               ng-click="toggle(task)">
+          </div>
+          <a href=""
+             ng-click="toggle(task)"
+             ng-class="{'icon-collapse': !task.visible, 'icon-collapse-top': task.visible}"
+             title="Toggle task details"
+             class="toggle">
+          </a>
+          <i title='Status indicator'
+             class="status-indicator"
+             ng-class="{'icon-check': task.status == 'done',
+                        'icon-cogs': task.status == 'inProgress',
+                        'icon-check-empty': task.status == 'notStarted'}">
+          </i>
 
-      <div class="acceptance-criteria"
-           ng-show="task.visible && task.acceptanceCriteria">
-        <h2>Acceptance Criteria</h2>
-        <div ng-bind-html="task.acceptanceCriteria"></div>
-      </div>
+          <div class="acceptance-criteria"
+               ng-show="task.visible && task.acceptanceCriteria">
+            <h2>Acceptance Criteria</h2>
+            <div ng-bind-html="task.acceptanceCriteria"></div>
+          </div>
 
-      <div class="hints"
-           ng-show="task.visible && task.hints">
-        <h2>Hints</h2>
-        <div ng-bind-html="task.hints"></div>
-      </div>
+          <div class="hints"
+               ng-show="task.visible && task.hints">
+            <h2>Hints</h2>
+            <div ng-bind-html="task.hints"></div>
+          </div>
 
-      <div class="management"
-           ng-show="task.visible">
-        <h2>Status</h2>
-        <div ng-show="task.status == 'notStarted'">
-          <p>This task was not yet started!</p>
-          <button class="btn btn-sm btn-primary"
-                  ng-click="start(task)">
-            Start this task
-          </button>
-        </div>
-        <div ng-show="task.status == 'inProgress'">
-          <p>Somebody is currently working on this task!</p>
-          <button class="btn btn-sm btn-success"
-                  ng-click="finish(task)">
-            Mark this task as finished
-          </button>
-        </div>
-        <div ng-show="task.status == 'done'">
-          <p>You finished this task, good job!</p>
-          <button class="btn btn-sm btn-warning"
-                  ng-click="reopen(task)">
-            Reopen task
-          </button>
-        </div>
-      </div>
+          <div class="management"
+               ng-show="task.visible">
+            <h2>Status</h2>
+            <div ng-show="task.status == 'notStarted'">
+              <p>This task was not yet started!</p>
+              <button class="btn btn-sm btn-primary"
+                      ng-click="start(task)">
+                Start this task
+              </button>
+            </div>
+            <div ng-show="task.status == 'inProgress'">
+              <p>Somebody is currently working on this task!</p>
+              <button class="btn btn-sm btn-success"
+                      ng-click="finish(task)">
+                Mark this task as finished
+              </button>
+            </div>
+            <div ng-show="task.status == 'done'">
+              <p>You finished this task, good job!</p>
+              <button class="btn btn-sm btn-warning"
+                      ng-click="reopen(task)">
+                Reopen task
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
     </li>
-  </ol>
+  </ul>
 
   <script src="vendor/angularjs/angular.js"></script>
   <script src="vendor/angularjs/angular-sanitize.js"></script>
