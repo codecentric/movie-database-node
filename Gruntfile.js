@@ -91,6 +91,7 @@ module.exports = function (grunt) {
                 files: { src: '<%= meta.client.js %>' },
                 options: {
                     browser: true,
+                    devel: true,
                     unused: false,
                     globals: {
                         angular: false
@@ -123,6 +124,7 @@ module.exports = function (grunt) {
                     sub: false,
                     noempty: false,
                     expr: true,
+                    devel: true,
                     globals: {
                         describe: false,
                         it: false,
