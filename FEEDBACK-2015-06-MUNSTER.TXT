@@ -6,6 +6,5 @@
     * CI-Track
 * Oder: Tasks mit Tags versehen
 * "Neuer Test erforderlich" in die Akzeptanzkriterien schreiben, damit die Leute auch mal eigene Tests schreiben.
-* Der Server speichert das Release-Date beim Update nicht. Evtl. mal fixen.
 * textAngular: ab 1.4.x inkompatibel zu PhantomJS/Karma (Reference error require) Mocken in Tests?
 * Link zum Twitter-Code: Wenn man das dort generierte Schnipsel in die Seite einfügt, funktioniert das nicht vernünftig. Besser Link entfernen und im Hint darauf hinweisen, nach auf twitter-angular-integrationen zu suchen?
