@@ -80,11 +80,8 @@
      As a user I want to be able to tell my friends about movies through a
      Twitter integration.
     hints:
-     Twitter provides
-     <a href="https://twitter.com/about/resources/buttons">
-      a few buttons
-     </a>
-     that are simple to integrate.
+     Twitter provides documentation on how to integrate a button into your
+     website. Check their developer documentation.
 
 #  This task is disabled for now because the current versions of textAngular
 #  (1.4.x) break the unit tests because PhantomJS throws an error
