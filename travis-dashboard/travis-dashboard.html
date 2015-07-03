@@ -1,0 +1,50 @@
+<div class="alert alert-danger" ng-if="self.errorMessage">
+  {{ self.errorMessage }}
+</div>
+
+<div class="alert alert-danger" ng-if="!self.errorMessage && !self.repo">
+    No Travis repository found for slug <em>{{ self.slug }}</em>.
+</div>
+
+<div ng-if="self.repo" class="panel ng-class:{
+    'errored':'panel-danger',
+    'failed':'panel-danger',
+    'canceled':'panel-default',
+    'passed':'panel-success',
+    'created':'panel-warning',
+    'started':'panel-warning'}[self.builds[0].state]">
+  <div class="panel-heading">
+    <h3 class="panel-title"><b>{{self.repo.description}}</b> | Builds:
+      <span style="color: black">{{self.buildCount}}</span> (
+      <span style="color: green">{{self.successCount}}</span> /
+      <span style="color: red">{{self.failCount}}</span>
+      )</h3>
+  </div>
+  <div class="panel-body">
+
+<table class="table" ng-if="self.builds.length">
+  <tbody>
+  <tr ng-repeat="build in self.builds">
+    <td style="text-align: center">
+      <div style="padding:10"><span class="label ng-class:{
+        'errored':'label-danger',
+        'failed':'label-danger',
+        'canceled':'label-default',
+        'passed':'label-success',
+        'created':'label-warning',
+        'started':'label-warning'}[build.state]">{{build.state}}</span>
+      </div>
+    </td>
+    <td style="font-size:80%">
+      <div>
+        <i>{{ build.started_at | ago }} ago by {{build.commit.author_name}} on {{build.commit.branch}}</i>
+      </div>
+      <div>
+        {{build.pull_request_title || build.commit.message | limitTo: 120}}
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+</div>

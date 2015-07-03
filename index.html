@@ -1,0 +1,18 @@
+<html ng-app="AgileJsDashboard" ng-strict-di>
+<head>
+  <title>AgileJS Dashboard</title>
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="index.js"></script>
+  <script src="travis-dashboard/travis-dashboard.js"></script>
+  <script src="travis-multi-dashboard/travis-multi-dashboard.js"></script>
+  <script src="travis-api/travis-api.js"></script>
+  <script src="ago-filter/ago-filter.js"></script>
+
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+  <!--<script src="node_modules/bootstrap/dist"></script>-->
+</head>
+<body ng-controller="AppController">
+  <travis-multi-dashboard repos="repos"/>
+</body>
+</html>
